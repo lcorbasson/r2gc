@@ -1,0 +1,34 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Raison soociale</th>
+        <th>Statut juridique</th>
+        <th>Secteur d'activité</th>
+        <th>Activité</th>
+        <th>Partenaires</th>
+        <th>Site web</th>
+        <th>Téléphone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @organisms.each do |organism| %>
+        <tr>
+          <td><%= link_to organism.name, edit_admin_agency_path(organism) %></td>
+          <td><%= organism.legal_status %></td>
+          <td><%= organism.activity_sector %></td>
+          <td><%= organism.activity %></td>
+          <td><%= organism.partners %></td>
+          <td><%= organism.website %></td>
+          <td><%= organism.phone %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvel organisme", new_admin_agency_path() %></li>
+  </ul>
+</div>

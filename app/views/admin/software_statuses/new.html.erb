@@ -1,0 +1,7 @@
+<h1>Nouveau domaine statut logiciel</h1>
+<% semantic_form_for([:admin, @status]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

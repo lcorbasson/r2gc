@@ -1,0 +1,22 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @laboratories.each do |laboratory| %>
+        <tr>
+          <td><%= link_to laboratory.name, edit_admin_laboratory_path(laboratory) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouveau labo", new_admin_laboratory_path() %></li>
+  </ul>
+</div>

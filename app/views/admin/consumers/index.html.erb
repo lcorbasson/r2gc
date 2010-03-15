@@ -1,0 +1,30 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+        <th>Annotations</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @consumers.each do |consumer| %>
+        <tr>
+          <td><%= consumer.last_name %></td>
+          <td><%= consumer.first_name %></td>
+          <td><%= consumer.email %></td>
+          <td><%= consumer.phone %></td>
+          <td><%= consumer.note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvel utilisateur", new_admin_consumer_path() %></li>
+  </ul>
+</div>

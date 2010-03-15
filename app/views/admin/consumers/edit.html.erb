@@ -1,0 +1,7 @@
+<h1>Edition de l'utilisateur <%= "#{@consumer.first_name} #{@consumer.last_name}"  %></h1>
+<% semantic_form_for([:admin, @consumer]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

@@ -1,0 +1,37 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Type</th>
+        <th>Sous type</th>
+        <th>Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tools.each do |tool| %>
+        <tr>
+          <% partial_name = tool.is_a?(Software) ? "admin/softwares/show" : tool.is_a?(ToolEngine) ? "admin/tool_engines/show" : tool.is_a?(TestEngine) ? "admin/test_engines/show" : "admin/measuring_engines/show" %>
+                             
+                          
+           <%= render :partial => partial_name, :locals => {:tool => tool} %>
+        </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouveau logiciel", new_admin_software_path() %></li>
+    <li><%= link_to "Nouvelle machine outil", new_admin_tool_engine_path() %></li>
+    <li><%= link_to "Nouvel instrument de mesure", new_admin_measuring_engine_path() %></li>
+    <li><%= link_to "Nouveau moyen d'essai", new_admin_test_engine_path() %></li>
+  
+  </ul>
+</div>
+
