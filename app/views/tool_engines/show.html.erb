@@ -1,0 +1,57 @@
+<p class="blue_title">Fiche équipement : </p>
+
+<div class="tool_show">
+  <div class="tool_top_show"></div>
+  <div class="tool_middle_show">
+    <label>Nom :</label> <%= @tool_engine.name %><br/>
+    <label>Type :</label> <%= @tool_engine.type %><br/>
+    <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
+    <label>Marque :</label> <%= @tool_engine.brand %><br/>
+    <label>Modèle :</label> <%= @tool_engine.version %><br/>
+    <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
+    <label>Organisme :</label> <%= @tool_engine.agency %><br/>
+    <label>Equipe :</label> <%= @tool_engine.correspondents.collect(&:teams) %><br/>
+
+
+    <div id="accordion">
+        <h3><a href="#">Principes de fonctionnement</a></h3>
+        <div><%= @tool_engine.operating_principles %></div>
+        <h3><a href="#">Caractéristiques techniques</a></h3>
+        <div><%= @tool_engine.specifications %></div>
+        <h3><a href="#">Autres précisions</a></h3>
+        <div>
+          Document explicatif : <%= @tool_engine.explanatory_document %><br/>
+          Date d'achat : <%= @tool_engine.purchase_date %><br/>
+          Commentaires : <%= @tool_engine.comment %>
+        </div>
+        <h3><a href="#">Echange de l’équipement</a></h3>
+        <div>      
+          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @tool_engine.use_on_site %><br/>
+          Conditions d’utilisation de l’équipement : <br/>
+          Localisation sur le site : <%= @tool_engine.mi_localization_on_site %><br/>
+          N° d’enregistrement interne:
+        </div>
+        <h3><a href="#">Liens</a></h3>
+        <div>
+          <label>Equipement(s) lié(s)</label>
+          <%= render :partial => "tool_relations/index", :locals => {:tool => @tool_engine} %>
+          <label>Lien web</label>
+          <%= link_to @tool_engine.website, @tool_engine.website %>
+        </div>
+        <h3>Correspondant(s)</h3>
+        <div>
+          <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.correspondents} %>
+        </div>
+    </div>
+  </div>
+  <div class="tool_bottom_show"></div>
+</div>
+
+
+
+<p>
+  <%= link_to "Retour", :back %>
+</p>
+
+<%= javascript_tag("$(function() {$('#accordion').accordion();});") %>
+

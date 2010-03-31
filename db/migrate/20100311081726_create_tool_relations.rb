@@ -1,8 +1,8 @@
 class CreateToolRelations < ActiveRecord::Migration
   def self.up
-    create_table :tool_relations, {:id => false} do |t|
-      t.integer :tool_id
-      t.integer :tool_target_id
+    create_table :tool_relations do |t|
+      t.integer :tool_from_id
+      t.integer :tool_to_id
       t.timestamps
     end
   end

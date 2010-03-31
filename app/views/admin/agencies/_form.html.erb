@@ -1,19 +1,67 @@
-<% f.inputs do %>
-  <%= f.input :name %>
-  <%= f.input :legal_status %>
-  <%= f.input :activity_sector %>
-  <%= f.input :activity %>
-  <%= f.input :partners %>
-  <%= f.input :memberships %>
-  <%= f.input :website %>
-  <%= f.input :appellation %>
-  <%= f.input :street %>
-  <%= f.input :zipcode %>
-  <%= f.input :city %>
-  <%= f.input :PO_box %>
-  <%= f.input :cedex %>
-  <%#= f.input :country %>
-  <%= f.input :phone %>
-  <%= f.input :parent %>
-<% end %>
+<table id="table_form">
+  <tr>
+    <td><label>Nom</label></td>
+    <td><label><%= f.text_field :name%></label></td>
+  </tr>
+  <tr>
+    <td><label>Statut juridique</label></td>
+    <td><label><%= f.text_field :legal_status%></label></td>
+  </tr>
+  <tr>
+    <td><label>Secteur d'activité</label></td>
+    <td><label><%= f.text_field :activity_sector%></label></td>
+  </tr>
+  <tr>
+    <td><label>Activité</label></td>
+    <td><label><%= f.text_field :activity%></label></td>
+  </tr>
+  <tr>
+    <td><label>Partenaires</label></td>
+    <td><label><%= f.text_area :partners%></label></td>
+  </tr>
+  <tr>
+    <td><label>Appartenance pôles, clusters</label></td>
+    <td><label><%= f.text_field :memberships%></label></td>
+  </tr>
+  <tr>
+    <td><label>Site web</label></td>
+    <td><label><%= f.text_field :website%></label></td>
+  </tr>
+  <tr>
+    <td><label>Adresse appellation</label></td>
+    <td><label><%= f.text_field :appellation%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse rue</label></td>
+    <td><label><%= f.text_field :street%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse code postal</label></td>
+    <td><label><%= f.text_field :zipcode%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse ville</label></td>
+    <td><label><%= f.text_field :city%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse BP</label></td>
+    <td><label><%= f.text_field :PO_box%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse cedex</label></td>
+    <td><label><%= f.text_field :cedex%></label></td>
+  </tr>
+   <tr>
+    <td><label>Adresse pays</label></td>
+    <td><label><%#= f.text_field :country%></label></td>
+  </tr>
+   <tr>
+    <td><label>Téléphone</label></td>
+    <td><label><%= f.text_field :phone%></label></td>
+  </tr>
+   <tr>
+    <td><label>Maison mère, tutelle</label></td>
+    <td><label><%= f.text_field :parent%></label></td>
+  </tr>
+</table>
 

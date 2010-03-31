@@ -1,0 +1,22 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @correspondents.each do |correspondent| %>
+        <tr>
+          <td><%= link_to correspondent.name, edit_admin_correspondent_path(correspondent) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouveau correpondant", new_admin_correspondent_path() %></li>
+  </ul>
+</div>

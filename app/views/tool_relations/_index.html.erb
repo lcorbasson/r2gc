@@ -1,0 +1,6 @@
+<% tool.relations_from.each do |relation| %>
+  <%= link_to relation.tool_to.name, relation.tool_to %>
+<% end %>
+<% tool.relations_to.each do |relation| %>
+  <%= link_to relation.tool_from.name, relation.tool_from %>
+<% end %>

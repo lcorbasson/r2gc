@@ -1,0 +1,21 @@
+<p class="blue_title">Fiche équipement : </p>
+
+<div class="tool_show">
+  <label>Nom : </label><%= @tool.name %><br/>
+  <label>Type :</label> <%= @tool.type %><br/>
+  <label>Sous type :</label> <%= @tool.tool_subtype %><br/>
+  <label>Marque :</label> <%= @tool.brand %><br/>
+  <label>Modèle :</label> <%= @tool.version %><br/>
+  <label>Quantité :</label> <%= @tool.quantity %><br/>
+  <label>Laboratoire :</label> <%= @tool.agency %><br/>
+  <label>Nom entité recherche :</label> <%= @tool.correspondents.collect(&:teams) %><br/>
+  <label>Principes de fonctionnement :</label> <%= @tool.operating_principles %><br/>
+  <label>Caractéristiques techniques :</label> <%= @tool.specifications %><br/>
+  <label>Document explicatif :</label> <%= @tool.explanatory_document %><br/>
+  <label>Date d'achat :</label> <%= @tool.purchase_date %><br/>
+  <label>Commentaires :</label> <%= @tool.comment %>
+</div>
+
+<p>
+  <%= link_to "Retour", :back %>
+</p>

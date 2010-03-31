@@ -1,0 +1,30 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>       
+        <th>Sous type</th>
+        <th>Supprimer</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tools.each do |tool| %>
+        <tr>           
+           <%= render :partial => "show", :locals => {:tool => tool} %>
+        </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouveau logiciel", new_admin_software_path() %></li>
+  
+  </ul>
+</div>
+

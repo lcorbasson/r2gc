@@ -1,0 +1,53 @@
+<p class="blue_title">Fiche équipement : </p>
+
+<div class="tool_show">
+  <div class="tool_top_show"></div>
+  <div class="tool_middle_show">
+  <label>Nom :</label> <%= @software.name %><br/>
+    <label>Type :</label> <%= @software.type %><br/>
+    <label>Sous type :</label> <%= @software.tool_subtype %><br/>
+    <label>Marque :</label> <%= @software.brand %><br/>
+    <label>Version :</label> <%= @software.version %><br/>
+    <label>Quantité :</label> <%= @software.quantity %><br/>
+    <label>Organisme :</label> <%= @software.agency %><br/>
+    <label>Nom entité recherche :</label> <%= @software.teams %><br/>
+    <label>Statut du logiciel :</label> <br/>
+    <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
+    <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
+    <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs %><br/>
+
+
+
+    <div id="accordion">
+        <h3><a href="#">Description et usages du Logiciel</a></h3>
+        <div><%= @software.software_description %></div>
+        <h3><a href="#">Spécificités techniques du Logiciel</a></h3>
+        <div><%= @software.specifications %></div>
+        <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
+        <div><%= @software.software_sharing_conditions %></div>
+        <h3><a href="#">Commentaires</a></h3>
+        <div><%= @software.comment %></div>
+        <h3><a href="#">Liens</a></h3>
+        <div>
+          <label>Equipement(s) lié(s)</label>
+          <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %>
+          <label>Lien web</label>
+          <%= link_to @software.website, @software.website %>
+        </div>
+        <h3>Correspondant(s)</h3>
+        <div>
+          <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents} %>
+        </div>
+    </div>
+  </div>
+  <div class="tool_bottom_show"></div>
+</div>
+
+
+
+
+<p>
+  <%= link_to "Retour", :back %>
+</p>
+
+<%= javascript_tag("$(function() {$('#accordion').accordion();});") %>

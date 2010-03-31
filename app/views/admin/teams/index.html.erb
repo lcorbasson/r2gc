@@ -1,0 +1,22 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teams.each do |team| %>
+        <tr>
+          <td><%= link_to team.name, edit_admin_team_path(team) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvelle équipe", new_admin_team_path() %></li>
+  </ul>
+</div>

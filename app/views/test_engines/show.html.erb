@@ -1,0 +1,60 @@
+<p class="blue_title">Fiche équipement : </p>
+
+<div class="tool_show">
+  <div class="tool_top_show"></div>
+  <div class="tool_middle_show">
+    <label>Nom :</label> <%= @test_engine.name %><br/>
+    <label>Type :</label> <%= @test_engine.type %><br/>
+    <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
+    <label>Marque :</label> <%= @test_engine.brand %><br/>
+    <label>Modèle :</label> <%= @test_engine.version %><br/>
+    <label>Quantité :</label> <%= @test_engine.quantity %><br/>
+    <label>Organisme :</label> <%= @test_engine.agency %><br/>
+    <label>Equipe :</label> <%= @test_engine.correspondents.collect(&:teams) %><br/>
+
+
+    <div id="accordion">
+        <h3><a href="#">Principes de fonctionnement</a></h3>
+        <div><%= @test_engine.operating_principles %></div>
+        <h3><a href="#">Caractéristiques techniques</a></h3>
+        <div><%= @test_engine.specifications %></div>
+        <h3><a href="#">Autres précisions</a></h3>
+        <div>
+          Document explicatif : <%= @test_engine.explanatory_document %><br/>
+          Etalonnage/calibration/vérification : <%= @test_engine.calibration %><br/>
+          Remarques : <%= @test_engine.calibration_comment %><br/>
+          Date d'achat : <%= @test_engine.purchase_date %><br/>
+          Commentaires : <%= @test_engine.comment %>
+        </div>
+        <h3><a href="#">Echange de l’équipement</a></h3>
+        <div>
+          Equipement mobile : <%= @test_engine.mi_mobility %><br/>
+          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @test_engine.use_on_site %><br/>
+          Emprunt possible en dehors du site de l’organisme propriétaire : <%= @test_engine.borrowing %><br/>
+          Conditions de prêt et d’emprunt de l’équipement : <br/>
+          Localisation sur le site : <%= @test_engine.mi_localization_on_site %><br/>
+          N° d’enregistrement interne: <%= @test_engine.internal_number %>
+        </div>
+        <h3><a href="#">Liens</a></h3>
+        <div>
+          <label>Equipement(s) lié(s)</label>
+          <%= render :partial => "tool_relations/index", :locals => {:tool => @test_engine} %>
+          <label>Lien web</label>
+          <%= link_to @test_engine.website, @test_engine.website %>
+        </div>
+        <h3>Correspondant(s)</h3>
+        <div>
+          <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents} %>
+        </div>
+    </div>
+  </div>
+  <div class="tool_bottom_show"></div>
+</div>
+
+
+
+<p>
+  <%= link_to "Retour", :back %>
+</p>
+
+<%= javascript_tag("$(function() {$('#accordion').accordion();});") %>

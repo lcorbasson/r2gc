@@ -1,0 +1,2 @@
+class MeasuringEngine < Tool
+end

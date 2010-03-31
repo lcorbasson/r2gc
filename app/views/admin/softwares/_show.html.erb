@@ -1,4 +1,3 @@
-<td><%= link_to tool.name, edit_admin_software_path(tool) %></td>
-<td><%= tool.type %></td>
+<td><%= (current_user.can_update_tool?(tool)) ? link_to(tool.name, edit_admin_software_path(tool)) : tool.name %></td>
 <td><%= tool.tool_subtype %></td>
 <td><%= link_to image('remove', :alt => 'remove page'), admin_tool_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?" %></td>

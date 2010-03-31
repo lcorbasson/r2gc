@@ -1,2 +1,2 @@
-class Testngine < Tool
+class TestEngine < Tool
 end

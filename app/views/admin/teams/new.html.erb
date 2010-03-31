@@ -1,0 +1,7 @@
+<h1>Nouvelle équipe</h1>
+<% form_for([:admin, @team]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

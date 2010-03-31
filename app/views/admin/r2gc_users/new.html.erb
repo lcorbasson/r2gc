@@ -1,0 +1,7 @@
+<h1>Nouveau correspondant</h1>
+<% form_for([:admin, @r2gc_user]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

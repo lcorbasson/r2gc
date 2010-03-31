@@ -1,5 +1,10 @@
-<% f.inputs do %>
-  <%= f.input :tool_type, :as => :hidden %>
-  <%= f.input :conditions %>
-<% end %>
+<table id="table_form">
+  <tr>
+    <td><label>Conditions</label></td>
+    <td><%= f.text_area :conditions %></td>
+  </tr>
+</table>
+<%= f.hidden_field :tool_type %>
+
+
 

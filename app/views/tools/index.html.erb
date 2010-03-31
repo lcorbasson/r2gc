@@ -1,1 +1,100 @@
-ceci est un test
+Bienvenur sur la base de données équipements des laboratoires de génie civil de la région.<br/>
+
+
+<p class="blue_title">Identifiez-vous :</p>
+
+<div id="login">
+  <%  form_tag login_databases_path do |f| %>
+     <%=  label_tag "Login" %>
+     <%=  text_field_tag "login" %>
+
+     <%=  label_tag "Mot de passe" %>
+      <%= password_field_tag "password" %>
+
+
+     <%= submit_tag "OK", :id => "btn_login" %>
+
+  <% end %>
+</div>
+
+
+<p class="blue_title">Recherchez un équipement : </p>
+
+<div id="tool_search">
+  <%= link_to_function "Moyens d'essais", "make_type('TestEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("TestEngine")}" %>
+  <%= link_to_function "Instruments de mesure et d'analyse", "make_type('MesuringEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("MesuringEngine")}" %>
+  <%= link_to_function "Logiciels", "make_type('Software')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("Software")}" %>
+  <%= link_to_function "Machine-outils", "make_type('ToolEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("ToolEngine")}" %>
+
+
+<%  form_for @search,:html => { :id => "search_form" } do |f| %>
+   
+    <%= f.text_field :name_like, :class => "equipment_name" %>
+    <%= f.hidden_field :type_equals %>
+    <%= submit_tag "&nbsp;", :class => "search_btn" %>
+    <div id="search-separate"></div>
+    <h1 class="search_title">Affinez votre recherche</h1>
+    <table style="width:50%" class="refine_search" align="center">
+      <% case @tool_type
+         when "TestEngine" %>
+          <%= render :partial => "test_engines/refine_search", :locals => {:f => f} %>
+        <% when "MesuringEngine" %>
+          <%= render :partial => "measuring_engines/refine_search", :locals => {:f => f} %>
+        <% when "Software" %>
+          <%= render :partial => "softwares/refine_search", :locals => {:f => f} %>
+        <% when "ToolEngine" %>
+          <%= render :partial => "tool_engines/refine_search", :locals => {:f => f} %>
+      <% end %>
+    </table>
+
+
+
+<% end  %>
+
+</div>
+
+<div id="search_results">
+  <div id="equipments_list">
+    <table width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Organisme</th>
+          <th>Nom</th>
+          <th>Sous type</th>
+          <th>Marque</th>
+          <th class="last">Type ou modèle</th>
+        </tr>
+      </thead>
+      <% @tools.each do |tool| %>
+        <tr>
+           <td><%= tool.agency %></td>
+          <td>
+            <%= link_to tool.name, tool %>
+          </td>         
+          <td><%= tool.tool_subtype %></td>
+          <td><%= tool.brand %></td>
+          <td class="last"><%= tool.version %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<%= javascript_tag("    
+     $(document).ready(function () {
+
+        $('.select_refine_search').selectbox();
+        $('.select_refine_search').change(function() {
+          $('#search_form').trigger('submit');
+        });
+      });
+    
+
+    function make_type(type) {
+      $('#search_type_equals').val(type);
+      $('#search_form').trigger('submit');
+    }
+
+  ") %>
+

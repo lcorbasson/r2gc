@@ -1,4 +1,9 @@
 class Admin::UseConditionsController < Admin::ResourceController
+  only_allow_access_to :index, :new, :create, :update, :edit,
+    :when => [:admin, :r2gc_manager],
+    :denied_url => { :controller => 'admin/pages', :action => 'index' },
+    :denied_message => 'You must have designer privileges to perform this action.'
+
 
   def index
     @tools_use_conditions = UseCondition.find(:all, :conditions => {:tool_type => "tool"})

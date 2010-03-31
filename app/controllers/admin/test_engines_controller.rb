@@ -1,9 +1,56 @@
 class Admin::TestEnginesController < Admin::ResourceController
+  only_allow_access_to :create, :edit, :update,
+    :when => [:admin, :r2gc_correspondent, :r2gc_manager],
+    :denied_url => { :controller => 'admin/pages', :action => 'index' },
+    :denied_message => 'You must have designer privileges to perform this action.'
  
-  
+
   def index
-    @equipments = TestEngine.all
+    @tools = TestEngine.all
   end
+
+  def create
+    @test_engine = TestEngine.new(params[:test_engine])
+    if @test_engine.save
+      if params[:tools]
+        params[:tools].each do |tool_id|
+          ToolRelation.create!(
+            :tool_from => @test_engine,
+            :tool_to => Tool.find(tool_id)
+          )
+        end
+      end
+      flash[:notice] = "Moyen d'essai enregistré."
+      redirect_to admin_tools_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
+      redirect_to :back
+    end
+  end
+
+  def edit
+    @test_engine = TestEngine.find(params[:id])
+  end
+
+  def update
+    @test_engine = TestEngine.find(params[:id])
+    if @test_engine.update_attributes(params[:test_engine])
+      if params[:tools]
+        params[:tools].each do |tool_id|
+          ToolRelation.create!(
+            :tool_from => @test_engine,
+            :tool_to => Tool.find(tool_id)
+          )
+        end
+      end
+      flash[:notice] = "Moyen d'essai enregistré."
+      redirect_to admin_tools_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
+      redirect_to :back
+    end
+  end
+
 
   
 end

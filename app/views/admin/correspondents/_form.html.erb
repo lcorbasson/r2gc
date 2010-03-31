@@ -1,0 +1,24 @@
+<table id="table_form">
+  <tr>
+    <td><label>Nom</label></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+   <tr>
+    <td><label>Login</label></td>
+    <td><%= f.text_field :login %></td>
+  </tr>
+   <tr>
+    <td><label>Email</label></td>
+    <td><%= f.text_field :email %></td>
+  </tr>
+   <tr>
+    <td><label>Equipes</label></td>
+    <td><%= f.select :teams, Team.all.collect{|t| [t.name, t.id]}, :multiple => true %></td>
+  </tr>
+   <tr>
+    <td><label>Equipements</label></td>
+    <td><%= f.select :tools, Tool.all.collect{|t| [t.name, t.id]}, :multiple => true %></td>
+  </tr>
+</table>
+
+

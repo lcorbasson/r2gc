@@ -1,0 +1,22 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @r2gc_users.each do |r2gc_user| %>
+        <tr>
+          <td><%= link_to r2gc_user.name, edit_admin_r2gc_user_path(r2gc_user) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvel utilisateur R2GC", new_admin_r2gc_user_path() %></li>
+  </ul>
+</div>

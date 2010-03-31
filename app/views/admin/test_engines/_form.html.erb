@@ -1,0 +1,94 @@
+<table id="table_form">
+  <tr>
+    <td><label>Nom</label></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><label>Sous type</label></td>
+    <td><%= f.select :tool_subtype, ToolSubtype.all{|s| [s.name, s.id]} %></td>
+  </tr>
+  <tr>
+    <td><label>Marque</label></td>
+    <td><%= f.text_field :brand %></td>
+  </tr>
+  <tr>
+    <td><label>Modèle</label></td>
+    <td><%= f.text_field :version %></td>
+  </tr>
+  <tr>
+    <td><label>Quantité</label></td>
+    <td><%= f.text_field :quantity %></td>
+  </tr>
+  <tr>
+    <td><label>Organisme</label></td>
+    <td><%= f.select :agency, Agency.all.collect{|a| [a.name, a.id]} %></td>
+  </tr>
+  <tr>
+    <td><label>Principes de fonctionnement</label></td>
+    <td><%= f.text_field :operating_principles %></td>
+  </tr>
+  <tr>
+    <td><label>Caractéristiques techniques</label></td>
+    <td><%= f.text_field :specifications %></td>
+  </tr>
+  <tr>
+    <td><label>Document explicatif </label></td>
+    <td><%= f.text_field :explanatory_document %></td>
+  </tr>
+  <tr>
+    <td><label>Etalonnage/calibration/vérification</label></td>
+    <td><%= f.text_field :calibration %></td>
+  </tr>
+  <tr>
+    <td><label>Remarque(s)</label></td>
+    <td><%= f.text_field :calibration_comment %></td>
+  </tr>
+  <tr>
+    <td><label>Date d’achat de l’équipement</label></td>
+    <td><%= f.text_field :purchase_date %></td>
+  </tr>
+  <tr>
+    <td><label>Autre(s) commentaire(s)</label></td>
+    <td><%= f.text_field :comment %></td>
+  </tr>
+  <tr>
+    <td><label>Equipement mobile</label></td>
+    <td><%= f.text_field :mi_mobility %></td>
+  </tr>
+   <tr>
+    <td><label>Prêt possible uniquement sur le site de l’organisme propriétaire</label></td>
+    <td><%= f.text_field :use_on_site %></td>
+  </tr>
+  <tr>
+    <td><label>Emprunt possible en dehors du site de l’organisme propriétaire</label></td>
+    <td><%= f.text_field :borrowing %></td>
+  </tr>
+  <tr>
+    <td><label>Conditions de prêt et d’emprunt de l’équipement</label></td>
+    <td><%= f.text_field :borrowing %></td>
+  </tr>
+  <tr>
+    <td><label>Localisation sur le site</label></td>
+    <td><%= f.text_field :mi_localization_on_site %></td>
+  </tr> 
+  <tr>
+    <td><label>N° d’enregistrement interne</label></td>
+    <td><%= f.text_field :internal_number %></td>
+  </tr>
+  <tr>
+    <td><label>Niveau confidentialité</label></td>
+    <td><%= f.text_field :privacy %></td>
+  </tr>
+  <tr>
+    <td><label>Equipement liés</label></td>
+    <td><%= select_tag "tools", @test_engine.new_record? ? options_for_select(Tool.all{|c| [c.name, c.id]}) : options_for_select((Tool.all-@test_engine.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+  </tr>
+   <tr>
+    <td><label>Correspondants</label></td>
+    <td><%= f.select :correspondents, Correspondent.all{|c| [c.name, c.id]}, :multiple => true %></td>
+  </tr>
+</table>
+
+
+
+
