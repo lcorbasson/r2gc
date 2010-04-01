@@ -9,6 +9,10 @@ class Admin::SoftwaresController < Admin::ResourceController
      @tools = Software.all
   end
 
+  def show
+    @software = Software.find(params[:id])
+  end
+
   def new
     @software = Software.new
   end

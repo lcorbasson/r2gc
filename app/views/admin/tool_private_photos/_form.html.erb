@@ -1,0 +1,16 @@
+<table id="table_form">
+  <tr>
+    <td><label>Document</label></td>
+    <td><%= f.file_field :asset %></td>
+  </tr>
+  <tr>
+    <td><label>Légende</label></td>
+    <td><%= f.text_field :legend %></td>
+  </tr> 
+  <%= hidden_field_tag :tool_id, @tool.id%>
+  <%= hidden_field_tag "asset_type", "private_photo" %>
+</table>
+
+
+
+

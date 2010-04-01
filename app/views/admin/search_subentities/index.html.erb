@@ -1,0 +1,29 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Entité de recherche</th>
+        <th>Laboratoire</th>
+        <th>Modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @search_subentities.each do |entity| %>
+        <tr>
+          <td><%= link_to entity.name, edit_admin_search_subentity_path(entity) %></td>
+          <td><%= entity.search_entity.name %></td>
+          <td><%= entity.search_entity.laboratory.name %></td>
+          <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_search_subentity_path(entity), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette sous entité ? Les correspondants en seront détachés." %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvelle sous entité", new_admin_search_subentity_path() %></li>
+  </ul>
+</div>

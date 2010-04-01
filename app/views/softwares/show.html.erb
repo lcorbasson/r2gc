@@ -3,41 +3,56 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
-  <label>Nom :</label> <%= @software.name %><br/>
-    <label>Type :</label> <%= @software.type %><br/>
-    <label>Sous type :</label> <%= @software.tool_subtype %><br/>
-    <label>Marque :</label> <%= @software.brand %><br/>
-    <label>Version :</label> <%= @software.version %><br/>
-    <label>Quantité :</label> <%= @software.quantity %><br/>
-    <label>Organisme :</label> <%= @software.agency %><br/>
-    <label>Nom entité recherche :</label> <%= @software.teams %><br/>
-    <label>Statut du logiciel :</label> <br/>
-    <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
-    <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
-    <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs %><br/>
-
+    <div class="tool_image">
+      <%= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @software.tool_public_photos.size>0 %>
+    </div>
+    <div class="tool_infos">
+      <label>Nom :</label> <%= @software.name %><br/>
+      <label>Type :</label> <%= @software.type %><br/>
+      <label>Sous type :</label> <%= @software.tool_subtype %><br/>
+      <label>Marque :</label> <%= @software.brand %><br/>
+      <label>Version :</label> <%= @software.version %><br/>
+      <label>Quantité :</label> <%= @software.quantity %><br/>
+      <label>Organisme :</label> <%= @software.agency %><br/>
+      <% if current_user %>
+        <label>Nom entité recherche :</label> <%= @software.teams %><br/>
+      <% end %>
+      <label>Statut du logiciel :</label> <br/>
+      <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
+      <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
+      <% if current_user %>
+        <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs %><br/>
+      <% end %>
+    </div>
+    <div style="clear:both"></div>
 
 
     <div id="accordion">
         <h3><a href="#">Description et usages du Logiciel</a></h3>
         <div><%= @software.software_description %></div>
-        <h3><a href="#">Spécificités techniques du Logiciel</a></h3>
-        <div><%= @software.specifications %></div>
+        <% if current_user %>
+          <h3><a href="#">Spécificités techniques du Logiciel</a></h3>
+          <div><%= @software.specifications %></div>
+        <% end %>
         <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
         <div><%= @software.software_sharing_conditions %></div>
-        <h3><a href="#">Commentaires</a></h3>
-        <div><%= @software.comment %></div>
+        <% if current_user %>
+          <h3><a href="#">Commentaires</a></h3>
+          <div><%= @software.comment %></div>
+        <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
           <label>Equipement(s) lié(s)</label>
-          <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %>
+          <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
           <label>Lien web</label>
           <%= link_to @software.website, @software.website %>
         </div>
-        <h3>Correspondant(s)</h3>
-        <div>
-          <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents} %>
-        </div>
+        <% if current_user %>
+          <h3><a href="#">Correspondant(s)</a></h3>
+          <div>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents} %>
+          </div>
+        <% end %>
     </div>
   </div>
   <div class="tool_bottom_show"></div>
@@ -50,4 +65,8 @@
   <%= link_to "Retour", :back %>
 </p>
 
-<%= javascript_tag("$(function() {$('#accordion').accordion();});") %>
+<%= javascript_tag("
+  $(function() {
+    $('#accordion').accordion();
+    //$('.tool_infos').css('background', 'url('') no-repeat top right;')
+  });") %>

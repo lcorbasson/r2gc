@@ -10,7 +10,7 @@
       <% @application_domains.each do |application_domain| %>
         <tr>
           <td><%= link_to application_domain.application_domain, edit_admin_software_application_domain_path(application_domain) %></td>
-          <td><%= link_to image('remove', :alt => 'remove page'), admin_software_application_domain_path(application_domain), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce domaine d'application logiciel ?" %></td>
+          <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_software_application_domain_path(application_domain), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce domaine d'application logiciel ?" %></td>
         </tr>
       <% end %>
     </tbody>

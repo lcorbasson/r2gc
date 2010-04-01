@@ -39,4 +39,15 @@ class Admin::LaboratoriesController < Admin::ResourceController
     end
   end
 
+  def destroy
+    @laboratory = Laboratory.find(params[:id])
+    if @laboratory.destroy
+      flash[:notice] = 'Laboratoire supprimé.'
+      redirect_to admin_laboratories_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
+      redirect_to :back
+    end
+  end
+
 end

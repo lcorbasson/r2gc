@@ -1,0 +1,9 @@
+<div class="outset">
+  <%= @page.parts.find_by_name("body").content %>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Modifier la page d'accueil", modify_home_admin_r2gc_statics_path() %></li>
+  </ul>
+</div>

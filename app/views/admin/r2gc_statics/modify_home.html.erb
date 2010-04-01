@@ -1,0 +1,28 @@
+<h1>Modification de la page d'accueil de la base de données équipements</h1>
+<%  form_tag update_home_admin_r2gc_statics_path, :id => 'edit_page' do |f| %>
+     <%=  label_tag "Contenu" %><br/>
+     <%=  text_area_tag "content", @page.parts.find_by_name("body").content, {:cols => 100, :rows => 300, :id => "part_body_content"}  %>
+    
+
+    <p class="buttons">
+      <%= submit_tag "Enregistrer" %>
+    </p>
+  <% end %>
+
+
+
+<script>
+  function putInEditor(partIndex){
+      var oFCKeditor = new FCKeditor('part_'+ partIndex +'_content', '600px', '600px', 'Default');
+      var page_type = 'normal';
+      oFCKeditor.BasePath = "/javascripts/fckeditor/"
+      oFCKeditor.Config['CustomConfigurationsPath'] = '/fckeditor/config?class_name=' + page_type;
+      oFCKeditor.Width = '100%' ;
+      oFCKeditor.Height = '350' ;
+      oFCKeditor.ReplaceTextarea();
+  }
+</script>
+<%= javascript_include_tag("/javascripts/fckeditor/fckeditor.js") %>
+<%= javascript_tag("
+      putInEditor('body');    
+  ") %>

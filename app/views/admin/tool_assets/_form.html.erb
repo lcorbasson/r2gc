@@ -1,0 +1,19 @@
+<table id="table_form">
+  <tr>
+    <td><label>Document</label></td>
+    <td><%= f.file_field :asset %></td>
+  </tr>
+  <tr>
+    <td><label>Légende</label></td>
+    <td><%= f.text_field :legend %></td>
+  </tr>
+  <tr>
+    <td><label>Type</label></td>
+    <td><%= select_tag "asset_type", options_for_select([["Photo diffusable", "public_photo"], ["Photo non diffusable", "private_photo"], ["Plaquette", "brochure"], ["Schéma", "schema"]]) %></td>
+  </tr>
+  <%= hidden_field_tag :tool_id, @tool.id%>
+</table>
+
+
+
+

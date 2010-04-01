@@ -1,0 +1,2 @@
+class ToolPublicPhoto < ToolAsset
+end

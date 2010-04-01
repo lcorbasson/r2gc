@@ -3,49 +3,62 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
-    <label>Nom :</label> <%= @measuring_engine.name %><br/>
-    <label>Type :</label> <%= @measuring_engine.type %><br/>
-    <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
-    <label>Marque :</label> <%= @measuring_engine.brand %><br/>
-    <label>Modèle :</label> <%= @measuring_engine.version %><br/>
-    <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
-    <label>Organisme :</label> <%= @measuring_engine.agency %><br/>
-    <label>Equipe :</label> <%= @measuring_engine.teams %><br/>
+    <div class="tool_image">
+      <%= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
+    </div>
+      <div class="tool_infos">
+      <label>Nom :</label> <%= @measuring_engine.name %><br/>
+      <label>Type :</label> <%= @measuring_engine.type %><br/>
+      <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
+      <label>Marque :</label> <%= @measuring_engine.brand %><br/>
+      <label>Modèle :</label> <%= @measuring_engine.version %><br/>
+      <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
+      <label>Organisme :</label> <%= @measuring_engine.agency %><br/>
+      <% if current_user %>
+        <label>Equipe :</label> <%= @measuring_engine.teams %><br/>
+      <% end %>
+      </div>
 
+    <div style="clear:both"></div>
 
     <div id="accordion">
-        <h3><a href="#">Principes de fonctionnement</a></h3>
-        <div><%= @measuring_engine.operating_principles %></div>
-        <h3><a href="#">Caractéristiques techniques</a></h3>
-        <div><%= @measuring_engine.specifications %></div>
-        <h3><a href="#">Autres précisions</a></h3>
-        <div>
-          Document explicatif : <%= @measuring_engine.explanatory_document %><br/>
-          Etalonnage/calibration/vérification : <%= @measuring_engine.calibration %><br/>
-          Document explicatif : <%= @measuring_engine.calibration_comment %><br/>
-          Date d'achat : <%= @measuring_engine.purchase_date %><br/>
-          Commentaires : <%= @measuring_engine.comment %>
-        </div>
-        <h3><a href="#">Echange de l’équipement</a></h3>
-        <div>
-          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @measuring_engine.use_on_site %><br/>
-          Emprunt possible en dehors du site de l’organisme propriétaire : <%= @measuring_engine.borrowing %><br/>
-          Conditions de prêt et d’emprunt de l’équipement: TODO<br/>
-          Localisation sur le site : <%= @measuring_engine.mi_localization_on_site %><br/>
-          Précisions: <%= @measuring_engine.localization_on_site_precision %><br/>
-          N° d’enregistrement interne: <%= @measuring_engine.internal_number %><br/>
-        </div>
+      <% if current_user %>
+          <h3><a href="#">Principes de fonctionnement</a></h3>
+          <div><%= @measuring_engine.operating_principles %></div>
+          <h3><a href="#">Caractéristiques techniques</a></h3>
+          <div><%= @measuring_engine.specifications %></div>
+        
+          <h3><a href="#">Autres précisions</a></h3>
+          <div>
+            Document explicatif : <%= @measuring_engine.explanatory_document %><br/>
+            Etalonnage/calibration/vérification : <%= @measuring_engine.calibration %><br/>
+            Document explicatif : <%= @measuring_engine.calibration_comment %><br/>
+            Date d'achat : <%= @measuring_engine.purchase_date %><br/>
+            Commentaires : <%= @measuring_engine.comment %>
+          </div>
+          <h3><a href="#">Echange de l’équipement</a></h3>
+          <div>
+            Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @measuring_engine.use_on_site %><br/>
+            Emprunt possible en dehors du site de l’organisme propriétaire : <%= @measuring_engine.borrowing %><br/>
+            Conditions de prêt et d’emprunt de l’équipement: TODO<br/>
+            Localisation sur le site : <%= @measuring_engine.mi_localization_on_site %><br/>
+            Précisions: <%= @measuring_engine.localization_on_site_precision %><br/>
+            N° d’enregistrement interne: <%= @measuring_engine.internal_number %><br/>
+          </div>
+        <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
           <label>Equipement(s) lié(s)</label>
-          <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %>
+          <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %><br/>
           <label>Lien web</label>
           <%= link_to @measuring_engine.website, @measuring_engine.website %>
         </div>
-        <h3>Correspondant(s)</h3>
-        <div>
-          <%= render :partial => "correspondents/index", :locals => {:correspondents => @measuring_engine.correspondents} %>
-        </div>
+        <% if current_user %>
+          <h3>Correspondant(s)</h3>
+          <div>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @measuring_engine.correspondents} %>
+          </div>
+        <% end %>
     </div>
   </div>
   <div class="tool_bottom_show"></div>

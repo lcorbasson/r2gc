@@ -1,0 +1,2 @@
+class ToolBrochure < ToolAsset
+end

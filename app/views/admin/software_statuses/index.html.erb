@@ -10,7 +10,7 @@
       <% @statuses.each do |status| %>
         <tr>
           <td><%= link_to status.name, edit_admin_software_status_path(status) %></td>
-          <td><%= link_to image('remove', :alt => 'remove page'), admin_software_status_path(status), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce domaine statut logiciel ?" %></td>
+          <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_software_status_path(status), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce domaine statut logiciel ?" %></td>
         </tr>
       <% end %>
     </tbody>

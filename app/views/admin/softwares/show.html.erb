@@ -1,0 +1,85 @@
+<div class="outset">
+  <p class="blue_title">Fiche équipement : </p>
+
+  <table>
+    <tr>
+      <td>Nom :</td>
+      <td><%= @software.name %></td>
+    </tr>
+    <tr>
+      <td>Type :</td>
+      <td><%= @software.type %></td>
+    </tr><tr>
+      <td>Sous type :</td>
+      <td><%= @software.tool_subtype %></td>
+    </tr><tr>
+      <td>Marque :</td>
+      <td><%= @software.brand %></td>
+    </tr>
+    <tr>
+      <td>Version :</td>
+      <td><%= @software.version %></td>
+    </tr>
+     <tr>
+      <td>Quantité :</td>
+      <td><%= @software.quantity %></td>
+    </tr>
+     <tr>
+      <td>Organisme :</td>
+      <td><%= @software.agency %></td>
+    </tr>
+     <tr>
+      <td>Nom entité recherche :</td>
+      <td><%= @software.teams %></td>
+    </tr>
+     <tr>
+      <td>Statut du logiciel :</td>
+      <td><%= @software.software_statuses.collect(&:name).join(", ") unless !@software.software_statuses%></td>
+    </tr>
+    <tr>
+      <td>Domaines d'applications :</td>
+      <td><%= @software.software_application_domains %></td>
+    </tr><tr>
+      <td>Précisions :</td>
+      <td><%= @software.software_application_domain_comment %></td>
+    </tr><tr>
+      <td>Logiciel permettant de développer des programmes internes ? :</td>
+      <td><%= @software.software_can_develop_programs %></td>
+    </tr><tr>
+      <td>Description et usages du Logiciel :</td>
+      <td><%= @software.software_description %></td>
+    </tr>
+    <tr>
+      <td>Spécificités techniques du Logiciel :</td>
+      <td><%= @software.specifications %></td>
+    </tr>
+    <tr>
+      <td>Caractéristiques de partage et de diffusion du logiciel :</td>
+      <td><%= @software.software_sharing_conditions %></td>
+    </tr>
+    <tr>
+      <td>Commentaires :</td>
+      <td><%= @software.comment %></td>
+    </tr>
+    <tr>
+      <td>Equipement(s) lié(s) :</td>
+      <td><%= render :partial => "tool_relations/index", :locals => {:tool => @software} %></td>
+    </tr>
+    <tr>
+      <td>Correspondant(s) :</td>
+      <td><%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents} %></td>
+    </tr>
+
+  </table>
+
+
+
+
+</div>
+<% if current_user.can_update_tool?(@software) %>
+  <div id="actions">
+    <ul>
+      <li><%= link_to "Modifier le logiciel", edit_admin_software_path(@software) %></li>
+   </ul>
+  </div>
+<% end %>

@@ -2,6 +2,7 @@ class DatabasesController < SiteController
  no_login_required
   
   def index
+    @page = Page.find_by_slug("tools")
      radiant_render :page => "/tools"
   end
 

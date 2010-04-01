@@ -9,11 +9,41 @@ class R2gcExtension < Radiant::Extension
 
   define_routes do |map|
     map.namespace(:admin)  do |admin|
-      admin.resources :tools
-      admin.resources :softwares
-      admin.resources :test_engines
-      admin.resources :measuring_engines
-      admin.resources :tool_engines 
+      admin.resources :tools do |tool|
+        tool.resources :tool_assets
+        tool.resources :tool_public_photos
+        tool.resources :tool_private_photos
+        tool.resources :tool_brochures
+        tool.resources :tool_schemas
+      end
+      admin.resources :softwares do |software|
+        software.resources :tool_assets
+        software.resources :tool_public_photos
+        software.resources :tool_private_photos
+        software.resources :tool_brochures
+        software.resources :tool_schemas
+      end
+      admin.resources :test_engines do |test_engine|
+        test_engine.resources :tool_assets
+        test_engine.resources :tool_public_photos
+        test_engine.resources :tool_private_photos
+        test_engine.resources :tool_brochures
+        test_engine.resources :tool_schemas
+      end
+      admin.resources :measuring_engines do |measuring_engine|
+        measuring_engine.resources :tool_assets
+        measuring_engine.resources :tool_public_photos
+        measuring_engine.resources :tool_private_photos
+        measuring_engine.resources :tool_brochures
+        measuring_engine.resources :tool_schemas
+      end
+      admin.resources :tool_engines do |tool_engine|
+        tool_engine.resources :tool_assets
+        tool_engine.resources :tool_public_photos
+        tool_engine.resources :tool_private_photos
+        tool_engine.resources :tool_brochures
+        tool_engine.resources :tool_schemas
+      end
       admin.resources :laboratories
       admin.resources :agencies
       admin.resources :use_conditions
@@ -21,7 +51,9 @@ class R2gcExtension < Radiant::Extension
       admin.resources :software_statuses
       admin.resources :correspondents
       admin.resources :r2gc_users
-      admin.resources :teams
+      admin.resources :search_entities
+      admin.resources :search_subentities
+      admin.resources :r2gc_statics, :collection => { :modify_home => :any, :update_home => :post }
       admin.resources :roles#, :member => {:users => :get, :remove_user => :delete, :add_user => :post}
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'remove_user', :conditions => {:method => :delete}
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
@@ -40,7 +72,12 @@ class R2gcExtension < Radiant::Extension
 
   def activate
      #add Radiant Render
-     SiteController.send :include, SiteControllerExtension   
+     SiteController.send :include, SiteControllerExtension
+
+     tab 'Accueil base de données' do
+        add_item("Accueil", "/admin/r2gc_statics")
+      end
+
 
       tab 'Equipements' do
          add_item("Logiciels", "/admin/softwares")
@@ -52,16 +89,16 @@ class R2gcExtension < Radiant::Extension
          add_item("Conditions d'utilisation", "/admin/use_conditions")
       end
 
-      tab 'Laboratoires - Organismes' do
+      tab 'Laboratoires - Entités de recherche' do
          add_item("Laboratoires", "/admin/laboratories")
-         add_item("Organismes", "/admin/agencies")
+         add_item("Entités de recherche", "/admin/search_entities")
+         add_item("Sous entités", "/admin/search_subentities")
       end
 
       tab 'Utilisateurs' do
-        add_item("Equipes", "/admin/teams")
         add_item("Correspondants", "/admin/correspondents")
         add_item("Utilisateurs R2GC", "/admin/r2gc_users")
-      end
+      end      
 
       Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
       if Role.table_exists?

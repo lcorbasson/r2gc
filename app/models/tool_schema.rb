@@ -1,0 +1,2 @@
+class ToolSchema < ToolAsset
+end

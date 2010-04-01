@@ -20,8 +20,8 @@
     <td><%= f.text_field :quantity %></td>
   </tr>
   <tr>
-    <td><label>Organisme</label></td>
-    <td><%= f.select :agency, Agency.all.collect{|a| [a.name, a.id]} %></td>
+    <td><label>Laboratoire</label></td>
+    <td><%= f.select :laboratory, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
   </tr>
   <tr>
     <td><label>Principes de fonctionnement</label></td>

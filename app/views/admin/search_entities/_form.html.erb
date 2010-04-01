@@ -1,0 +1,15 @@
+<table id="table_form">
+  <tr>
+    <td><label>Nom</label></td>
+    <td><label><%= f.text_field :name%></label></td>
+  </tr>
+  <tr>
+    <td><label>Laboratoire</label></td>
+    <td><label><%= f.select :laboratory_id, Laboratory.all.collect{|l| [l.name, l.id]}%></label></td>
+  </tr>
+  <tr>
+    <td><label>Correspondants</label></td>
+    <td><label><%= select_tag "correspondents", options_for_select(Correspondent.all.collect{|c| [c.name, c.id]}, @correspondents ? @correspondents.collect(&:id) : nil), {:multiple => true} %></label></td>
+  </tr>
+</table>
+

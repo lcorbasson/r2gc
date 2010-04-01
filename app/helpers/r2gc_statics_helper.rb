@@ -1,0 +1,2 @@
+module R2gcStaticsHelper
+end
