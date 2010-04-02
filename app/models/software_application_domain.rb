@@ -3,6 +3,7 @@ class SoftwareApplicationDomain < ActiveRecord::Base
 
   validates_presence_of :application_domain
 
+
   def to_s
     application_domain
   end

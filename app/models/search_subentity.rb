@@ -10,4 +10,8 @@ class SearchSubentity < ActiveRecord::Base
     search_subentity.correspondents.update_all("search_entity_id = NULL")
   end
 
+  def to_s
+    name
+  end
+
 end

@@ -21,15 +21,15 @@
   </tr>
   <tr>
     <td><label>Laboratoire</label></td>
-    <td><%= f.select :laboratory, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
+    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
   </tr>
   <tr>
     <td><label>Statuts</label></td>
-    <td><%= f.select :software_statuses, SoftwareStatus.all.collect{|s| [s.name, s.id]}, :multiple => true %></td>
+    <td><%= f.select :software_status_ids, SoftwareStatus.all.collect{|s| [s.name, s.id]},{}, :multiple => true %></td>
   </tr>
   <tr>
     <td><label>Domaines d'application</label></td>
-    <td><%= f.select :software_application_domains, SoftwareApplicationDomain.all.collect{|d| [d.application_domain, d.id]} %></td>
+    <td><%= f.select :software_application_domain_ids, SoftwareApplicationDomain.all.collect{|d| [d.application_domain, d.id]} %></td>
   </tr>
   <tr>
     <td><label>Précisions</label></td>
@@ -69,11 +69,11 @@
   </tr>
   <tr>
     <td><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @software.new_record? ? options_for_select(Tool.all{|c| [c.name, c.id]}) : options_for_select((Tool.all-@software.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+    <td><%= select_tag :tools, @software.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@software.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
   </tr>
    <tr>
     <td><label>Correspondants</label></td>
-    <td><%= f.select :correspondents, Correspondent.all{|c| [c.name, c.id]}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
   </tr>
 </table>
 

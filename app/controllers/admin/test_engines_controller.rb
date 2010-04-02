@@ -21,7 +21,7 @@ class Admin::TestEnginesController < Admin::ResourceController
         end
       end
       flash[:notice] = "Moyen d'essai enregistré."
-      redirect_to admin_tools_path()
+      redirect_to admin_test_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back
@@ -44,7 +44,7 @@ class Admin::TestEnginesController < Admin::ResourceController
         end
       end
       flash[:notice] = "Moyen d'essai enregistré."
-      redirect_to admin_tools_path()
+      redirect_to admin_test_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back

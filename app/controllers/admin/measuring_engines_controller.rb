@@ -15,8 +15,16 @@ class Admin::MeasuringEnginesController < Admin::ResourceController
   def create
     @measuring_engine = MeasuringEngine.new(params[:measuring_engine])
     if @measuring_engine.save
-      flash[:notice] = 'Logiciel enregistré.'
-      redirect_to admin_tools_path()
+      if params[:tools]
+        params[:tools].each do |tool_id|
+          ToolRelation.create!(
+            :tool_from => @measuring_engine,
+            :tool_to => Tool.find(tool_id)
+          )
+        end
+      end
+      flash[:notice] = 'Moyen de mesure enregistré.'
+      redirect_to admin_measuring_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back
@@ -39,8 +47,8 @@ class Admin::MeasuringEnginesController < Admin::ResourceController
           )
         end
       end
-      flash[:notice] = 'Logiciel enregistré.'
-      redirect_to admin_tools_path()
+      flash[:notice] = 'Moyen de mesure enregistré.'
+      redirect_to admin_measuring_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back

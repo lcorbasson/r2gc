@@ -9,6 +9,8 @@ class Tool < ActiveRecord::Base
   has_many :tool_public_photos, :dependent => :destroy
   has_many :tool_private_photos, :dependent => :destroy
   has_many :tool_schemas, :dependent => :destroy
+  has_and_belongs_to_many :software_statuses
+  has_and_belongs_to_many :software_application_domains
 
   belongs_to :tool_subtype
   belongs_to :laboratory
@@ -19,8 +21,12 @@ class Tool < ActiveRecord::Base
     relations_from+relations_to
   end
 
-  def teams
-    correspondents.collect(&:teams).delete_if{|t| t.nil? }.join(", ")
+  def search_entities
+    correspondents.collect(&:search_entity).uniq.delete_if{|e| e.nil? }.join(", ")
+  end
+
+  def search_subentities
+    correspondents.collect(&:search_subentity).uniq.delete_if{|e| e.nil? }.join(", ")
   end
 
   def to_s

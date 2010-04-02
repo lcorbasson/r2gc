@@ -20,7 +20,15 @@ class Admin::ToolEnginesController < Admin::ResourceController
   def create
     @tool_engine = ToolEngine.new(params[:tool_engine])
     if @tool_engine.save
-      flash[:notice] = 'Machine outil enregistré.'
+       if params[:tools]
+        params[:tools].each do |tool_id|
+          ToolRelation.create!(
+            :tool_from => @tool_engine,
+            :tool_to => Tool.find(tool_id)
+          )
+        end
+      end
+      flash[:notice] = 'Machine outil enregistrée.'
       redirect_to admin_tool_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
@@ -44,7 +52,7 @@ class Admin::ToolEnginesController < Admin::ResourceController
           )
         end
       end
-      flash[:notice] = 'Machine outil enregistré.'
+      flash[:notice] = 'Machine outil enregistrée.'
       redirect_to admin_tool_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
@@ -55,7 +63,7 @@ class Admin::ToolEnginesController < Admin::ResourceController
   def destroy
     @tool_engine = ToolEngine.find(params[:id])
     if @tool_engine.destroy      
-      flash[:notice] = 'Machine outil supprimé.'
+      flash[:notice] = 'Machine outil supprimée.'
       redirect_to admin_tool_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de la suppression."

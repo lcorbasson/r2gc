@@ -20,8 +20,16 @@ class Admin::SoftwaresController < Admin::ResourceController
   def create
     @software = Software.new(params[:software])
     if @software.save
+      if params[:tools]
+        params[:tools].each do |tool_id|
+          ToolRelation.create!(
+            :tool_from => @software,
+            :tool_to => Tool.find(tool_id)
+          )
+        end
+      end   
       flash[:notice] = 'Logiciel enregistré.'
-      redirect_to admin_tools_path()
+      redirect_to admin_softwares_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back
@@ -43,9 +51,9 @@ class Admin::SoftwaresController < Admin::ResourceController
             :tool_to => Tool.find(tool_id)
           )
         end
-      end
+      end     
       flash[:notice] = 'Logiciel enregistré.'
-      redirect_to admin_tools_path()
+      redirect_to admin_softwares_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
       redirect_to :back

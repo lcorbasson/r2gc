@@ -13,15 +13,16 @@
       <label>Marque :</label> <%= @software.brand %><br/>
       <label>Version :</label> <%= @software.version %><br/>
       <label>Quantité :</label> <%= @software.quantity %><br/>
-      <label>Organisme :</label> <%= @software.agency %><br/>
+      <label>Laboratoire :</label> <%= @software.laboratory %><br/>      
       <% if current_user %>
-        <label>Nom entité recherche :</label> <%= @software.teams %><br/>
+        <label>Entités de recherche :</label> <%= @software.search_entities %><br/>
+        <label>Sous entités :</label> <%= @software.search_subentities %><br/>
       <% end %>
       <label>Statut du logiciel :</label> <br/>
       <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
       <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
       <% if current_user %>
-        <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs %><br/>
+        <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
       <% end %>
     </div>
     <div style="clear:both"></div>
