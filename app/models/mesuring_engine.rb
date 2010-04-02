@@ -1,2 +1,0 @@
-class MeasuringEngine < Tool
-end

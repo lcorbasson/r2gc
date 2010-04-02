@@ -1,7 +1,0 @@
-<h1>Edition de l'organisme <%= @organism.name  %></h1>
-<% form_for([:admin, @organism]) do |f| %>
-  <%= render :partial => "form", :locals => {:f => f} %>
-  <p class="buttons">
-    <%= submit_tag "Enregistrer", :class => "button" %>
-  </p>
-<% end %>

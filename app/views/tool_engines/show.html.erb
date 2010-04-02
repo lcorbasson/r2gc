@@ -13,7 +13,7 @@
       <label>Marque :</label> <%= @tool_engine.brand %><br/>
       <label>Modèle :</label> <%= @tool_engine.version %><br/>
       <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
-      <label>Organisme :</label> <%= @tool_engine.agency %><br/>
+      <label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/>
       <% if current_user %>
         <label>Equipe :</label> <%= @tool_engine.correspondents.collect(&:teams) %><br/>
       <% end %>
@@ -42,13 +42,13 @@
       <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s)</label>
+          <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @tool_engine} %><br/>
           <label>Lien web</label>
           <%= link_to @tool_engine.website, @tool_engine.website %>
         </div>
         <% if current_user %>
-          <h3>Correspondant(s)</h3>
+          <h3>Correspondant(s) : </h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.correspondents} %>
           </div>

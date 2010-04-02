@@ -15,5 +15,12 @@ class ToolsController < SiteController
     @tool = Tool.find(params[:id])
     radiant_render :page => "/tools"
   end
+
+
+  def get_information
+    @tool = Tool.find(params[:tool_id])
+    radiant_render :page => "/tools"
+
+  end
   
 end

@@ -46,7 +46,9 @@
           <label>Equipement(s) lié(s)</label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
           <label>Lien web</label>
-          <%= link_to @software.website, @software.website %>
+          <%= link_to @software.website, @software.website %><br/>
+          
+          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @software.id) %>
         </div>
         <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>

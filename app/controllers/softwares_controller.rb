@@ -6,4 +6,5 @@ class SoftwaresController < SiteController
 
      radiant_render :page => "/tools"
   end
+
 end

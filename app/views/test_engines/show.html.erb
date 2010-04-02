@@ -13,7 +13,7 @@
       <label>Marque :</label> <%= @test_engine.brand %><br/>
       <label>Modèle :</label> <%= @test_engine.version %><br/>
       <label>Quantité :</label> <%= @test_engine.quantity %><br/>
-      <label>Organisme :</label> <%= @test_engine.agency %><br/>
+      <label>Laboratoire :</label> <%= @test_engine.laboratory %><br/>
       <% if current_user %>
         <label>Equipe :</label> <%= @test_engine.correspondents.collect(&:teams) %><br/>
       <% end %>

@@ -59,7 +59,7 @@ class R2gcExtension < Radiant::Extension
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
       admin.role_users '/roles/:role_id/users', :controller => 'roles', :action => 'users', :conditions => {:method => :get}
     end
-    map.resources :tools
+    map.resources :tools, :collection => {:get_information => :get, :send_informations_mail => :post}
     map.resources :softwares
     map.resources :test_enginesls
     map.resources :measuring_engine

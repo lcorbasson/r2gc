@@ -1,3 +1,10 @@
-<% correspondents.each do |correspondent| %>
-  <%= correspondent.name %>
+<% if correspondents %>
+  <ul class="correspondents_list">
+    <% correspondents.each_with_index do |correspondent, i| %>    
+      <li>
+        <%= correspondent.name %><br/>
+        <%= correspondent.email %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
