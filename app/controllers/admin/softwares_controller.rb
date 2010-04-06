@@ -1,8 +1,8 @@
 class Admin::SoftwaresController < Admin::ResourceController
-  only_allow_access_to :create, :edit, :update, :new,
+  only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
-    :denied_message => 'You must have designer privileges to perform this action.'
+    :denied_message => "Vous n'avez pas les droits."
  
 
   def index
@@ -56,6 +56,18 @@ class Admin::SoftwaresController < Admin::ResourceController
       redirect_to admin_softwares_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
+      redirect_to :back
+    end
+  end
+
+
+  def destroy
+    @software = Software.find(params[:id])
+    if @software.destroy
+      flash[:notice] = 'Logiciel supprimé.'
+      redirect_to admin_softwares_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
       redirect_to :back
     end
   end

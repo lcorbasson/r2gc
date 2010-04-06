@@ -6,19 +6,19 @@
         <%= hidden_field_tag "tool_id", @tool.id %>
         <table class="front_forms">
           <tr>
-            <td><label>Nom</label></td>
+            <td><label>Nom*</label></td>
             <td><%= text_field_tag "last_name" %></td>
           </tr>
           <tr>
-            <td><label>Prénom</label></td>
+            <td><label>Prénom*</label></td>
             <td><%= text_field_tag "first_name" %></td>
           </tr>
           <tr>
-            <td><label>Email</label></td>
+            <td><label>Email*</label></td>
             <td><%= text_field_tag "email" %></td>
           </tr>
           <tr>
-            <td><label>Message</label></td>
+            <td valign="top"><label>Message*</label></td>
             <td><%= text_area_tag "message" %></td>
           </tr>
           <tr>
@@ -32,3 +32,7 @@
   </div>
   <div class="tool_bottom_show"></div>
 </div>
+
+<p class="link_to_back">
+  <%= link_to " << Retour", :back %>
+</p>

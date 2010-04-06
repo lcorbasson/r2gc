@@ -51,6 +51,7 @@ class R2gcExtension < Radiant::Extension
       admin.resources :software_statuses
       admin.resources :correspondents
       admin.resources :r2gc_users
+      admin.resources :r2gc_managers
       admin.resources :search_entities
       admin.resources :search_subentities
       admin.resources :r2gc_statics, :collection => { :modify_home => :any, :update_home => :post }
@@ -98,6 +99,7 @@ class R2gcExtension < Radiant::Extension
       tab 'Utilisateurs' do
         add_item("Correspondants", "/admin/correspondents")
         add_item("Utilisateurs R2GC", "/admin/r2gc_users")
+        add_item("Modérateurs R2GC", "/admin/r2gc_managers")
       end      
 
       Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']

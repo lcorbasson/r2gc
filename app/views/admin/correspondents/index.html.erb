@@ -3,12 +3,14 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @correspondents.each do |correspondent| %>
         <tr>
           <td><%= link_to correspondent.name, edit_admin_correspondent_path(correspondent) %></td>
+          <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_correspondent_path(correspondent), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet correspondant ?" %></td>
         </tr>
       <% end %>
     </tbody>

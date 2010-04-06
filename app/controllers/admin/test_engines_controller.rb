@@ -1,5 +1,5 @@
 class Admin::TestEnginesController < Admin::ResourceController
-  only_allow_access_to :create, :edit, :update,
+  only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
     :denied_message => 'You must have designer privileges to perform this action.'
@@ -47,6 +47,17 @@ class Admin::TestEnginesController < Admin::ResourceController
       redirect_to admin_test_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    @test_engine = TestEngine.find(params[:id])
+    if @test_engine.destroy
+      flash[:notice] = "Moyen d'essai supprimé."
+      redirect_to admin_test_engines_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
       redirect_to :back
     end
   end

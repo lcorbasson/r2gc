@@ -3,28 +3,36 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
-    <div class="tool_image">
-      <%= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @software.tool_public_photos.size>0 %>
-    </div>
-    <div class="tool_infos">
-      <label>Nom :</label> <%= @software.name %><br/>
-      <label>Type :</label> <%= @software.type %><br/>
-      <label>Sous type :</label> <%= @software.tool_subtype %><br/>
-      <label>Marque :</label> <%= @software.brand %><br/>
-      <label>Version :</label> <%= @software.version %><br/>
-      <label>Quantité :</label> <%= @software.quantity %><br/>
-      <label>Laboratoire :</label> <%= @software.laboratory %><br/>      
-      <% if current_user %>
-        <label>Entités de recherche :</label> <%= @software.search_entities %><br/>
-        <label>Sous entités :</label> <%= @software.search_subentities %><br/>
-      <% end %>
-      <label>Statut du logiciel :</label> <br/>
-      <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
-      <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
-      <% if current_user %>
-        <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
-      <% end %>
-    </div>
+    <table style="width:100%">
+      <tr>
+        <td><%= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @software.tool_public_photos.size>0 %></td>
+        <td>
+          <% if @software.laboratory && @software.laboratory.logo_file_name %>
+            <div style="float:right;margin:10px;"><%= image_tag(@software.laboratory.logo.url(:thumb)) %></div>
+          <% end %>
+          <div class="tool_infos">
+            <label>Nom :</label> <%= @software.name %><br/>
+            <label>Type :</label> <%= @software.type %><br/>
+            <label>Sous type :</label> <%= @software.tool_subtype %><br/>
+            <label>Marque :</label> <%= @software.brand %><br/>
+            <label>Version :</label> <%= @software.version %><br/>
+            <label>Quantité :</label> <%= @software.quantity %><br/>
+            <label>Laboratoire :</label> <%= @software.laboratory %><br/>
+            <% if current_user %>
+              <label>Entités de recherche :</label> <%= @software.search_entities %><br/>
+              <label>Sous entités :</label> <%= @software.search_subentities %><br/>
+            <% end %>
+            <label>Statut du logiciel :</label> <br/>
+            <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
+            <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
+            <% if current_user %>
+              <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    </table>
+ 
     <div style="clear:both"></div>
 
 
@@ -43,10 +51,10 @@
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s)</label>
+          <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
-          <label>Lien web</label>
-          <%= link_to @software.website, @software.website %><br/>
+          <label>Lien web : </label>
+          <%= link_to @software.website, @software.website unless !@software.website %><br/>
           
           <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @software.id) %>
         </div>
@@ -64,8 +72,8 @@
 
 
 
-<p>
-  <%= link_to "Retour", :back %>
+<p class="link_to_back">
+  <%= link_to " << Retour", :back %>
 </p>
 
 <%= javascript_tag("

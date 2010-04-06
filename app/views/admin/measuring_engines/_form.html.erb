@@ -79,6 +79,10 @@
     <td><label>Niveau confidentialité</label></td>
     <td><%= f.text_field :privacy %></td>
   </tr>
+   <tr>
+    <td><label>Conditions d'utilisation</label></td>
+    <td><%= f.select :use_condition_ids, UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]},{}, :multiple => true %></td>
+  </tr>
   <tr>
     <td><label>Equipement liés</label></td>
     <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine).collect{|c| [c.name, c.id]}), :multiple => true %></td>

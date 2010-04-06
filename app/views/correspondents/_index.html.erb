@@ -2,9 +2,18 @@
   <ul class="correspondents_list">
     <% correspondents.each_with_index do |correspondent, i| %>    
       <li>
-        <%= correspondent.name %><br/>
-        <%= correspondent.email %>
+        <span class="correspondent_name"><%= correspondent.name %></span><br/>
+        <% if correspondent.comments %>
+          <%= correspondent.comments %><br/>
+        <% end %>
+        <% if correspondent.email %>
+           Email : <%= mail_to correspondent.email,correspondent.email %><br/>
+        <% end %>
+        <% if correspondent.phone_number %>
+            Tél. : <%= correspondent.phone_number %><br/>
+       <% end %>
       </li>
     <% end %>
   </ul>
 <% end %>
+<div style="clear:both"></div>

@@ -44,6 +44,8 @@
                 <%= render :partial => "softwares/refine_search", :locals => {:f => f} %>
               <% when "ToolEngine" %>
                 <%= render :partial => "tool_engines/refine_search", :locals => {:f => f} %>
+              <% else %>
+                <%= render :partial => "tools/refine_search", :locals => {:f => f} %>
             <% end %>
           </table>
       <% end  %>    
@@ -76,9 +78,14 @@
         </tr>
       <% end %>
     </table>
+  
   </div>
+ 
 </div>
 
+<div class="tools_pagination">
+  <%= will_paginate @users, :next_label => ">", :previous_label => "<" %>
+</div>
 
 <%= javascript_tag("    
      $(document).ready(function () {

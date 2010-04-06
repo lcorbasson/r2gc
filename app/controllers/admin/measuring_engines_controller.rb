@@ -1,5 +1,5 @@
 class Admin::MeasuringEnginesController < Admin::ResourceController
-  only_allow_access_to :create, :edit, :update, :new,
+  only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
     :denied_message => 'You must have designer privileges to perform this action.'
@@ -51,6 +51,17 @@ class Admin::MeasuringEnginesController < Admin::ResourceController
       redirect_to admin_measuring_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
+      redirect_to :back
+    end
+  end
+
+   def destroy
+    @measuring_engine = MeasuringEngine.find(params[:id])
+    if @measuring_engine.destroy
+      flash[:notice] = 'Moyen de mesure supprimé.'
+      redirect_to admin_measuring_engines_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
       redirect_to :back
     end
   end

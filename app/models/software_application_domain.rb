@@ -4,6 +4,10 @@ class SoftwareApplicationDomain < ActiveRecord::Base
   validates_presence_of :application_domain
 
 
+  before_destroy do |application_domain|
+    application_domain.softwares = []
+  end
+
   def to_s
     application_domain
   end

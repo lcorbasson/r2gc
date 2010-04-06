@@ -4,7 +4,7 @@
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
     <div class="tool_image">
-      <%= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
+      <%= image_tag(@measuring_engine.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
     </div>
       <div class="tool_infos">
       <label>Nom :</label> <%= @measuring_engine.name %><br/>
@@ -15,7 +15,8 @@
       <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
       <label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/>
       <% if current_user %>
-        <label>Equipe :</label> <%= @measuring_engine.teams %><br/>
+        <label>Entités de recherche :</label> <%= @measuring_engine.search_entities %><br/>
+        <label>Sous entités :</label> <%= @measuring_engine.search_subentities %><br/>
       <% end %>
       </div>
 
@@ -48,10 +49,11 @@
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s)</label>
+          <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %><br/>
-          <label>Lien web</label>
-          <%= link_to @measuring_engine.website, @measuring_engine.website %>
+          <label>Lien web : </label>
+          <%= link_to @measuring_engine.website, @measuring_engine.website unless !@measuring_engine.website%><br/>
+          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @measuring_engine.id) %>
         </div>
         <% if current_user %>
           <h3>Correspondant(s)</h3>
@@ -66,8 +68,8 @@
 
 
 
-<p>
-  <%= link_to "Retour", :back %>
+<p class="link_to_back">
+  <%= link_to " << Retour", :back %>
 </p>
 
 <%= javascript_tag("$(function() {$('#accordion').accordion();});") %>
