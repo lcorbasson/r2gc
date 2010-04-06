@@ -1,19 +1,20 @@
 <h1 class="tools_title">Rechercher sur la base de données équipements des laboratoires de génie civil de la région.</h1>
 
+<% if !current_user %>
+  <div id="login">
+    <%  form_tag login_databases_path do |f| %>
+       <%=  label_tag "Votre identifiant" %>
+       <%=  text_field_tag "login" %>
 
-<div id="login">
-  <%  form_tag login_databases_path do |f| %>
-     <%=  label_tag "Votre identifiant" %>
-     <%=  text_field_tag "login" %>
-
-     <%=  label_tag "Votre code d'accès" %>
-      <%= password_field_tag "password" %>
+       <%=  label_tag "Votre code d'accès" %>
+        <%= password_field_tag "password" %>
 
 
-     <%= submit_tag "OK", :id => "btn_login" %>
+       <%= submit_tag "OK", :id => "btn_login" %>
 
-  <% end %>
-</div>
+    <% end %>
+  </div>
+<% end %>
 
 
 <p class="blue_title">Recherchez un équipement : </p>

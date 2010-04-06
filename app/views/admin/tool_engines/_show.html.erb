@@ -1,5 +1,8 @@
 <td><%= (current_user.can_update_tool?(tool)) ? link_to(tool.name, edit_admin_tool_engine_path(tool)) : tool.name %></td>
 <td><%= tool.tool_subtype %></td>
 <td>
-<%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_tool_engine_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?" %>
-  <%= link_to image('plus', :alt => 'supprimer')+"Nouveau document", new_admin_tool_engine_tool_asset_path(tool) %></td>
+  <% if current_user.can_update_tool?(tool) %>
+    <%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_tool_engine_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?" %>
+    <%= link_to image('plus', :alt => 'supprimer')+"Nouveau document", new_admin_tool_engine_tool_asset_path(tool) %>
+<% end %>
+</td>
