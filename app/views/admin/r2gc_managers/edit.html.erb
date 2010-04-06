@@ -1,0 +1,7 @@
+<h1>Edition du modérateur <%= @r2gc_manager.name %></h1>
+<% form_for([:admin, @r2gc_manager]) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

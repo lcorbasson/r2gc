@@ -1,0 +1,26 @@
+<table id="table_form">
+  <tr>
+    <td><label>Nom</label></td>
+    <td><%= f.text_field :name %></td>
+  </tr>
+  <tr>
+    <td><label>Login</label></td>
+    <td><%= f.text_field :login %></td>
+  </tr>
+  <tr>
+    <td><label>Email</label></td>
+    <td><%= f.text_field :email %></td>
+  </tr>
+   <% if @r2gc_manager.new_record? %>
+    <tr>
+      <td><label>Mot de passe</label></td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <td><label>Confirmation Mot de passe</label></td>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+  <% end %>
+</table>
+
+

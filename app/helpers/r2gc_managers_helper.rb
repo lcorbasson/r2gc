@@ -1,0 +1,2 @@
+module R2gcManagersHelper
+end
