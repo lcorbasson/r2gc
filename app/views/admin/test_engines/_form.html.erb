@@ -40,7 +40,7 @@
     <td><%= f.text_field :website %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Etalonnage/calibration/vérification</label></td>
+    <td><label>Etalonnage/calibration/vérification</label></td>
     <td><%= f.select :calibration_id,Calibration.all.collect{|c| [c.calibration, c.id]}, :include_blank => true %></td>
   </tr>
   <tr>
