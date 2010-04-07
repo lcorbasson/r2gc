@@ -36,7 +36,9 @@ class Admin::ToolAssetsController < Admin::ResourceController
   end
 
   def edit
-    @organism = Agency.find(params[:id])
+    tool_id = params[:software_id] ? params[:software_id] : params[:test_engine_id] ? params[:test_engine_id] : params[:tool_engine_id] ? params[:tool_engine_id] : params[:measuring_engine_id]
+    @tool = Tool.find(tool_id)
+    @asset = @tool.tool_assets.new
   end
 
   def update

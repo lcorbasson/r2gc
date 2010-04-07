@@ -1,49 +1,102 @@
 <% case tool
-  when Software %>
+  when Software %>    
     <% new_public_photo_link = new_admin_software_tool_public_photo_path(tool) %>
     <% new_private_photo_link = new_admin_software_tool_private_photo_path(tool) %>
     <% new_brochure_link = new_admin_software_tool_brochure_path(tool) %>
     <% new_schema_link = new_admin_software_tool_schema_path(tool) %>
+    <% edit_public_photo_link = edit_admin_software_tool_public_photo_path(tool) %>
+    <% edit_private_photo_link = edit_admin_software_tool_private_photo_path(tool) %>
+    <% edit_brochure_link = edit_admin_software_tool_brochure_path(tool) %>
+    <% edit_schema_link = edit_admin_software_tool_schema_path(tool) %>
+    <% delete_public_photo_link = admin_software_tool_public_photo_path(tool) %>
+    <% delete_private_photo_link = admin_software_tool_private_photo_path(tool) %>
+    <% delete_brochure_link = admin_software_tool_brochure_path(tool) %>
+    <% delete_schema_link = admin_software_tool_schema_path(tool) %>
  <% when  ToolEngine %>
     <% new_public_photo_link = new_admin_tool_engine_tool_public_photo_path(tool) %>
     <% new_private_photo_link = new_admin_tool_engine_tool_private_photo_path(tool) %>
     <% new_brochure_link = new_admin_tool_engine_tool_brochure_path(tool) %>
     <% new_schema_link = new_admin_tool_engine_tool_schema_path(tool) %>
+    <% edit_public_photo_link = edit_admin_tool_engine_tool_public_photo_path(tool) %>
+    <% edit_private_photo_link = edit_admin_tool_engine_tool_private_photo_path(tool) %>
+    <% edit_brochure_link = edit_admin_tool_engine_tool_brochure_path(tool) %>
+    <% edit_schema_link = edit_admin_tool_engine_tool_schema_path(tool) %>
+    <% delete_public_photo_link = admin_tool_engine_tool_public_photo_path(tool) %>
+    <% delete_private_photo_link = admin_tool_engine_tool_private_photo_path(tool) %>
+    <% delete_brochure_link = admin_tool_engine_tool_brochure_path(tool) %>
+    <% delete_schema_link = admin_tool_engine_tool_schema_path(tool) %>
  <% when TestEngine %>
     <% new_public_photo_link = new_admin_test_engine_tool_public_photo_path(tool) %>
     <% new_private_photo_link = new_admin_test_engine_tool_private_photo_path(tool) %>
     <% new_brochure_link = new_admin_test_engine_tool_brochure_path(software) %>
     <% new_schema_link = new_admin_test_engine_tool_schema_path(tool) %>
+    <% edit_public_photo_link = edit_admin_test_engine_tool_public_photo_path(tool) %>
+    <% edit_private_photo_link = edit_admin_test_engine_tool_private_photo_path(tool) %>
+    <% edit_brochure_link = edit_admin_test_engine_tool_brochure_path(tool) %>
+    <% edit_schema_link = edit_admin_test_engine_tool_schema_path(tool) %>
+    <% delete_public_photo_link = admin_test_engine_tool_public_photo_path(tool) %>
+    <% delete_private_photo_link = admin_test_engine_tool_private_photo_path(tool) %>
+    <% delete_brochure_link = admin_test_engine_tool_brochure_path(tool) %>
+    <% delete_schema_link = admin_test_engine_tool_schema_path(tool) %>
   <% when MeasuringEngine %>
     <% new_public_photo_link = new_admin_measuring_engine_tool_public_photo_path(tool) %>
     <% new_private_photo_link = new_admin_measuring_engine_tool_private_photo_path(tool) %>
     <% new_brochure_link = new_admin_measuring_engine_tool_brochure_path(tool) %>
     <% new_schema_link = new_admin_measuring_engine_tool_schema_path(tool) %>
+    <% edit_public_photo_link = edit_admin_measuring_engine_tool_public_photo_path(tool) %>
+    <% edit_private_photo_link = edit_admin_measuring_engine_tool_private_photo_path(tool) %>
+    <% edit_brochure_link = edit_admin_measuring_engine_tool_brochure_path(tool) %>
+    <% edit_schema_link = edit_admin_measuring_engine_tool_schema_path(tool) %>
+    <% delete_public_photo_link = admin_measuring_engine_tool_public_photo_path(tool) %>
+    <% delete_private_photo_link = admin_measuring_engine_tool_private_photo_path(tool) %>
+    <% delete_brochure_link = admin_measuring_engine_tool_brochure_path(tool) %>
+    <% delete_schema_link = admin_measuring_engine_tool_schema_path(tool) %>
 <% end %>
 
 
 <div style="width:45%;float:right">
-  <h1>Documents</h1>
-  
+  <h1>Documents</h1>  
     <div style="margin-top:10px;">
       <span class="asset_type">Photos diffusables (<%= link_to "Nouvelle photo diffusable", new_public_photo_link  %> )</span><hr/>
-      <%  tool.tool_public_photos.each do |asset| %>
-        <%= image_tag(asset.asset.url(:thumb)) %>
-      <% end %>
+      <ul class="documents_list">
+        <%  tool.tool_public_photos.each do |asset| %>
+        <li class="actions_box">
+          <div class="actions">
+            <%= link_to image_tag("admin/edit_icon.png"), edit_public_photo_link %>
+            <%= link_to image_tag("admin/delete_icon.png"), delete_public_photo_link, :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
+          </div>
+          <%= image_tag(asset.asset.url(:thumb)) %>
+          
+        </li>
+        <% end %>
+      </ul>
+      <div style="clear:both"></div>
     </div>
  
     <div style="margin-top:10px;">
      <span class="asset_type"> Photos non diffusables (<%= link_to "Nouvelle photo non diffusable", new_private_photo_link  %> )</span><hr/>
-      <% tool.tool_private_photos.each do |asset| %>
-        <%= image_tag(asset.asset.url(:thumb)) %>
-      <% end %>
+      <ul class="documents_list">
+        <% tool.tool_private_photos.each do |asset| %>
+          <li>
+            
+            <%= image_tag(asset.asset.url(:thumb)) %>
+            
+          </li>
+        <% end %>
+      </ul>
+     <div style="clear:both"></div>
     </div>
   
     <div style="margin-top:10px;">
       <span class="asset_type">Plaquettes (<%= link_to "Nouvelle plaquette", new_brochure_link  %> )</span><hr/>
-      <% tool.tool_brochures.each do |asset| %>
-        <%= asset.asset_file_name %><br/>
-      <% end %>
+      
+        <% tool.tool_brochures.each do |asset| %>
+
+            <%= asset.asset_file_name %><br/>
+
+        <% end %>
+  
+     <div style="clear:both"></div>
     </div>
   
     <div style="margin-top:10px;">
