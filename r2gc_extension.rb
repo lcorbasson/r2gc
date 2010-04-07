@@ -46,6 +46,7 @@ class R2gcExtension < Radiant::Extension
         tool_engine.resources :tool_schemas
       end
       admin.resources :laboratories
+      admin.resources :calibrations
       admin.resources :agencies
       admin.resources :use_conditions
       admin.resources :software_application_domains
@@ -63,6 +64,7 @@ class R2gcExtension < Radiant::Extension
     end
     map.resources :tools, :collection => {:get_information => :get, :send_informations_mail => :post}
     map.resources :softwares
+    
     map.resources :test_enginesls
     map.resources :measuring_engine
     map.resources :tool_engines
@@ -97,6 +99,8 @@ class R2gcExtension < Radiant::Extension
         add_item("Domaines d'application logiciel", "/admin/software_application_domains")
         add_item("Statuts logiciel", "/admin/software_statuses")
         add_item("Conditions d'utilisation", "/admin/use_conditions")
+        add_item("Etalonnage/Calibration/Verification", "/admin/calibrations")
+
       end  
 
 

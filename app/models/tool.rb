@@ -18,6 +18,7 @@ class Tool < ActiveRecord::Base
 
   belongs_to :tool_subtype
   belongs_to :laboratory
+  belongs_to :calibration
 
   named_scope :limit, lambda {|count| { :limit => count } }
 
