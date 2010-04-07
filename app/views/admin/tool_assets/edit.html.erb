@@ -1,0 +1,9 @@
+<h1>Modification  de document</h1>
+<%= image_tag @asset.asset.url(:thumb) %>
+
+<% form_for([:admin, @tool, @asset], :html => {:multipart => true}) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>

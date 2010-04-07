@@ -1,0 +1,8 @@
+<h1>Edition d'un schéma pour l'équipement <%= @tool.name %></h1>
+
+<% form_for([:admin, @tool, @asset], :html => {:multipart => true}) do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <p class="buttons">
+    <%= submit_tag "Enregistrer", :class => "button" %>
+  </p>
+<% end %>
