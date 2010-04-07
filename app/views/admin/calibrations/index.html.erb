@@ -1,0 +1,25 @@
+<div class="outset">
+  <table class="index">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @calibrations.each do |calibration| %>
+        <tr>
+          <td><%= link_to calibration.calibration, edit_admin_calibration_path(calibration) %></td>
+          <td><%= link_to image('remove', :alt => 'supprimer calibration')+"Supprimer", admin_calibration_path(calibration), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette calibration ?" %></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Nouvelle calibration", new_admin_calibration_path() %></li>
+  </ul>
+</div>
