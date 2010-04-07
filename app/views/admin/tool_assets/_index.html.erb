@@ -28,7 +28,7 @@
  <% when TestEngine %>
     <% new_public_photo_link = new_admin_test_engine_tool_public_photo_path(tool) %>
     <% new_private_photo_link = new_admin_test_engine_tool_private_photo_path(tool) %>
-    <% new_brochure_link = new_admin_test_engine_tool_brochure_path(software) %>
+    <% new_brochure_link = new_admin_test_engine_tool_brochure_path(tool) %>
     <% new_schema_link = new_admin_test_engine_tool_schema_path(tool) %>
     <% edit_public_photo_link = edit_admin_test_engine_tool_public_photo_path(tool) %>
     <% edit_private_photo_link = edit_admin_test_engine_tool_private_photo_path(tool) %>
@@ -61,10 +61,10 @@
       <ul class="documents_list">
         <%  tool.tool_public_photos.each do |asset| %>
         <li class="actions_box">
-          <div class="actions">
-            <%= link_to image_tag("admin/edit_icon.png"), edit_public_photo_link %>
-            <%= link_to image_tag("admin/delete_icon.png"), delete_public_photo_link, :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
-          </div>
+          <%#*<div class="actions">%>
+            <%#= link_to image_tag("admin/edit_icon.png"), edit_public_photo_link %>
+            <%#= link_to image_tag("admin/delete_icon.png"), delete_public_photo_link, :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
+          <%#*</div>%>
           <%= image_tag(asset.asset.url(:thumb)) %>
           
         </li>

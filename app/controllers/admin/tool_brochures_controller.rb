@@ -23,11 +23,11 @@ class Admin::ToolBrochuresController < Admin::ResourceController
       when Software
         redirect_to edit_admin_software_path(@tool)
       when TestEngine
-        redirect_to edit_test_engine_software_path(@tool)
+        redirect_to edit_admin_test_engine_path(@tool)
       when ToolEngine
-        redirect_to edit_tool_engine_software_path(@tool)
+        redirect_to edit_admin_tool_engine_path(@tool)
       when MeasuringEngine
-        redirect_to edit_measuring_engine_software_path(@tool)
+        redirect_to edit_admin_measuring_engine_path(@tool)
       end
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
@@ -50,11 +50,11 @@ class Admin::ToolBrochuresController < Admin::ResourceController
       when Software
         redirect_to edit_admin_software_path(@tool)
       when TestEngine
-        redirect_to edit_test_engine_software_path(@tool)
+        redirect_to edit_admin_test_engine_path(@tool)
       when ToolEngine
-        redirect_to edit_tool_engine_software_path(@tool)
+        redirect_to edit_admin_tool_engine_path(@tool)
       when MeasuringEngine
-        redirect_to edit_measuring_engine_software_path(@tool)
+        redirect_to edit_admin_measuring_engine_path(@tool)
       end
 
     else
@@ -72,11 +72,11 @@ class Admin::ToolBrochuresController < Admin::ResourceController
       when Software
         redirect_to edit_admin_software_path(@tool)
       when TestEngine
-        redirect_to edit_test_engine_software_path(@tool)
+        redirect_to edit_admin_test_engine_path(@tool)
       when ToolEngine
-        redirect_to edit_tool_engine_software_path(@tool)
+        redirect_to edit_admin_tool_engine_path(@tool)
       when MeasuringEngine
-        redirect_to edit_measuring_engine_software_path(@tool)
+        redirect_to edit_admin_measuring_engine_path(@tool)
       end
 
     else

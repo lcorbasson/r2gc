@@ -36,6 +36,10 @@
     <td><%= f.text_field :explanatory_document %></td>
   </tr>
   <tr>
+    <td class="label_td"><label>Lien internet</label></td>
+    <td><%= f.text_field :website %></td>
+  </tr>
+  <tr>
     <td><label>Etalonnage/calibration/vérification</label></td>
     <td><%= f.text_field :calibration %></td>
   </tr>
@@ -52,24 +56,26 @@
     <td><%= f.text_field :comment %></td>
   </tr>
   <tr>
-    <td><label>Prêt possible uniquement sur le site de l’organisme propriétaire</label></td>
-    <td><%= f.text_field :use_on_site %></td>
+    <td><label>Prêt possible(uniquement sur le site de l’organisme propriétaire)</label></td>
+    <td><%=  f.radio_button :use_on_site, true %>Oui
+      <%=  f.radio_button :use_on_site, false %>Non</td>
   </tr>
   <tr>
-    <td><label>Emprunt possible en dehors du site de l’organisme propriétaire</label></td>
-    <td><%= f.text_field :borrowing %></td>
+    <td><label>Emprunt possible(en dehors du site de l’organisme propriétaire)</label></td>
+    <td><%=  f.radio_button :borrowing, true %>Oui
+      <%=  f.radio_button :borrowing, false %>Non</td>
   </tr>
   <tr>
     <td><label>Conditions de prêt et d’emprunt de l’équipement</label></td>
-    <td><%= f.text_field :borrowing %></td>
+    <td><%= f.select :use_condition_ids, UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]},{}, {:multiple => true} %></td>
   </tr>
   <tr>
     <td><label>Localisation sur le site</label></td>
-    <td><%= f.text_field :mi_localization_on_site %></td>
+    <td><%= f.text_area :mi_localization_on_site %></td>
   </tr>
   <tr>
     <td><label>Précisions</label></td>
-    <td><%= f.text_field :localization_on_site_precision %></td>
+    <td><%= f.text_area :localization_on_site_precision %></td>
   </tr>
   <tr>
     <td><label>N° d’enregistrement interne</label></td>
@@ -78,18 +84,14 @@
   <tr>
     <td><label>Niveau confidentialité</label></td>
     <td><%= f.text_field :privacy %></td>
-  </tr>
-   <tr>
-    <td><label>Conditions d'utilisation</label></td>
-    <td><%= f.select :use_condition_ids, UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]},{}, :multiple => true %></td>
-  </tr>
+  </tr>   
   <tr>
     <td><label>Equipement liés</label></td>
     <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine).collect{|c| [c.name, c.id]}), :multiple => true %></td>
   </tr>
    <tr>
     <td><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
   </tr>
 </table>
 

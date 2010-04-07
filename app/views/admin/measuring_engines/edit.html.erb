@@ -1,3 +1,4 @@
+<div style="width:50%;float:left">
 <h1>Edition de du moyen de mesure et d'analyse <%= @mesuring_engine.name %></h1>
 <% form_for([:admin, @measuring_engine]) do |f| %>
   <%= render :partial => "form", :locals => {:f => f} %>
@@ -5,3 +6,5 @@
     <%= submit_tag "Enregistrer", :class => "button" %>
   </p>
 <% end %>
+</div>
+<%= render :partial => "admin/tool_assets/index", :locals => {:tool => @mesuring_engine} %>
