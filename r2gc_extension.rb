@@ -111,7 +111,7 @@ class R2gcExtension < Radiant::Extension
         User.class_eval do
           define_method("can_update_tool?") do |*args|
             tool = *args
-            (r2gc_correspondent? && Correspondent.find(id).tools.include?(tool)) || admin?
+            (r2gc_correspondent? && Correspondent.find(id).tools.include?(tool)) || admin? || r2gc_manager?
           end
         end
         admin.users.edit[:form].delete('edit_roles')
