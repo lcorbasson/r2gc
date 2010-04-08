@@ -1,6 +1,11 @@
-<h1 class="tools_title">Rechercher sur la base de données équipements des laboratoires de génie civil de la région.</h1>
+<h1 class="tools_title">Base de données équipements des laboratoires de génie civil de la région.</h1>
+
+
 
 <% if !current_user %>
+<p>
+  Si vous êtes membre du réseau, identifiez-vous, sinon, utilisez le formulaire de recherche ci-dessous.
+</p>
   <div id="login">
     <%  form_tag login_databases_path do |f| %>
        <%=  label_tag "Votre identifiant" %>
@@ -15,9 +20,9 @@
     <% end %>
   </div>
 <% end %>
+<br/>
 
-
-<p class="blue_title">Recherchez un équipement : </p>
+<p class="blue_title">Interrogation de la base de données : </p>
 <div id="tool_search">
 <div class="tool_show">
   <div class="tool_top_show"></div>
@@ -26,7 +31,7 @@
       <%= link_to_function "Moyens d'essais", "make_type('TestEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("TestEngine")}" %>
       <%= link_to_function "Moyens de mesure et d'analyse", "make_type('MesuringEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("MesuringEngine")}" %>
       <%= link_to_function "Logiciels", "make_type('Software')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("Software")}" %>
-      <%= link_to_function "Machine-outils", "make_type('ToolEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("ToolEngine")}" %>
+      <%= link_to_function "Machines-outil", "make_type('ToolEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("ToolEngine")}" %>
 
 
       <%  form_for @search,:html => { :id => "search_form" } do |f| %>
@@ -63,8 +68,8 @@
           <th>Laboratoire</th>
           <th>Nom</th>
           <th>Sous type</th>
-          <th>Marque</th>
-          <th class="last">Type ou modèle</th>
+          <th>Marque/Constructeur</th>
+          <th class="last">Modèle/Version</th>
         </tr>
       </thead>
       <% @tools.each do |tool| %>
@@ -79,11 +84,12 @@
         </tr>
       <% end %>
     </table>
+    
   
   </div>
  
 </div>
-
+Pour visionner la fiche complète d'un équipement, cliquez sur le nom de celui-ci.
 <div class="tools_pagination">
   <%= will_paginate @users, :next_label => ">", :previous_label => "<" %>
 </div>

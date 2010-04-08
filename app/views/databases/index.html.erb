@@ -26,6 +26,15 @@
 
 <% end %>
 <div style="clear:both"></div>
+<div class="tools_details">
+  Logiciels : <%=  Software.count %><br/>
+  Moyens d'essai : <%=  TestEngine.count %><br/>
+  Machines-outils: <%= ToolEngine.count %> <br/>
+  Moyen de mesure et d'analyse : <%= MeasuringEngine.count %><br/>
+</div>
+
+
+
 <p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
 
 <%= @page.parts.find_by_name("body").content  %>

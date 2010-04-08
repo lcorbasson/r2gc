@@ -61,10 +61,10 @@
       <ul class="documents_list">
         <%  tool.tool_public_photos.each do |asset| %>
         <li class="actions_box">
-          <%#*<div class="actions">%>
-            <%#= link_to image_tag("admin/edit_icon.png"), edit_public_photo_link %>
-            <%#= link_to image_tag("admin/delete_icon.png"), delete_public_photo_link, :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
-          <%#*</div>%>
+          <div class="actions">
+            <%= link_to image_tag("admin/edit_icon.png"), edit_public_photo_link %>
+            <%= link_to image_tag("admin/delete_icon.png"), delete_public_photo_link, :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
+          </div>
           <%= image_tag(asset.asset.url(:thumb)) %>
           
         </li>

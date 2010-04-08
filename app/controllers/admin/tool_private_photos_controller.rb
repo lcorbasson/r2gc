@@ -11,7 +11,7 @@ class Admin::ToolPrivatePhotosController < Admin::ResourceController
   def new
     tool_id = params[:software_id] ? params[:software_id] : params[:test_engine_id] ? params[:test_engine_id] : params[:tool_engine_id] ? params[:tool_engine_id] : params[:measuring_engine_id]
     @tool = Tool.find(tool_id)
-    @asset = @tool.tool_assets.new
+    @asset = @tool.tool_private_photos.new
   end
 
   def create

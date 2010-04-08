@@ -53,8 +53,11 @@
         <div>
           <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
-          <label>Lien web : </label>
-          <%= link_to @software.website, @software.website unless !@software.website %><br/>
+          <label>Lien(s) web : </label>
+          <%  @software.website.split(",").each do |link| %>
+            <%= link_to link, link %>
+          <% end %>
+     <br/>
           
           <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @software.id) %>
         </div>
