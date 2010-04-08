@@ -87,7 +87,7 @@
   </tr>   
   <tr>
     <td><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+    <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
   </tr>
    <tr>
     <td><label>Correspondants</label></td>

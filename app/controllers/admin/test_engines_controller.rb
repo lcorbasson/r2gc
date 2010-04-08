@@ -1,4 +1,4 @@
-class Admin::TestEnginesController < Admin::ResourceController
+class Admin::TestEnginesController < ApplicationController
   only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
@@ -7,6 +7,10 @@ class Admin::TestEnginesController < Admin::ResourceController
 
   def index
     @tools = TestEngine.all
+  end
+
+  def new
+    @test_engine = TestEngine.new
   end
 
   def create

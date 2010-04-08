@@ -1,4 +1,4 @@
-class Admin::MeasuringEnginesController < Admin::ResourceController
+class Admin::MeasuringEnginesController < ApplicationController
   only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },

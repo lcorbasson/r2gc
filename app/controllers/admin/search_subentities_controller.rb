@@ -1,4 +1,4 @@
-class Admin::SearchSubentitiesController < Admin::ResourceController
+class Admin::SearchSubentitiesController < ApplicationController
   only_allow_access_to :create, :edit, :update, :new, :destroy, :index,
     :when => [:admin, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },

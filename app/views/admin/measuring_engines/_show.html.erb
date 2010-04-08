@@ -1,4 +1,4 @@
-<td><%= (current_user.can_update_tool?(tool)) ? link_to(tool.name, edit_admin_tool_engine_path(tool)) : tool.name %></td>
+<td><%= (current_user.can_update_tool?(tool)) ? link_to(tool.name, edit_admin_measuring_engine_path(tool)) : tool.name %></td>
 <td><%= tool.tool_subtype %></td>
 <td>
   <% if current_user.can_update_tool?(tool) %>

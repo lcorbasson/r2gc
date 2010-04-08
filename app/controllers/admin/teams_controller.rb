@@ -1,4 +1,4 @@
-class Admin::TeamsController < Admin::ResourceController
+class Admin::TeamsController < ApplicationController
   only_allow_access_to :index, :new, :edit,
     :when => [:admin, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },

@@ -1,4 +1,4 @@
-class Admin::UseConditionsController < Admin::ResourceController
+class Admin::UseConditionsController < ApplicationController
   only_allow_access_to :index, :new, :create, :update, :edit,
     :when => [:admin, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },

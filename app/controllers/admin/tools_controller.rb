@@ -1,4 +1,4 @@
-class Admin::ToolsController < Admin::ResourceController
+class Admin::ToolsController < ApplicationController
   only_allow_access_to :create, :edit, :update, :new, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
