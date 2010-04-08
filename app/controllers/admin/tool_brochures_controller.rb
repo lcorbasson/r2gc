@@ -1,4 +1,4 @@
-class Admin::ToolBrochuresController < Admin::ResourceController
+class Admin::ToolBrochuresController < ApplicationController
   only_allow_access_to :create, :edit, :update, :new, :destroy, :index,
     :when => [:admin, :r2gc_correspondent, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
@@ -38,12 +38,13 @@ class Admin::ToolBrochuresController < Admin::ResourceController
   def edit
     tool_id = params[:software_id] ? params[:software_id] : params[:test_engine_id] ? params[:test_engine_id] : params[:tool_engine_id] ? params[:tool_engine_id] : params[:measuring_engine_id]
     @tool = Tool.find(tool_id)
-    @asset = @tool.find(params[:tool_brochure_id])
+    @asset = ToolAsset.find(params[:id])
   end
 
   def update
-    @tool = Tool.find(params[:tool_id])
-    @asset = @tool.find(params[:tool_brochure_id])
+    tool_id = params[:software_id] ? params[:software_id] : params[:test_engine_id] ? params[:test_engine_id] : params[:tool_engine_id] ? params[:tool_engine_id] : params[:measuring_engine_id]
+    @tool = Tool.find(tool_id)
+    @asset = ToolAsset.find(params[:id])
     if @asset.update_attributes(params[:tool_brochure])
       flash[:notice] = 'Document mis à jour.'
       case @tool
@@ -64,8 +65,9 @@ class Admin::ToolBrochuresController < Admin::ResourceController
   end
   
   def destroy
-    @tool = Tool.find(params[:tool_id])
-    @asset = @tool.find(params[:tool_brochure_id])
+    tool_id = params[:software_id] ? params[:software_id] : params[:test_engine_id] ? params[:test_engine_id] : params[:tool_engine_id] ? params[:tool_engine_id] : params[:measuring_engine_id]
+    @tool = Tool.find(tool_id)
+    @asset = ToolAsset.find(params[:id])
     if @asset.destroy
       flash[:notice] = 'Document supprimé.'
       case @tool
