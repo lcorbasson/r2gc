@@ -46,6 +46,7 @@ class R2gcExtension < Radiant::Extension
         tool_engine.resources :tool_schemas
       end
       admin.resources :laboratories
+      admin.resources :tool_subtypes
       admin.resources :calibrations
       admin.resources :agencies
       admin.resources :use_conditions
@@ -100,7 +101,7 @@ class R2gcExtension < Radiant::Extension
         add_item("Statuts logiciel", "/admin/software_statuses")
         add_item("Conditions d'utilisation", "/admin/use_conditions")
         add_item("Etalonnage/Calibration/Verification", "/admin/calibrations")
-
+        add_item("Sous types", "/admin/tool_subtypes")
       end  
 
 
