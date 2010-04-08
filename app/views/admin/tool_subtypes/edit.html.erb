@@ -1,0 +1,9 @@
+<div style="width:50%;float:left">
+  <h1>Edition du sous type <%= @tool_subtype.name %></h1>
+  <% form_for([:admin, @tool_subtype], :html => {:multipart => true}) do |f| %>
+    <%= render :partial => "form", :locals => {:f => f} %>
+    <p class="buttons">
+      <%= submit_tag "Enregistrer", :class => "button" %>
+    </p>
+  <% end %>
+</div>
