@@ -42,7 +42,9 @@
       
         <% tool.tool_brochures.each do |asset| %>
 
-            <%= asset.asset_file_name %><br/>
+            <%= asset.asset_file_name %>
+            <%= link_to image_tag("admin/edit_icon.png"), edit_brochure_link(tool, asset) %>
+            <%= link_to image_tag("admin/delete_icon.png"), destroy_brochure_link(tool, asset), :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %><br/>
 
         <% end %>
   
@@ -52,7 +54,10 @@
     <div style="margin-top:10px;">
       <span class="asset_type">Schémas (<%= link_to "Nouveau schéma", new_schema_link(tool)  %> )</span><hr/>
       <% tool.tool_schemas.each do |asset| %>
-        <%= asset.asset_file_name %><br/>
+        <%= asset.asset_file_name %>
+      <%= link_to image_tag("admin/edit_icon.png"), edit_schema_link(tool, asset) %>
+            <%= link_to image_tag("admin/delete_icon.png"), destroy_schema_link(tool, asset), :method => :delete, :confirm => "Etes-vous certain de vouloir supprimer cette photo ?" %>
+<br/>
       <% end %>
     </div>
 </div>

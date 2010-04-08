@@ -16,7 +16,7 @@ class Admin::ToolSchemasController < ApplicationController
 
   def create
     @tool = Tool.find(params[:tool_id])
-    @asset = @tool.tool_schemas_photos.new(params[:tool_schema])
+    @asset = @tool.tool_schemas.new(params[:tool_schema])
     if @asset.save
       flash[:notice] = 'Document enregistré.'
        case @tool
