@@ -1,8 +1,10 @@
 class MeasuringEnginesController < SiteController
  
   
-  def index
-    @softwares = Tool.all
+  def show
+    @measuring_engine = MeasuringEngine.find(params[:id])
+
+     radiant_render :page => "/tools"
   end
 
   

@@ -67,7 +67,7 @@ class R2gcExtension < Radiant::Extension
     map.resources :softwares
     
     map.resources :test_enginesls
-    map.resources :measuring_engine
+    map.resources :measuring_engines
     map.resources :tool_engines
     map.resources :test_engines
     map.resources :databases, :collection => {:login =>:any}    
