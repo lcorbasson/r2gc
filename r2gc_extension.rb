@@ -57,7 +57,7 @@ class R2gcExtension < Radiant::Extension
       admin.resources :r2gc_managers
       admin.resources :search_entities
       admin.resources :search_subentities
-      admin.resources :r2gc_statics, :collection => { :modify_home => :any, :update_home => :post }
+     # admin.resources :r2gc_statics, :collection => { :modify_home => :any, :update_home => :post }
       admin.resources :roles#, :member => {:users => :get, :remove_user => :delete, :add_user => :post}
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'remove_user', :conditions => {:method => :delete}
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
