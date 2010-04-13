@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td class="label_td"><label>Sous type</label></td>
-    <td><%= f.select :tool_subtype, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]} %></td>
+    <td><%= f.select :tool_subtype_id, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]} %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Marque</label></td>

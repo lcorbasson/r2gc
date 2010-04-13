@@ -6,4 +6,8 @@ class ToolSubtype < ActiveRecord::Base
   named_scope :for_softwares, :conditions => ["tool_type = ?", "Software"]
   named_scope :for_measuring_engines, :conditions => ["tool_type = ?", "MeasuringEngine"]
 
+
+  def to_s
+    name
+  end
 end
