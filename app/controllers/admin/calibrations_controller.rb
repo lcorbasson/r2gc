@@ -1,4 +1,4 @@
-class Admin::CalibrationsController < Admin::ResourceController
+class Admin::CalibrationsController < ApplicationController
   only_allow_access_to :create, :edit, :update, :index, :new, :destroy,
     :when => [:admin, :r2gc_manager],
     :denied_url => { :controller => 'admin/pages', :action => 'index' },
