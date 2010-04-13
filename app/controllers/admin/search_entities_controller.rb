@@ -10,7 +10,7 @@ class Admin::SearchEntitiesController < ApplicationController
 
   def new
     if Laboratory.count>0
-        @search_subentity = SearchSubentity.new
+        @search_entity = SearchEntity.new
    else
         flash[:error] = "Vous devez d'abord créer des laboratoires pour pouvoir créer des entités de recherche."
         redirect_to admin_search_entities_path()
