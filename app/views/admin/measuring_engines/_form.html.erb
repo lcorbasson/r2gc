@@ -33,18 +33,15 @@
   </tr>
   <tr>
     <td><label>Document explicatif </label></td>
-    <td><%= f.text_field :explanatory_document %></td>
+    <td><%= f.text_area :explanatory_document %></td>
   </tr>
-  <tr>
-    <td class="label_td"><label>Lien internet</label></td>
-    <td><%= f.text_field :website %></td>
-  </tr>
+  
   <tr>
     <td><label>Etalonnage/calibration/vérification</label></td>
     <td><%= f.select :calibration_id,Calibration.all.collect{|c| [c.calibration, c.id]}, :include_blank => true %></td>
   </tr>
   <tr>
-    <td><label>Remarque(s)</label></td>
+    <td><label>emarque(s) Etalonnage/calibration/vérification</label></td>
     <td><%= f.text_area :calibration_comment %></td>
   </tr>
   <tr>
@@ -53,7 +50,7 @@
   </tr>
   <tr>
     <td><label>Autre(s) commentaire(s)</label></td>
-    <td><%= f.text_field :comment %></td>
+    <td><%= f.text_area :comment %></td>
   </tr>
   <tr>
     <td><label>Prêt possible(uniquement sur le site de l’organisme propriétaire)</label></td>
@@ -79,12 +76,16 @@
   </tr>
   <tr>
     <td><label>N° d’enregistrement interne</label></td>
-    <td><%= f.text_field :internal_number %></td>
+    <td><%= f.text_area :internal_number %></td>
   </tr>
   <tr>
     <td><label>Niveau confidentialité</label></td>
     <td><%= f.text_field :privacy %></td>
-  </tr>   
+  </tr>
+  <tr>
+    <td class="label_td"><label>Lien internet</label></td>
+    <td><%= f.text_field :website %></td>
+  </tr>
   <tr>
     <td><label>Equipement liés</label></td>
     <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
@@ -92,6 +93,10 @@
    <tr>
     <td><label>Correspondants</label></td>
     <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+  </tr>
+  <tr>
+    <td><label>Niveau confidentialité</label></td>
+    <td><%= f.text_field :privacy %></td>
   </tr>
 </table>
 

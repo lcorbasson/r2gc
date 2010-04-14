@@ -14,11 +14,7 @@
   <tr>
     <td class="label_td"><label>Version</label></td>
     <td><%= f.text_field :version %></td>
-  </tr>
-  <tr>
-    <td class="label_td"><label>Quantité</label></td>
-    <td><%= f.text_field :quantity %></td>
-  </tr>
+  </tr>  
   <tr>
     <td class="label_td"><label>Laboratoire</label></td>
     <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
@@ -53,24 +49,21 @@
   </tr>
   <tr>
     <td class="label_td"><label>Caractéristiques de partage et de diffusion du logiciel</label></td>
-    <td><%= f.text_field :software_sharing_conditions %></td>
+    <td><%= f.text_area :software_sharing_conditions %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Commentaire(s)</label></td>
+    <td class="label_td"><label>Autre commentaire(s)</label></td>
     <td><%= f.text_area :comment %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Document explicatif</label></td>
-    <td><%= f.text_field :explanatory_document %></td>
+    <td><%= f.text_area :explanatory_document %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Lien internet</label></td>
     <td><%= f.text_field :website %></td>
   </tr>
-   <tr>
-    <td><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
-  </tr>
+   
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
     <td><%= select_tag :tools, @software.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@software.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
@@ -78,6 +71,10 @@
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
     <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+  </tr>
+  <tr>
+    <td><label>Niveau confidentialité</label></td>
+    <td><%= f.text_field :privacy %></td>
   </tr>
 </table>
 

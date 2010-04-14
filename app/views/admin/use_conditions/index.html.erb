@@ -21,7 +21,7 @@
 
 
 
-<h1 class="subtitle">Conditions d'utilisation Instruments de mesure - Moyens d'essai</h1>
+<h1 class="subtitle">Conditions d’utilisation moyens d’essais et moyens de mesure et d’analyse</h1>
 
 <div>
   <table class="index">
@@ -35,7 +35,7 @@
       <% @test_and_measure_use_conditions.each do |use_condition| %>
         <tr>
           <td><%= link_to use_condition.conditions, edit_admin_use_condition_path(use_condition) %></td>
-          <td><%= link_to image('remove', :alt => 'remove page'), admin_use_condition_path(use_condition), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette condition ?" %></td>
+          <td><%= link_to image('remove', :alt => 'remove page')+" Supprimer", admin_use_condition_path(use_condition), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette condition ?" %></td>
         </tr>
       <% end %>
     </tbody>
@@ -46,7 +46,7 @@
 <div id="actions">
   <ul>
     <li><%= link_to "Nouvelle condition d'utilisation MO", new_admin_use_condition_path(:tool_type => "tool") %></li>
-    <li><%= link_to "Nouvelle condition d'utilisation IM-ME", new_admin_use_condition_path(:tool_type => "other") %></li>
+    <li><%= link_to "Nouvelle conditions d’utilisation ME – MMA", new_admin_use_condition_path(:tool_type => "other") %></li>
   </ul>
 </div>
 

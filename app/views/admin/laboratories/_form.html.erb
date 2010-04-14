@@ -4,11 +4,11 @@
     <td><label><%= f.text_field :name%></label></td>
   </tr>
   <tr>
-    <td><label>Logo</label></td>
-    <td><label><%= f.file_field :logo%></label></td>
+    <td style="vertical-align:top"><label>Logo</label></td>
+    <td><label><%= f.file_field :logo%></label><%= image_tag(@laboratory.logo.url(:thumb)) unless !@laboratory.logo%> </td>
   </tr>
   <tr>
-    <td><label>Statut juridique</label></td>
+    <td><label>Statut</label></td>
     <td><label><%= f.text_field :legal_status%></label></td>
   </tr>
   <tr>

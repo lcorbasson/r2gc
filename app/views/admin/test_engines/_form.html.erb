@@ -35,16 +35,13 @@
     <td class="label_td"><label>Document explicatif </label></td>
     <td><%= f.text_field :explanatory_document %></td>
   </tr>
-  <tr>
-    <td class="label_td"><label>Lien internet</label></td>
-    <td><%= f.text_field :website %></td>
-  </tr>
+  
   <tr>
     <td><label>Etalonnage/calibration/vérification</label></td>
     <td><%= f.select :calibration_id,Calibration.all.collect{|c| [c.calibration, c.id]}, :include_blank => true %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Commentaire etalonnage</label></td>
+    <td class="label_td"><label>Remarque(s) Etalonnage/calibration/vérification</label></td>
     <td><%= f.text_area :calibration_comment %></td>
   </tr>
   <tr>
@@ -53,7 +50,7 @@
   </tr>
   <tr>
     <td class="label_td"><label>Autre(s) commentaire(s)</label></td>
-    <td><%= f.text_field :comment %></td>
+    <td><%= f.text_area :comment %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Equipement mobile</label></td>
@@ -63,12 +60,12 @@
       </td>
   </tr>
    <tr>
-    <td class="label_td"><label>Prêt possible(uniquement sur le site de l’organisme propriétaire)</label></td>
+    <td class="label_td"><label>Prêt possible (uniquement sur le site de l’organisme propriétaire)</label></td>
     <td><%=  f.radio_button :use_on_site, true %>Oui
       <%=  f.radio_button :use_on_site, false %>Non</td>
   </tr>
   <tr>
-    <td class="label_td"><label>Emprunt possible(en dehors du site de l’organisme propriétaire(</label></td>
+    <td class="label_td"><label>Emprunt possible (en dehors du site de l’organisme propriétaire)</label></td>
     <td><%=  f.radio_button :borrowing, true %>Oui
       <%=  f.radio_button :borrowing, false %>Non</td>
   </tr>
@@ -78,15 +75,16 @@
   </tr>
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
-    <td><%= f.text_field :mi_localization_on_site %></td>
+    <td><%= f.text_area :mi_localization_on_site %></td>
   </tr> 
   <tr>
     <td class="label_td"><label>N° d’enregistrement interne</label></td>
-    <td><%= f.text_field :internal_number %></td>
+    <td><%= f.text_area :internal_number %></td>
   </tr>
+  
   <tr>
-    <td class="label_td"><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
+    <td class="label_td"><label>Lien internet</label></td>
+    <td><%= f.text_field :website %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
@@ -95,6 +93,10 @@
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
     <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+  </tr>
+  <tr>
+    <td class="label_td"><label>Niveau confidentialité</label></td>
+    <td><%= f.text_field :privacy %></td>
   </tr>
 </table>
 

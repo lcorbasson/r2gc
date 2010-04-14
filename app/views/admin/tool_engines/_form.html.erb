@@ -31,10 +31,7 @@
     <td class="label_td"><label>Document explicatif </label></td>
     <td><%= f.text_field :explanatory_document %></td>
   </tr>
-  <tr>
-    <td class="label_td"><label>Lien internet</label></td>
-    <td><%= f.text_field :website %></td>
-  </tr>
+  
   <tr>
     <td class="label_td"><label>Date d'achat </label></td>
     <td><%= f.text_field :purchase_date %></td>
@@ -44,26 +41,28 @@
     <td><%=  f.radio_button :use_on_site, true %>Oui
     <%=  f.radio_button :use_on_site, false %>Non</td>
 
-  </tr> 
+  </tr>
+  <tr>
+    <td class="label_td"><label>Conditions d'utilisation</label></td>
+    <td><%= f.select :use_condition_ids, UseCondition.for_tools.collect{|c| [c.conditions, c.id]},{}, {:multiple => true} %></td>
+  </tr>
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
     <td><%= f.text_area :mi_localization_on_site %></td>
   </tr>
   <tr>
     <td class="label_td"><label>N° d’enregistrement interne</label></td>
-    <td><%= f.text_field :internal_number %></td>
+    <td><%= f.text_area :internal_number %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Commentaires </label></td>
+    <td class="label_td"><label>Autres commentaires </label></td>
     <td><%= f.text_area :comment %></td>
   </tr> 
+  
+   
   <tr>
-    <td class="label_td"><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
-  </tr>
-   <tr>
-    <td class="label_td"><label>Conditions d'utilisation</label></td>
-    <td><%= f.select :use_condition_ids, UseCondition.for_tools.collect{|c| [c.conditions, c.id]},{}, {:multiple => true} %></td>
+    <td class="label_td"><label>Lien internet</label></td>
+    <td><%= f.text_field :website %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
@@ -72,6 +71,10 @@
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
     <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+  </tr>
+  <tr>
+    <td class="label_td"><label>Niveau confidentialité</label></td>
+    <td><%= f.text_field :privacy %></td>
   </tr>
 </table>
 
