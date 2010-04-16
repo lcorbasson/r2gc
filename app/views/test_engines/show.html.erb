@@ -8,7 +8,7 @@
     </div>
     <div class="tool_infos">
       <label>Nom :</label> <%= @test_engine.name %><br/>
-      <label>Type :</label> <%= @test_engine.type %><br/>
+      <label>Type :</label>Moyen d'essai<br/>
       <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
       <label>Marque :</label> <%= @test_engine.brand %><br/>
       <label>Modèle :</label> <%= @test_engine.version %><br/>
@@ -25,16 +25,16 @@
     <div id="accordion">
       <% if current_user %>
         <h3><a href="#">Principes de fonctionnement</a></h3>
-        <div><%= @test_engine.operating_principles %></div>
+        <div><%= simple_format @test_engine.operating_principles %></div>
         <h3><a href="#">Caractéristiques techniques</a></h3>
-        <div><%= @test_engine.specifications %></div>
+        <div><%= simple_format @test_engine.specifications %></div>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
           Document explicatif : <%= @test_engine.explanatory_document %><br/>
           Etalonnage/calibration/vérification : <%= @test_engine.calibration %><br/>
-          Remarques : <%= @test_engine.calibration_comment %><br/>
+          Remarques : <%= simple_format @test_engine.calibration_comment %><br/>
           Date d'achat : <%= @test_engine.purchase_date %><br/>
-          Commentaires : <%= @test_engine.comment %>
+          Commentaires : <%= simple_format @test_engine.comment %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>
@@ -42,7 +42,7 @@
           Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @test_engine.use_on_site %><br/>
           Emprunt possible en dehors du site de l’organisme propriétaire : <%= @test_engine.borrowing %><br/>
           Conditions de prêt et d’emprunt de l’équipement : <br/>
-          Localisation sur le site : <%= @test_engine.mi_localization_on_site %><br/>
+          Localisation sur le site : <%= simple_format @test_engine.mi_localization_on_site %><br/>
           N° d’enregistrement interne: <%= @test_engine.internal_number %>
         </div>
        <% end %>

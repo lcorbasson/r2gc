@@ -8,7 +8,7 @@
     </div>
     <div class="tool_infos">
       <label>Nom :</label> <%= @tool_engine.name %><br/>
-      <label>Type :</label> <%= @tool_engine.type %><br/>
+      <label>Type :</label>Machine-outil<br/>
       <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
       <label>Marque :</label> <%= @tool_engine.brand %><br/>
       <label>Modèle :</label> <%= @tool_engine.version %><br/>
@@ -24,20 +24,20 @@
     <div id="accordion">
       <% if current_user %>
         <h3><a href="#">Principes de fonctionnement</a></h3>
-        <div><%= @tool_engine.operating_principles %></div>
+        <div><%= simple_format @tool_engine.operating_principles %></div>
         <h3><a href="#">Caractéristiques techniques</a></h3>
-        <div><%= @tool_engine.specifications %></div>
+        <div><%= simple_format @tool_engine.specifications %></div>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
           Document explicatif : <%= @tool_engine.explanatory_document %><br/>
           Date d'achat : <%= @tool_engine.purchase_date %><br/>
-          Commentaires : <%= @tool_engine.comment %>
+          Commentaires : <%= simple_format @tool_engine.comment %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>      
           Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @tool_engine.use_on_site %><br/>
-          Conditions d’utilisation de l’équipement : <br/>
-          Localisation sur le site : <%= @tool_engine.mi_localization_on_site %><br/>
+          
+          Localisation sur le site : <%= simple_format @tool_engine.mi_localization_on_site %><br/>
           N° d’enregistrement interne:
         </div>
       <% end %>

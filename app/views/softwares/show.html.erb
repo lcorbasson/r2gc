@@ -12,7 +12,7 @@
           <% end %>
           <div class="tool_infos">
             <label>Nom :</label> <%= @software.name %><br/>
-            <label>Type :</label> <%= @software.type %><br/>
+            <label>Type :</label>Logiciel<br/>
             <label>Sous type :</label> <%= @software.tool_subtype %><br/>
             <label>Marque :</label> <%= @software.brand %><br/>
             <label>Version :</label> <%= @software.version %><br/>
@@ -24,7 +24,7 @@
             <% end %>
             <label>Statut du logiciel :</label> <br/>
             <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
-            <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
+            <label>Précisions :</label> <%= simple_format @software.software_application_domain_comment %><br/>
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
             <% end %>
@@ -38,16 +38,16 @@
 
     <div id="accordion">
         <h3><a href="#">Description et usages du Logiciel</a></h3>
-        <div><%= @software.software_description %></div>
+        <div><%= simple_format @software.software_description %></div>
         <% if current_user %>
           <h3><a href="#">Spécificités techniques du Logiciel</a></h3>
-          <div><%= @software.specifications %></div>
+          <div><%= simple_format @software.specifications %></div>
         <% end %>
         <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
-        <div><%= @software.software_sharing_conditions %></div>
+        <div><%= simple_format @software.software_sharing_conditions %></div>
         <% if current_user %>
           <h3><a href="#">Commentaires</a></h3>
-          <div><%= @software.comment %></div>
+          <div><%= simple_format @software.comment %></div>
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>

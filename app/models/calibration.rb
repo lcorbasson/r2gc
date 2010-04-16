@@ -4,4 +4,8 @@ class Calibration < ActiveRecord::Base
 
   validates_presence_of :calibration
 
+  def to_s
+    calibration
+  end
+
 end
