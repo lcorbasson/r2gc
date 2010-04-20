@@ -36,16 +36,16 @@ class Admin::SearchSubentitiesController < ApplicationController
 
   def edit
     @search_subentity = SearchSubentity.find(params[:id])
-    @correspondents = @search_entity.correspondents
+    @correspondents = @search_subentity.correspondents
   end
 
   def update
     @search_subentity = SearchSubentity.find(params[:id])
-    if @search_subentity.update_attribute(params[:search_subentity])
+    if @search_subentity.update_attributes(params[:search_subentity])
      if params[:correspondents]
         params[:correspondents].each do |user_id|
           correspondent = Correspondent.find(user_id)
-          correspondent.update_attributes(:search_subentity,@search_subentity)
+          correspondent.update_attribute(:search_subentity,@search_subentity)
         end
       end
       flash[:notice] = 'Sous entité enregistrée.'

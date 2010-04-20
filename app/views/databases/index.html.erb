@@ -1,6 +1,12 @@
 <p><b>Bienvenue sur la base de données équipements des laboratoires de génie civil de la région.</b></p>
 <div style="clear:both"></div>
 
+
+
+<p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
+
+<%= @page.parts.find_by_name("haut").content  %>
+
 <% if ToolPublicPhoto.all.size>0 %>
 <div class="scroll_assets">
   <!-- "previous page" action -->
@@ -32,12 +38,8 @@
   Machines-outils: <%= ToolEngine.count %> <br/>
   Moyen de mesure et d'analyse : <%= MeasuringEngine.count %><br/>
 </div>
+<%= @page.parts.find_by_name("bas").content  %>
 
-
-
-<p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
-
-<%= @page.parts.find_by_name("body").content  %>
 <script>
 // execute your scripts when the DOM is ready. this is a good habit
 $(function() {
