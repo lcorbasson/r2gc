@@ -4,7 +4,30 @@
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
     <div class="tool_image">
-      <%= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
+      <% if @tool_engine.tool_public_photos %>
+            <div class="ppy" id="images_scroll">
+              <ul class="ppy-imglist">
+                <% @tool_engine.tool_public_photos.each do |asset| %>
+                  <li>
+                    <%= link_to image_tag(asset.asset.url(:lightbox)), asset.asset.url(:profile)  %>
+                  </li>
+                <% end %>
+              </ul>
+              <div class="ppy-outer">
+                  <div class="ppy-stage">
+                      <div class="ppy-counter">
+
+                      </div>
+                  </div>
+                  <div class="ppy-nav">
+                    <a class="ppy-prev" title="Previous image"><</a>
+                      <a class="ppy-next" title="Next image">></a>
+
+                  </div>
+              </div>
+          </div>
+          <% end %>
+      <%#= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
     </div>
     <div class="tool_infos">
       <label>Nom :</label> <%= @tool_engine.name %><br/>
@@ -64,5 +87,5 @@
   <%= link_to " << Retour", :back %>
 </p>
 
-<%= javascript_tag("$(function() {$('#accordion').accordion();});") %>
+<%= javascript_tag("$(function() {$('#accordion').accordion();$('#images_scroll').popeye();});") %>
 
