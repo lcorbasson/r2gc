@@ -9,7 +9,7 @@
               <ul class="ppy-imglist">
                 <% @test_engine.tool_public_photos.each do |asset| %>
                   <li>
-                    <%= link_to image_tag(asset.asset.url(:lightbox)), asset.asset.url(:profile)  %>
+                    <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
                   </li>
                 <% end %>
               </ul>
