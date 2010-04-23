@@ -6,7 +6,11 @@
   <tr>
     <td><label>Légende</label></td>
     <td><%= f.text_field :legend %></td>
-  </tr>  
+  </tr>
+  <tr>
+    <td><label>Afficher dans le bandeau photo?</label></td>
+    <td><%= f.check_box :in_scrollable %></td>
+  </tr>
   <%= hidden_field_tag :tool_id, @tool.id%>
   <%= hidden_field_tag "asset_type", "public_photo" %>
 </table>
