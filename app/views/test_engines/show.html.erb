@@ -31,6 +31,9 @@
       <%#= image_tag(@test_engine.tool_public_photos.first.asset.url(:profile)) if @test_engine.tool_public_photos.size>0 %>
     </div>
     <div class="tool_infos">
+      <% if @test_engine.laboratory && @test_engine.laboratory.logo_file_name %>
+            <div style="float:right;margin:10px;"><%= image_tag(@test_engine.laboratory.logo.url(:thumb)) %></div>
+          <% end %>
       <label>Nom :</label> <%= @test_engine.name %><br/>
       <label>Type :</label>Moyen d'essai<br/>
       <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
@@ -39,8 +42,8 @@
       <label>Quantité :</label> <%= @test_engine.quantity %><br/>
       <label>Laboratoire :</label> <%= @test_engine.laboratory %><br/>
        <% if current_user %>
-        <label>Entités de recherche :</label> <%= @test_engine.search_entities %><br/>
-        <label>Sous entités :</label> <%= @test_engine.search_subentities %><br/>
+        <label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/>
+        <label>Sous entité(s) :</label> <%= @test_engine.search_subentities %><br/>
       <% end %>
     </div>
 
@@ -76,7 +79,11 @@
           <%= render :partial => "tool_relations/index", :locals => {:tool => @test_engine} %><br/>
           <label>Lien web : </label>
           <%= link_to @test_engine.website, @test_engine.website unless !@test_engine.website %><br/>
-          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @test_engine.id) %>
+         
+        </div>
+        <h3><a href="#">Demande d'informations</a></h3>
+        <div>
+         <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
         </div>
         <% if current_user %>
           <h3>Correspondant(s)</h3>

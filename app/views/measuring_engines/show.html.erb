@@ -32,6 +32,9 @@
       <%#= image_tag(@measuring_engine.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
     </div>
       <div class="tool_infos">
+        <% if @measuring_engine.laboratory && @measuring_engine.laboratory.logo_file_name %>
+            <div style="float:right;margin:10px;"><%= image_tag(@measuring_engine.laboratory.logo.url(:thumb)) %></div>
+          <% end %>
       <label>Nom :</label> <%= @measuring_engine.name %><br/>
       <label>Type :</label>Moyen de mesure et d'analyse<br/>
       <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
@@ -40,8 +43,8 @@
       <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
       <label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/>
       <% if current_user %>
-        <label>Entités de recherche :</label> <%= @measuring_engine.search_entities %><br/>
-        <label>Sous entités :</label> <%= @measuring_engine.search_subentities %><br/>
+        <label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/>
+        <label>Sous entité(s) :</label> <%= @measuring_engine.search_subentities %><br/>
       <% end %>
       </div>
 
@@ -50,9 +53,9 @@
     <div id="accordion">
       <% if current_user %>
           <h3><a href="#">Principes de fonctionnement</a></h3>
-          <div><%= @measuring_engine.operating_principles %></div>
+          <div><%= simple_format @measuring_engine.operating_principles %></div>
           <h3><a href="#">Caractéristiques techniques</a></h3>
-          <div><%= @measuring_engine.specifications %></div>
+          <div><%= simple_format @measuring_engine.specifications %></div>
         
           <h3><a href="#">Autres précisions</a></h3>
           <div>
@@ -78,7 +81,11 @@
           <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %><br/>
           <label>Lien web : </label>
           <%= link_to @measuring_engine.website, @measuring_engine.website unless !@measuring_engine.website%><br/>
-          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @measuring_engine.id) %>
+        
+        </div>
+         <h3><a href="#">Demande d'informations</a></h3>
+        <div>
+         <%= render :partial => "tools/get_information", :locals => {:tool => @measuring_engine} %>
         </div>
         <% if current_user %>
           <h3>Correspondant(s)</h3>

@@ -47,8 +47,8 @@
             <label>Quantité :</label> <%= @software.quantity %><br/>
             <label>Laboratoire :</label> <%= @software.laboratory %><br/>
             <% if current_user %>
-              <label>Entités de recherche :</label> <%= @software.search_entities %><br/>
-              <label>Sous entités :</label> <%= @software.search_subentities %><br/>
+              <label>Entité(s) de recherche :</label> <%= @software.search_entities %><br/>
+              <label>Sous entité(s) :</label> <%= @software.search_subentities %><br/>
             <% end %>
             <label>Statut du logiciel :</label> <br/>
             <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
@@ -87,7 +87,11 @@
           <% end %>
      <br/>
           
-          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @software.id) %>
+        
+        </div>
+        <h3><a href="#">Demande d'informations</a></h3>
+        <div>
+         <%= render :partial => "tools/get_information", :locals => {:tool => @software} %>
         </div>
         <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>

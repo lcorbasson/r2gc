@@ -30,6 +30,9 @@
       <%#= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
     </div>
     <div class="tool_infos">
+       <% if @tool_engine.laboratory && @tool_engine.laboratory.logo_file_name %>
+            <div style="float:right;margin:10px;"><%= image_tag(@tool_engine.laboratory.logo.url(:thumb)) %></div>
+          <% end %>
       <label>Nom :</label> <%= @tool_engine.name %><br/>
       <label>Type :</label>Machine-outil<br/>
       <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
@@ -38,8 +41,8 @@
       <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
       <label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/>
       <% if current_user %>
-        <label>Entités de recherche :</label> <%= @tool_engine.search_entities %><br/>
-        <label>Sous entités :</label> <%= @tool_engine.search_subentities %><br/>
+        <label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/>
+        <label>Sous entité(s) :</label> <%= @tool_engine.search_subentities %><br/>
       <% end %>
     </div>
     <div style="clear:both"></div>
@@ -70,7 +73,11 @@
           <%= render :partial => "tool_relations/index", :locals => {:tool => @tool_engine} %><br/>
           <label>Lien web : </label>
           <%= link_to @tool_engine.website, @tool_engine.website unless !@tool_engine.website %><br/>
-          <%= link_to "Demande d'information", get_information_tools_path(:tool_id => @tool_engine.id) %>
+         
+        </div>
+        <h3><a href="#">Demande d'informations</a></h3>
+        <div>
+         <%= render :partial => "tools/get_information", :locals => {:tool => @tool_engine} %>
         </div>
         <% if current_user %>
           <h3>Correspondant(s) : </h3>

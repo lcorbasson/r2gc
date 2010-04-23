@@ -31,7 +31,7 @@
       <%= link_to_function "Moyens d'essais", "make_type('TestEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("TestEngine")}" %>
       <%= link_to_function "Moyens de mesure et d'analyse", "make_type('MeasuringEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("MeasuringEngine")}" %>
       <%= link_to_function "Logiciels", "make_type('Software')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("Software")}" %>
-      <%= link_to_function "Machines-outil", "make_type('ToolEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("ToolEngine")}" %>
+      <%= link_to_function "Machines-outils", "make_type('ToolEngine')", :class =>"tool_type_filter #{'active' if @tool_type.eql?("ToolEngine")}" %>
 
 
       <%  form_for @search,:html => { :id => "search_form" } do |f| %>
