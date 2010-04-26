@@ -1,11 +1,12 @@
 <p class="blue_title">Fiche équipement : </p>
 
+
+<%= tools_navigation_table(@software.id) %>
+
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
-    <table style="width:100%">
-      <tr>
-        <td>
+    <div class="tool_image">
         <% if @software.tool_public_photos %>
             <div class="ppy" id="images_scroll">
               <ul class="ppy-imglist">
@@ -34,11 +35,12 @@
 
 
 <%#= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @software.tool_public_photos.size>0 %></td>
-        <td style="vertical-align:top">
+        </div>
+          <div class="tool_infos">
           <% if @software.laboratory && @software.laboratory.logo_file_name %>
             <div style="float:right;margin:10px;"><%= image_tag(@software.laboratory.logo.url(:thumb)) %></div>
           <% end %>
-          <div class="tool_infos">
+       
             <label>Nom :</label> <%= @software.name %><br/>
             <label>Type :</label>Logiciel<br/>
             <label>Sous type :</label> <%= @software.tool_subtype %><br/>
@@ -56,10 +58,9 @@
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
             <% end %>
-          </div>
-        </td>
-      </tr>
-    </table>
+         </div>
+
+    <div style="clear:both"></div>
  
     <div style="clear:both"></div>
 

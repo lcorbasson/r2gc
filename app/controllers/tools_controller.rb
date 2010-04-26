@@ -7,6 +7,9 @@ class ToolsController < SiteController
     
     @tool_type = params[:search][:type_equals] unless !params[:search]
 
+    save_tools_collection @search.map{|t| t.id}
+    save_search_params params[:search]
+
     radiant_render :page => "/tools"
   end
 
@@ -31,6 +34,20 @@ class ToolsController < SiteController
       flash[:error] = 'Veuillez remplir les champs obligatoires(*).'
       redirect_to :back
     end
+  end
+
+  private
+
+  def save_tools_collection collection
+    session[:tools_collection] = collection
+  end
+
+  def save_tool_show tool_id
+    session[:tool_show] = tool_id
+  end
+
+  def save_search_params search_params
+    session[:search_params] = search_params
   end
   
 end
