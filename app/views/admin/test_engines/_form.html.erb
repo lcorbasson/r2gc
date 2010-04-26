@@ -76,7 +76,11 @@
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
     <td><%= f.select :mi_localization_on_site, [["Variable", "Variable"], ["Définie", "Définie"]] %></td>
-  </tr> 
+  </tr>
+   <tr>
+    <td><label>Précisions</label></td>
+    <td><%= f.text_area :localization_on_site_precision %></td>
+  </tr>
   <tr>
     <td class="label_td"><label>N° d’enregistrement interne</label></td>
     <td><%= f.text_area :internal_number %></td>
