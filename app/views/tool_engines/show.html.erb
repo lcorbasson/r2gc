@@ -4,8 +4,9 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
+     <% if @tool_engine.tool_public_photos.size>0 %>
     <div class="tool_image">
-      <% if @tool_engine.tool_public_photos %>
+      
             <div class="ppy" id="images_scroll">
               <ul class="ppy-imglist">
                 <% @tool_engine.tool_public_photos.each do |asset| %>
@@ -27,9 +28,10 @@
                   </div>
               </div>
           </div>
-          <% end %>
+          
       <%#= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
     </div>
+    <% end %>
     <div class="tool_infos">
        <% if @tool_engine.laboratory && @tool_engine.laboratory.logo_file_name %>
             <div style="float:right;margin:10px;"><%= image_tag(@tool_engine.laboratory.logo.url(:thumb)) %></div>

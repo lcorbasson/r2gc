@@ -3,9 +3,10 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
-    <div class="tool_image">
+    <% if @measuring_engine.tool_public_photos.size>0 %>
+      <div class="tool_image">
 
-      <% if @measuring_engine.tool_public_photos %>
+      
             <div class="ppy" id="images_scroll">
               <ul class="ppy-imglist">
                 <% @measuring_engine.tool_public_photos.each do |asset| %>
@@ -27,10 +28,11 @@
                   </div>
               </div>
           </div>
-          <% end %>
+          
 
       <%#= image_tag(@measuring_engine.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
     </div>
+    <% end %>
       <div class="tool_infos">
         <% if @measuring_engine.laboratory && @measuring_engine.laboratory.logo_file_name %>
             <div style="float:right;margin:10px;"><%= image_tag(@measuring_engine.laboratory.logo.url(:thumb)) %></div>
