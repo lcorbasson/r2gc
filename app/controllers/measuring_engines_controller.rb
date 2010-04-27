@@ -5,11 +5,13 @@ class MeasuringEnginesController < SiteController
     @measuring_engine = MeasuringEngine.find(params[:id])
     save_tool_show @measuring_engine.id
 
-    respond_to do |format|
-      format.html { radiant_render :page => "/tools"}
-      format.pdf  { prawnto :filename =>  "#{@measuring_engine.name}.pdf", :inline => false, :template => "show.pdf.prawn"
-      }
-    end
+   radiant_render :page => "/tools"
+  end
+
+
+  def to_pdf
+    @measuring_engine = MeasuringEngine.find(params[:id])
+    prawnto :filename =>  "#{@measuring_engine.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
   private

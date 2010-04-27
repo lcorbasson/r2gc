@@ -64,12 +64,10 @@ class R2gcExtension < Radiant::Extension
       admin.role_users '/roles/:role_id/users', :controller => 'roles', :action => 'users', :conditions => {:method => :get}
     end
     map.resources :tools, :collection => {:get_information => :get, :send_informations_mail => :post}
-    map.resources :softwares
-    
-    map.resources :test_enginesls
-    map.resources :measuring_engines
-    map.resources :tool_engines
-    map.resources :test_engines
+    map.resources :softwares, :member => {:to_pdf => :get}
+    map.resources :measuring_engines, :member => {:to_pdf => :get}
+    map.resources :tool_engines, :member => {:to_pdf => :get}
+    map.resources :test_engines, :member => {:to_pdf => :get}
     map.resources :databases, :collection => {:login =>:any}    
     map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
     map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'

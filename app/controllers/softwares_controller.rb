@@ -5,14 +5,13 @@ class SoftwaresController < SiteController
     @software = Software.find(params[:id])
     save_tool_show @software.id    
 
+      radiant_render :page => "/tools"
+    end    
 
 
-    respond_to do |format|
-      format.html { radiant_render :page => "/tools"}
-      format.pdf  { prawnto :filename =>  "#{@software.name}.pdf", :inline => false, :template => "show.pdf.prawn"
-      }
-    end
-    
+  def to_pdf
+    @software = Software.find(params[:id])
+    prawnto :filename =>  "#{@software.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
   private
