@@ -50,8 +50,9 @@
           <% if current_user %>
             <label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/>
             <label>Sous entité(s) :</label> <%= @measuring_engine.search_subentities %><br/>
-          <% end %><br/>
+            <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", measuring_engine_path(@measuring_engine, :format => "pdf") %>
+          <% end %>
           </div>
 
           <div style="clear:both"></div>

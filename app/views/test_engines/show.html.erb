@@ -53,8 +53,9 @@
              <% if current_user %>
               <label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/>
               <label>Sous entité(s) :</label> <%= @test_engine.search_subentities %><br/>
-            <% end %><br/>
+            <br/><br/>
               <%= link_to "Télécharger la fiche au format PDF", test_engine_path(@test_engine, :format => "pdf") %>
+              <% end %>
           </div>
            <div style="clear:both"></div>
         </td>
