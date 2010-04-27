@@ -7,7 +7,8 @@ class MeasuringEnginesController < SiteController
 
     respond_to do |format|
       format.html { radiant_render :page => "/tools"}
-      format.pdf  { render :layout => false}
+      format.pdf  { prawnto :filename =>  "#{@measuring_engine.name}.pdf", :inline => false, :template => "show.pdf.prawn"
+      }
     end
   end
 
