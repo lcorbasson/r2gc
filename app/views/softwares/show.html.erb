@@ -6,9 +6,11 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
+    <table width="100%">
+      <tr>
     <% if @software.tool_public_photos.size>0 %>
-    <div class="tool_image">
-        
+        <td style="max-width:250px;vertical-align:top">
+           <div class="tool_image">
             <div class="ppy" id="images_scroll">
               <ul class="ppy-imglist">
                 <% @software.tool_public_photos.each do |asset| %>
@@ -30,21 +32,17 @@
                   </div>
               </div>
           </div>
-          
-
-
-
-
-<%#= image_tag(@software.tool_public_photos.first.asset.url(:profile)) if @software.tool_public_photos.size>0 %></td>
-        </div>
+         </div>          
+        </td>
     <% end %>
+        <td style="vertical-align:top">
           <div class="tool_infos">
           <% if @software.laboratory && @software.laboratory.logo_file_name %>
             <div style="float:right;margin:10px;"><%= image_tag(@software.laboratory.logo.url(:thumb)) %></div>
           <% end %>
        
             <label>Nom :</label> <%= @software.name %><br/>
-            <label>Type :</label>Logiciel<br/>
+            <label>Type : </label>Logiciel<br/>
             <label>Sous type :</label> <%= @software.tool_subtype %><br/>
             <label>Marque :</label> <%= @software.brand %><br/>
             <label>Version :</label> <%= @software.version %><br/>
@@ -56,15 +54,16 @@
             <% end %>
             <label>Statut du logiciel :</label> <br/>
             <label>Domaines d'applications :</label> <%= @software.software_application_domains %><br/>
-            <label>Précisions :</label> <%= simple_format @software.software_application_domain_comment %><br/>
+            <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
-            <% end %>
+            <% end %><br/>
+            <%= link_to "Télécharger la fiche au format PDF", software_path(@software, :format => "pdf") %>
          </div>
 
-    <div style="clear:both"></div>
- 
-    <div style="clear:both"></div>
+          <div style="clear:both"></div>
+        </td>
+      </tr></table>
 
 
     <div id="accordion">

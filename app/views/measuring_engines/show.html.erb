@@ -3,54 +3,61 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
+    <table width="100%">
+      <tr>
     <% if @measuring_engine.tool_public_photos.size>0 %>
-      <div class="tool_image">
+        <td style="max-width:250px;vertical-align:top">
+          <div class="tool_image">
+                <div class="ppy" id="images_scroll">
+                  <ul class="ppy-imglist">
+                    <% @measuring_engine.tool_public_photos.each do |asset| %>
+                      <li>
+                        <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <div class="ppy-outer">
+                      <div class="ppy-stage">
+                          <div class="ppy-counter">
 
-      
-            <div class="ppy" id="images_scroll">
-              <ul class="ppy-imglist">
-                <% @measuring_engine.tool_public_photos.each do |asset| %>
-                  <li>
-                    <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
-                  </li>
-                <% end %>
-              </ul>
-              <div class="ppy-outer">
-                  <div class="ppy-stage">
-                      <div class="ppy-counter">
+                          </div>
+                      </div>
+                      <div class="ppy-nav">
+                        <a class="ppy-prev" title="Previous image"><</a>
+                          <a class="ppy-next" title="Next image">></a>
 
                       </div>
                   </div>
-                  <div class="ppy-nav">
-                    <a class="ppy-prev" title="Previous image"><</a>
-                      <a class="ppy-next" title="Next image">></a>
-
-                  </div>
               </div>
-          </div>
-          
 
-      <%#= image_tag(@measuring_engine.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
-    </div>
+
+          <%#= image_tag(@measuring_engine.tool_public_photos.first.asset.url(:profile)) if @measuring_engine.tool_public_photos.size>0 %>
+        </div>
+        </td>
     <% end %>
-      <div class="tool_infos">
-        <% if @measuring_engine.laboratory && @measuring_engine.laboratory.logo_file_name %>
-            <div style="float:right;margin:10px;"><%= image_tag(@measuring_engine.laboratory.logo.url(:thumb)) %></div>
-          <% end %>
-      <label>Nom :</label> <%= @measuring_engine.name %><br/>
-      <label>Type :</label>Moyen de mesure et d'analyse<br/>
-      <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
-      <label>Marque :</label> <%= @measuring_engine.brand %><br/>
-      <label>Modèle :</label> <%= @measuring_engine.version %><br/>
-      <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
-      <label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/>
-      <% if current_user %>
-        <label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/>
-        <label>Sous entité(s) :</label> <%= @measuring_engine.search_subentities %><br/>
-      <% end %>
-      </div>
+        <td style="vertical-align:top">
+          <div class="tool_infos">
+            <% if @measuring_engine.laboratory && @measuring_engine.laboratory.logo_file_name %>
+                <div style="float:right;margin:10px;"><%= image_tag(@measuring_engine.laboratory.logo.url(:thumb)) %></div>
+              <% end %>
+          <label>Nom :</label> <%= @measuring_engine.name %><br/>
+          <label>Type :</label>Moyen de mesure et d'analyse<br/>
+          <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
+          <label>Marque :</label> <%= @measuring_engine.brand %><br/>
+          <label>Modèle :</label> <%= @measuring_engine.version %><br/>
+          <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
+          <label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/>
+          <% if current_user %>
+            <label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/>
+            <label>Sous entité(s) :</label> <%= @measuring_engine.search_subentities %><br/>
+          <% end %><br/>
+            <%= link_to "Télécharger la fiche au format PDF", measuring_engine_path(@measuring_engine, :format => "pdf") %>
+          </div>
 
-    <div style="clear:both"></div>
+          <div style="clear:both"></div>
+        </td>
+      </tr>
+    </table>
 
     <div id="accordion">
       <% if current_user %>
@@ -63,7 +70,7 @@
           <div>
             Document explicatif : <%= @measuring_engine.explanatory_document %><br/>
             Etalonnage/calibration/vérification : <%= @measuring_engine.calibration %><br/>
-            Document explicatif : <%= @measuring_engine.calibration_comment %><br/>
+            Remarque(s) Etalonnage/calibration/vérification : <%= @measuring_engine.calibration_comment %><br/>
             Date d'achat : <%= @measuring_engine.purchase_date %><br/>
             Commentaires : <%= simple_format @measuring_engine.comment %>
           </div>

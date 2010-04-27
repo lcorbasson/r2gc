@@ -4,51 +4,60 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
+    <table width="100%">
+      <tr>
      <% if @tool_engine.tool_public_photos.size>0 %>
-    <div class="tool_image">
-      
-            <div class="ppy" id="images_scroll">
-              <ul class="ppy-imglist">
-                <% @tool_engine.tool_public_photos.each do |asset| %>
-                  <li>
-                    <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
-                  </li>
-                <% end %>
-              </ul>
-              <div class="ppy-outer">
-                  <div class="ppy-stage">
-                      <div class="ppy-counter">
+        <td style="max-width:250px;vertical-align:top">
+        <div class="tool_image">
+
+                <div class="ppy" id="images_scroll">
+                  <ul class="ppy-imglist">
+                    <% @tool_engine.tool_public_photos.each do |asset| %>
+                      <li>
+                        <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <div class="ppy-outer">
+                      <div class="ppy-stage">
+                          <div class="ppy-counter">
+
+                          </div>
+                      </div>
+                      <div class="ppy-nav">
+                        <a class="ppy-prev" title="Previous image"><</a>
+                          <a class="ppy-next" title="Next image">></a>
 
                       </div>
                   </div>
-                  <div class="ppy-nav">
-                    <a class="ppy-prev" title="Previous image"><</a>
-                      <a class="ppy-next" title="Next image">></a>
-
-                  </div>
               </div>
-          </div>
-          
-      <%#= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
-    </div>
+
+          <%#= image_tag(@tool_engine.tool_public_photos.first.asset.url(:profile)) if @tool_engine.tool_public_photos.size>0 %>
+        </div>
+        </td>
     <% end %>
+        <td style="vertical-align:top">
     <div class="tool_infos">
-       <% if @tool_engine.laboratory && @tool_engine.laboratory.logo_file_name %>
-            <div style="float:right;margin:10px;"><%= image_tag(@tool_engine.laboratory.logo.url(:thumb)) %></div>
-          <% end %>
-      <label>Nom :</label> <%= @tool_engine.name %><br/>
-      <label>Type :</label>Machine-outil<br/>
-      <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
-      <label>Marque :</label> <%= @tool_engine.brand %><br/>
-      <label>Modèle :</label> <%= @tool_engine.version %><br/>
-      <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
-      <label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/>
-      <% if current_user %>
-        <label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/>
-        <label>Sous entité(s) :</label> <%= @tool_engine.search_subentities %><br/>
-      <% end %>
-    </div>
-    <div style="clear:both"></div>
+             <% if @tool_engine.laboratory && @tool_engine.laboratory.logo_file_name %>
+                  <div style="float:right;margin:10px;"><%= image_tag(@tool_engine.laboratory.logo.url(:thumb)) %></div>
+                <% end %>
+            <label>Nom :</label> <%= @tool_engine.name %><br/>
+            <label>Type :</label>Machine-outil<br/>
+            <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
+            <label>Marque :</label> <%= @tool_engine.brand %><br/>
+            <label>Modèle :</label> <%= @tool_engine.version %><br/>
+            <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
+            <label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/>
+            <% if current_user %>
+              <label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/>
+              <label>Sous entité(s) :</label> <%= @tool_engine.search_subentities %><br/>
+            <% end %><br/>
+              <%= link_to "Télécharger la fiche au format PDF", tool_engine_path(@tool_engine, :format => "pdf") %>
+          </div>
+          <div style="clear:both"></div>
+        </td>
+      </tr>
+    </table>
 
     <div id="accordion">
       <% if current_user %>
@@ -64,7 +73,7 @@
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>      
-          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @tool_engine.use_on_site %><br/>
+          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @tool_engine.use_on_site ? "Oui" : "Non" %><br/>
           
           Localisation sur le site : <%= simple_format @tool_engine.mi_localization_on_site %><br/>
           N° d’enregistrement interne:

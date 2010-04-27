@@ -5,53 +5,62 @@
 <div class="tool_show">
   <div class="tool_top_show"></div>
   <div class="tool_middle_show">
+    <table width="100%">
+      <tr>
     <% if @test_engine.tool_public_photos.size>0 %>
-    <div class="tool_image">
-   
-            <div class="ppy" id="images_scroll">
-              <ul class="ppy-imglist">
-                <% @test_engine.tool_public_photos.each do |asset| %>
-                  <li>
-                    <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
-                  </li>
-                <% end %>
-              </ul>
-              <div class="ppy-outer">
-                  <div class="ppy-stage">
-                      <div class="ppy-counter">
+        <td style="max-width:250px;vertical-align:top">
+        <div class="tool_image">
+
+                <div class="ppy" id="images_scroll">
+                  <ul class="ppy-imglist">
+                    <% @test_engine.tool_public_photos.each do |asset| %>
+                      <li>
+                        <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
+                      </li>
+                    <% end %>
+                  </ul>
+                  <div class="ppy-outer">
+                      <div class="ppy-stage">
+                          <div class="ppy-counter">
+
+                          </div>
+                      </div>
+                      <div class="ppy-nav">
+                        <a class="ppy-prev" title="Previous image"><</a>
+                          <a class="ppy-next" title="Next image">></a>
 
                       </div>
                   </div>
-                  <div class="ppy-nav">
-                    <a class="ppy-prev" title="Previous image"><</a>
-                      <a class="ppy-next" title="Next image">></a>
-
-                  </div>
               </div>
-          </div>
           
 
-      <%#= image_tag(@test_engine.tool_public_photos.first.asset.url(:profile)) if @test_engine.tool_public_photos.size>0 %>
-    </div>
+            <%#= image_tag(@test_engine.tool_public_photos.first.asset.url(:profile)) if @test_engine.tool_public_photos.size>0 %>
+          </div>
+        </td>
     <% end %>
-    <div class="tool_infos">
-      <% if @test_engine.laboratory && @test_engine.laboratory.logo_file_name %>
-            <div style="float:right;margin:10px;"><%= image_tag(@test_engine.laboratory.logo.url(:thumb)) %></div>
-          <% end %>
-      <label>Nom :</label> <%= @test_engine.name %><br/>
-      <label>Type :</label>Moyen d'essai<br/>
-      <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
-      <label>Marque :</label> <%= @test_engine.brand %><br/>
-      <label>Modèle :</label> <%= @test_engine.version %><br/>
-      <label>Quantité :</label> <%= @test_engine.quantity %><br/>
-      <label>Laboratoire :</label> <%= @test_engine.laboratory %><br/>
-       <% if current_user %>
-        <label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/>
-        <label>Sous entité(s) :</label> <%= @test_engine.search_subentities %><br/>
-      <% end %>
-    </div>
-
-    <div style="clear:both"></div>
+        <td style="vertical-align:top">
+          <div class="tool_infos">
+            <% if @test_engine.laboratory && @test_engine.laboratory.logo_file_name %>
+                  <div style="float:right;margin:10px;"><%= image_tag(@test_engine.laboratory.logo.url(:thumb)) %></div>
+                <% end %>
+            <label>Nom :</label> <%= @test_engine.name %><br/>
+            <label>Type :</label>Moyen d'essai<br/>
+            <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
+            <label>Marque :</label> <%= @test_engine.brand %><br/>
+            <label>Modèle :</label> <%= @test_engine.version %><br/>
+            <label>Quantité :</label> <%= @test_engine.quantity %><br/>
+            <label>Laboratoire :</label> <%= @test_engine.laboratory %><br/>
+             <% if current_user %>
+              <label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/>
+              <label>Sous entité(s) :</label> <%= @test_engine.search_subentities %><br/>
+            <% end %><br/>
+              <%= link_to "Télécharger la fiche au format PDF", test_engine_path(@test_engine, :format => "pdf") %>
+          </div>
+           <div style="clear:both"></div>
+        </td>
+      </tr>
+    </table>
+   
 
     <div id="accordion">
       <% if current_user %>
@@ -70,10 +79,11 @@
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>
           Equipement mobile : <%= @test_engine.mi_mobility %><br/>
-          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @test_engine.use_on_site %><br/>
-          Emprunt possible en dehors du site de l’organisme propriétaire : <%= @test_engine.borrowing %><br/>
+          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/>
+          Emprunt possible en dehors du site de l’organisme propriétaire : <%= @test_engine.borrowing ? "Oui" : "Non" %><br/>
           Conditions de prêt et d’emprunt de l’équipement : <br/>
           Localisation sur le site : <%= simple_format @test_engine.mi_localization_on_site %><br/>
+          Précisions: <%= simple_format @test_engine.localization_on_site_precision %><br/>
           N° d’enregistrement interne: <%= @test_engine.internal_number %>
         </div>
        <% end %>
