@@ -9,7 +9,8 @@ class SoftwaresController < SiteController
 
     respond_to do |format|
       format.html { radiant_render :page => "/tools"}
-      format.pdf  { }
+      format.pdf  { prawnto :filename =>  "#{@software.name}.pdf", :inline => false, :template => "show.prawn.pdf"
+      }
     end
     
   end

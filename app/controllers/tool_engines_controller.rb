@@ -7,7 +7,8 @@ class ToolEnginesController < SiteController
 
     respond_to do |format|
       format.html { radiant_render :page => "/tools"}
-      format.pdf  { }
+      format.pdf  { prawnto :filename =>  "#{@tool_engine.name}.pdf", :inline => false, :template => "show.prawn.pdf"
+      }
     end
   end
 
