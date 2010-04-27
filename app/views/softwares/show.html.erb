@@ -58,7 +58,7 @@
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs.eql?(1) ? "oui" : "non" %><br/>
             <br/><br/>
-            <%= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf") %>
+            <%#= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf") %>
             <% end %>
           </div>
 
