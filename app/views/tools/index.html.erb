@@ -1,4 +1,4 @@
-<h1 class="tools_title">Base de données équipements des laboratoires de génie civil de la région.</h1>
+<h1 class="tools_title">Base de données équipements des laboratoires de génie civil de la région</h1>
 
 
 
@@ -41,10 +41,12 @@
           <div id="search-separate"></div>
           <h1 class="search_title">Affinez votre recherche</h1>
           <table style="width:auto;margin:auto" class="refine_search" align="center">
+         
             <% case @tool_type
                when "TestEngine" %>
                 <%= render :partial => "test_engines/refine_search", :locals => {:f => f} %>
-              <% when "MesuringEngine" %>
+              <% when "MeasuringEngine" %>
+
                 <%= render :partial => "measuring_engines/refine_search", :locals => {:f => f} %>
               <% when "Software" %>
                 <%= render :partial => "softwares/refine_search", :locals => {:f => f} %>
@@ -67,7 +69,7 @@
         <tr>
           <th>Laboratoire</th>
           <th>Nom</th>
-          <th>Sous type</th>
+          <th>Sous-type</th>
           <th>Marque/Constructeur</th>
           <th class="last">Modèle/Version</th>
         </tr>
@@ -80,7 +82,7 @@
           </td>         
           <td><%= tool.tool_subtype %></td>
           <td><%= tool.brand %></td>
-          <td class="last"><%= tool.version %></td>
+          <td class="last"><%=truncate(tool.version, :length => 30) %></td>
         </tr>
       <% end %>
     </table>

@@ -6,7 +6,7 @@ class ToolsController < SiteController
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 30, :order => "name ASC")
     
     @tool_type = params[:search][:type_equals] unless !params[:search]
-
+    puts "*******************************"
     save_tools_collection @search.map{|t| t.id}
     save_search_params params[:search]
 

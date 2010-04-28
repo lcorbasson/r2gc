@@ -114,10 +114,19 @@
   <%= link_to " << Retour", :back %>
 </p>
 
-<%= javascript_tag("
-  $(function() {
-    $('#accordion').accordion();   
-      $('#images_scroll').popeye();
-  
+<% if current_user %>
+<%= javascript_tag("$(function() {   
+    $('#accordion').accordion({active:1} );
+})") %>
+<% else %>
+<%= javascript_tag("$(function() {
+    $('#accordion').accordion();
 
-  });") %>
+})") %>
+<% end %>
+
+<%= javascript_tag("$(function() {
+    $('#images_scroll').popeye();
+});") %>
+
+

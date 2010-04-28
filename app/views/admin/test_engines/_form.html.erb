@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td class="label_td"><label>Sous type</label></td>
-    <td><%= f.select :tool_subtype_id, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]} %></td>
+    <td><%= f.select :tool_subtype_id, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]}.sort %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Marque</label></td>
@@ -21,7 +21,7 @@
   </tr>
    <tr>
     <td class="label_td"><label>Laboratoire</label></td>
-    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
+    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]}.sort %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Principes de fonctionnement</label></td>
@@ -38,7 +38,7 @@
   
   <tr>
     <td><label>Etalonnage/calibration/vérification</label></td>
-    <td><%= f.select :calibration_id,Calibration.all.collect{|c| [c.calibration, c.id]}, :include_blank => true %></td>
+    <td><%= f.select :calibration_id,Calibration.all.collect{|c| [c.calibration, c.id]}.sort, :include_blank => true %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Remarque(s) Etalonnage/calibration/vérification</label></td>
@@ -71,7 +71,11 @@
   </tr>
   <tr>
     <td class="label_td"><label>Conditions de prêt et d’emprunt de l’équipement</label></td>
-    <td><%= f.select :use_condition_ids, UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]},{}, {:multiple => true} %></td>
+    <td><%= f.select :use_condition_ids, (UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]}<<["- Aucune -",""]).sort,{}, {:multiple => true} %></td>
+  </tr>
+  <tr>
+    <td class="label_td"><label>N° d’enregistrement interne</label></td>
+    <td><%= f.text_area :internal_number %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
@@ -82,21 +86,16 @@
     <td><%= f.text_area :localization_on_site_precision %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>N° d’enregistrement interne</label></td>
-    <td><%= f.text_area :internal_number %></td>
-  </tr>
-  
-  <tr>
     <td class="label_td"><label>Lien internet</label></td>
     <td><%= f.text_field :website %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
-    <td><%= select_tag "tools", @test_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@test_engine.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+    <td><%= select_tag "tools", @test_engine.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select(((Tool.all-@test_engine.to_a).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort), :multiple => true %></td>
   </tr>
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Niveau confidentialité</label></td>

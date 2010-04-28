@@ -1,4 +1,4 @@
-<h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région.</h1>
+<h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
 <div style="clear:both"></div>
 
 
@@ -33,8 +33,8 @@
 <div class="tools_details">
   Logiciels : <%=  Software.count %>,  Moyens d'essai : <%=  TestEngine.count %>, Machines-outils: <%= ToolEngine.count %>, Moyens de mesure et d'analyse : <%= MeasuringEngine.count %><br/>
 </div>
-<%= @page.parts.find_by_name("bas").content  %>
-
+<%= @page.parts.find_by_name("bas").content  %><br/>
+<p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
 <script>
 // execute your scripts when the DOM is ready. this is a good habit
 $(function() {

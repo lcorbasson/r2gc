@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td class="label_td"><label>Sous type</label></td>
-    <td><%= f.select :tool_subtype_id, ToolSubtype.for_softwares.collect{|s| [s.name, s.id]} %></td>
+    <td><%= f.select :tool_subtype_id, ToolSubtype.for_softwares.collect{|s| [s.name, s.id]}.sort %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Marque</label></td>
@@ -17,15 +17,15 @@
   </tr>  
   <tr>
     <td class="label_td"><label>Laboratoire</label></td>
-    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]} %></td>
+    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]}.sort %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Statuts</label></td>
-    <td><%= f.select :software_status_ids, SoftwareStatus.all.collect{|s| [s.name, s.id]},{}, :multiple => true %></td>
+    <td><%= f.select :software_status_ids, (SoftwareStatus.all.collect{|s| [s.name, s.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Domaines d'application</label></td>
-    <td><%= f.select :software_application_domain_ids, SoftwareApplicationDomain.all.collect{|d| [d.application_domain, d.id]},{}, :multiple => true %></td>
+    <td><%= f.select :software_application_domain_ids, (SoftwareApplicationDomain.all.collect{|d| [d.application_domain, d.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Précisions</label></td>
@@ -66,11 +66,11 @@
    
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @software.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@software.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+    <td><%= select_tag :tools, @software.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select((Tool.all-@software.to_a.collect{|c| [c.name, c.id]}<<["- Aucun -",""])).sort, :multiple => true %></td>
   </tr>
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td><label>Niveau confidentialité</label></td>

@@ -64,20 +64,21 @@
   </tr>
   <tr>
     <td><label>Conditions de prêt et d’emprunt de l’équipement</label></td>
-    <td><%= f.select :use_condition_ids, UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]},{}, {:multiple => true} %></td>
-  </tr>
-  <tr>
-    <td><label>Localisation sur le site</label></td>
-    <td><%= f.select :mi_localization_on_site, [["Variable", "Variable"], ["Définie", "Définie"]] %></td>
-  </tr>
-  <tr>
-    <td><label>Précisions</label></td>
-    <td><%= f.text_area :localization_on_site_precision %></td>
+    <td><%= f.select :use_condition_ids, (UseCondition.for_test_and_measuring.collect{|c| [c.conditions, c.id]}<<["- Aucune -",""]).sort,{}, {:multiple => true} %></td>
   </tr>
   <tr>
     <td><label>N° d’enregistrement interne</label></td>
     <td><%= f.text_area :internal_number %></td>
   </tr>
+  <tr>
+    <td><label>Localisation sur le site</label></td>
+    <td><%= f.select :mi_localization_on_site, [["Variable", "Variable"], ["Définie", "Définie"]] %></td>
+  </tr>
+  <tr id="tr_precisions">
+    <td><label>Précisions</label></td>
+    <td><%= f.text_area :localization_on_site_precision %></td>
+  </tr>
+  
   <tr>
     <td><label>Niveau confidentialité</label></td>
     <td><%= f.text_field :privacy %></td>
@@ -88,15 +89,33 @@
   </tr>
   <tr>
     <td><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select(Tool.all.collect{|c| [c.name, c.id]}) : options_for_select((Tool.all-@measuring_engine.to_a).collect{|c| [c.name, c.id]}), :multiple => true %></td>
+    <td><%= select_tag :tools, @measuring_engine.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select((Tool.all-@measuring_engine.to_a.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort), :multiple => true %></td>
   </tr>
    <tr>
     <td><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, Correspondent.all.collect{|c| [c.name, c.id]},{}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td><label>Niveau confidentialité</label></td>
     <td><%= f.text_field :privacy %></td>
   </tr>
 </table>
+
+<%= javascript_tag("
+  $(document).ready(function () {
+ if ($('#measuring_engine_mi_localization_on_site').val()=='Variable'){
+        $('#tr_precisions').hide();
+      }else {
+        $('#tr_precisions').show();
+      }
+    $('#measuring_engine_mi_localization_on_site').change(function() {
+      if ($(this).val()=='Variable'){
+        $('#tr_precisions').hide();
+      }else {
+        $('#tr_precisions').show();
+      }
+
+    });
+  });") %>
+
 
