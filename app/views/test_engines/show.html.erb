@@ -44,7 +44,7 @@
                   <div style="float:right;margin:10px;"><%= image_tag(@test_engine.laboratory.logo.url(:thumb)) %></div>
                 <% end %>
             <label>Nom :</label> <%= @test_engine.name %><br/>
-            <label>Type :</label>Moyen d'essai<br/>
+            <label>Type : </label>Moyen d'essai<br/>
             <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
             <label>Marque :</label> <%= @test_engine.brand %><br/>
             <label>Modèle :</label> <%= @test_engine.version %><br/>
@@ -71,21 +71,21 @@
         <div><%= simple_format @test_engine.specifications %></div>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
-          Document explicatif : <%= @test_engine.explanatory_document %><br/>
-          Etalonnage/calibration/vérification : <%= @test_engine.calibration %><br/>
-          Remarques : <%= simple_format @test_engine.calibration_comment %><br/>
-          Date d'achat : <%= @test_engine.purchase_date %><br/>
-          Commentaires : <%= simple_format @test_engine.comment %>
+          <label>Document explicatif :</label> <%= @test_engine.explanatory_document %><br/>
+          <label>Etalonnage/calibration/vérification :</label> <%= @test_engine.calibration %><br/>
+          <label>Remarques :</label> <%= simple_format @test_engine.calibration_comment %><br/>
+          <label>Date d'achat :</label> <%= @test_engine.purchase_date %><br/>
+          <label>Commentaires :</label> <%= simple_format @test_engine.comment %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>
-          Equipement mobile : <%= @test_engine.mi_mobility %><br/>
-          Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/>
-          Emprunt possible en dehors du site de l’organisme propriétaire : <%= @test_engine.borrowing ? "Oui" : "Non" %><br/>
-          Conditions de prêt et d’emprunt de l’équipement : <br/>
-          Localisation sur le site : <%= simple_format @test_engine.mi_localization_on_site %><br/>
-          Précisions: <%= simple_format @test_engine.localization_on_site_precision %><br/>
-          N° d’enregistrement interne: <%= @test_engine.internal_number %>
+          <label>Equipement mobile :</label> <%= @test_engine.mi_mobility %><br/>
+          <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/>
+          <label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @test_engine.borrowing ? "Oui" : "Non" %><br/>
+          <label>Conditions de prêt et d’emprunt de l’équipement :</label> <br/>
+          <label>Localisation sur le site :</label> <%=  @test_engine.mi_localization_on_site %><br/>
+          <label>Précisions:</label> <%=  @test_engine.localization_on_site_precision %><br/>
+          <label>N° d’enregistrement interne: </label><%= @test_engine.internal_number %>
         </div>
        <% end %>
         <h3><a href="#">Liens</a></h3>
