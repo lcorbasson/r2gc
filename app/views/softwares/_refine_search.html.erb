@@ -1,30 +1,30 @@
 <tr>
   <td class="label"><label>Sous type : </label></td>
-  <td><%= f.select :tool_subtype_id_equals, ToolSubtype.all.collect {|s| [ s.name, "#{s.id}" ] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:tool_subtype_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :tool_subtype_id_equals, (ToolSubtype.all.collect {|s| [ s.name, "#{s.id}" ] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:tool_subtype_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
 <tr>
   <td class="label"><label>Laboratoire : </label></td>
-  <td><%= f.select :laboratory_id_equals, Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :laboratory_id_equals, (Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }<<["Tous les laboratoires",""]).sort, {:selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
 <% if current_user %>
   <tr>
     <td class="label"><label>Entité de recherche : </label></td>
-    <td><%= f.select :correspondents_search_entity_id_equals, SearchEntity.all.collect {|c| [ c.name, "#{c.id}"] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_search_entity_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+    <td><%= f.select :correspondents_search_entity_id_equals, (SearchEntity.all.collect {|c| [ c.name, "#{c.id}"] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_search_entity_id_equals]}" : nil}, :class => "select_refine_search" %></td>
   </tr>
   <tr>
     <td class="label"><label>Correspondant : </label></td>
-    <td><%= f.select :correspondents_id_equals, Correspondent.all.collect {|c| [ c.name, "#{c.id}"] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+    <td><%= f.select :correspondents_id_equals, (Correspondent.all.collect {|c| [ c.name, "#{c.id}"] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
   </tr>
 <% end %>
 <tr>
   <td class="label"><label>Marque/Constructeur : </label></td>
-  <td><%= f.select :brand_equals, Team.all.collect {|a| [ a.name, a.name ] }, {:include_blank => true, :selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :brand_equals, (Tool.all.collect(&:brand).collect {|b| [ b, b ] }).sort, {:include_blank => true, :selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
 </tr>
 <tr>
   <td class="label"><label>Statut : </label></td>
-  <td><%= f.select :software_statuses_id_equals, SoftwareStatus.all.collect {|s| [ s.name, s.name ] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:software_statuses_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :software_statuses_id_equals, (SoftwareStatus.all.collect {|s| [ s.name, s.name ] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:software_statuses_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
 <tr>
   <td class="label"><label>Domaine d'application : </label></td>
-  <td><%= f.select :software_application_domains_id_equals, SoftwareApplicationDomain.all.collect {|d| [ d.application_domain, d.id ] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:software_application_domains_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :software_application_domains_id_equals, (SoftwareApplicationDomain.all.collect {|d| [ d.application_domain, d.id ] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:software_application_domains_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
