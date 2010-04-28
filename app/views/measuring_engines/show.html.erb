@@ -79,7 +79,7 @@
           <div>
             Prêt possible uniquement sur le site de l’organisme propriétaire : <%= @measuring_engine.use_on_site ? "Oui" : "Non" %><br/>
             Emprunt possible en dehors du site de l’organisme propriétaire : <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/>
-           <!-- Conditions de prêt et d’emprunt de l’équipement: TODO<br/>-->
+            Conditions de prêt et d’emprunt ME et MMA: <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ") if  @measuring_engine.use_conditions%> <br/>
             Localisation sur le site : <%= simple_format @measuring_engine.mi_localization_on_site %><br/>
             Précisions: <%= simple_format @measuring_engine.localization_on_site_precision %><br/>
             N° d’enregistrement interne: <%= @measuring_engine.internal_number %><br/>
