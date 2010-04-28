@@ -79,12 +79,9 @@
   </tr>
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
-    <td><%= f.select :mi_localization_on_site, [["Variable", "Variable"], ["Définie", "Définie"]] %></td>
+    <td><%= f.text_field :mi_localization_on_site %></td>
   </tr>
-   <tr>
-    <td><label>Précisions</label></td>
-    <td><%= f.text_area :localization_on_site_precision %></td>
-  </tr>
+  
   <tr>
     <td class="label_td"><label>Lien internet</label></td>
     <td><%= f.text_field :website %></td>
@@ -98,8 +95,8 @@
     <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
+    <td class="label_td"><label>Affichage sur site</label></td>
+    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @test_engine.privacy || "Tous publics" %></td>
   </tr>
 </table>
 

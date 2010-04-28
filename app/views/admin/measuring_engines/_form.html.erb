@@ -77,11 +77,10 @@
   <tr id="tr_precisions">
     <td><label>Précisions</label></td>
     <td><%= f.text_area :localization_on_site_precision %></td>
-  </tr>
-  
+  </tr>  
   <tr>
-    <td><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
+    <td><label>Affichage sur site</label></td>
+    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @measuring_engine.privacy || "Tous publics" %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Lien internet</label></td>
@@ -95,10 +94,7 @@
     <td><label>Correspondants</label></td>
     <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
-  <tr>
-    <td><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
-  </tr>
+ 
 </table>
 
 <%= javascript_tag("

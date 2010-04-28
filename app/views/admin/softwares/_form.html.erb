@@ -52,7 +52,7 @@
     <td><%= f.text_area :software_sharing_conditions %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Autre commentaire(s)</label></td>
+    <td class="label_td"><label>Autre(s) commentaire(s)</label></td>
     <td><%= f.text_area :comment %></td>
   </tr>
   <tr>
@@ -73,8 +73,8 @@
     <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
-    <td><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
+    <td><label>Affichage sur site</label></td>
+    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @software.privacy || "Tous publics" %></td>
   </tr>
 </table>
 

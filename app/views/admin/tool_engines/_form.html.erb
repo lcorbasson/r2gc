@@ -52,11 +52,11 @@
   </tr>
   <tr>
     <td class="label_td"><label>Localisation sur le site</label></td>
-    <td><%= f.select :mi_localization_on_site, [["Variable", "Variable"], ["Définie", "Définie"]] %></td>
+    <td><%= f.text_field :mi_localization_on_site %></td>
   </tr>
  
   <tr>
-    <td class="label_td"><label>Autres commentaires </label></td>
+    <td class="label_td"><label>Autre(s) commentaire(s) </label></td>
     <td><%= f.text_area :comment %></td>
   </tr> 
   
@@ -74,8 +74,8 @@
     <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Niveau confidentialité</label></td>
-    <td><%= f.text_field :privacy %></td>
+    <td class="label_td"><label>Affichage sur site</label></td>
+   <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @tool_engine.privacy || "Tous publics" %></td>
   </tr>
 </table>
 
