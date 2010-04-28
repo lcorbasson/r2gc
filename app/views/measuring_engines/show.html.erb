@@ -78,7 +78,7 @@
           <h3><a href="#">Echange de l’équipement</a></h3>
           <div>
             <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @measuring_engine.use_on_site ? "Oui" : "Non" %><br/>
-            Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/>
+            <label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/>
             <label>Conditions de prêt et d’emprunt ME et MMA:</label> <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ") if  @measuring_engine.use_conditions%> <br/>
             <label>Localisation sur le site :</label> <%= @measuring_engine.mi_localization_on_site %><br/>
             <label>Précisions:</label> <%=  @measuring_engine.localization_on_site_precision %><br/>
