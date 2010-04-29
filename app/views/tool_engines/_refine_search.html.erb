@@ -14,5 +14,5 @@
   <% end %>
 <tr>
   <td class="label"><label>Marque/Constructeur : </label></td>
-  <td><%= f.select :brand_equals, (Tool.all.collect(&:brand).collect {|b| [ b, b ] }.delete_if {|a,b| a.nil? || b.nil?}.uniq).sort, {:selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :brand_equals, (ToolEngine.all.collect(&:brand).collect {|b| [ b, b ] }.delete_if {|a,b| a.nil? || b.nil?}.uniq).sort, {:selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
 </tr>       
