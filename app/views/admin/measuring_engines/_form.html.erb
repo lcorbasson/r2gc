@@ -80,7 +80,15 @@
   </tr>  
   <tr>
     <td><label>Affichage sur site</label></td>
-    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @measuring_engine.privacy || "Tous publics" %></td>
+    <td>
+
+       <%=  f.radio_button :privacy, "Tous publics", {:checked => @measuring_engine.new_record? ? true : @measuring_engine.privacy.eql?("Tous publics")} %>Tous publics
+      <%=  f.radio_button :privacy, "Restreint", {:checked => @measuring_engine.privacy.eql?("Restreint")} %>Restreint
+
+
+
+      <%#=  f.check_box :privacy, {},"Tous publics", @measuring_engine.new_record? ? true : @measuring_engine.privacy.eql?("Tous publics")  %>
+      <%#=  f.check_box  :privacy, {}, "Restreint", @measuring_engine.privacy.eql?("Restreint")%></td>
   </tr>
   <tr>
     <td class="label_td"><label>Lien internet</label></td>

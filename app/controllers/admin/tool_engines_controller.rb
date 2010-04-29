@@ -6,7 +6,7 @@ class Admin::ToolEnginesController < ApplicationController
  
   
  def index
-     @tools = ToolEngine.all
+     @tools = ToolEngine.all(:order => "name")
   end
 
   def show

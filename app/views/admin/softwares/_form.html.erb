@@ -74,7 +74,9 @@
   </tr>
   <tr>
     <td><label>Affichage sur site</label></td>
-    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @software.privacy || "Tous publics" %></td>
+    <td><%=  f.radio_button :privacy, "Tous publics", {:checked => @software.new_record? ? true : @software.privacy.eql?("Tous publics")} %>Tous publics
+      <%=  f.radio_button :privacy, "Restreint", {:checked => @software.privacy.eql?("Restreint")} %>Restreint
+</td>
   </tr>
 </table>
 

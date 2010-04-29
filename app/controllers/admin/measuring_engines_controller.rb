@@ -5,7 +5,7 @@ class Admin::MeasuringEnginesController < ApplicationController
     :denied_message => 'You must have designer privileges to perform this action.'
 
   def index
-    @tools = MeasuringEngine.all
+    @tools = MeasuringEngine.all(:order => "name")
   end
 
   def new

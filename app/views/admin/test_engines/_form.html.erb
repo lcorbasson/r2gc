@@ -96,7 +96,10 @@
   </tr>
   <tr>
     <td class="label_td"><label>Affichage sur site</label></td>
-    <td><%= f.select :privacy, [["Tous publics", "Tous publics"], ["Restreint", "Restreint"]], :selected => @test_engine.privacy || "Tous publics" %></td>
+    <td>
+    <%=  f.radio_button :privacy, "Tous publics", {:checked => @test_engine.new_record? ? true : @test_engine.privacy.eql?("Tous publics")} %>Tous publics
+      <%=  f.radio_button :privacy, "Restreint", {:checked => @test_engine.privacy.eql?("Restreint")} %>Restreint
+    </td>
   </tr>
 </table>
 

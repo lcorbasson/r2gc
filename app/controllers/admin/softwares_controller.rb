@@ -6,7 +6,7 @@ class Admin::SoftwaresController < ApplicationController
  
 
   def index
-     @tools = Software.all
+     @tools = Software.all(:order => "name")
   end
 
   def show

@@ -6,7 +6,7 @@ class Admin::TestEnginesController < ApplicationController
  
 
   def index
-    @tools = TestEngine.all
+    @tools = TestEngine.all(:order => "name")
   end
 
   def new
