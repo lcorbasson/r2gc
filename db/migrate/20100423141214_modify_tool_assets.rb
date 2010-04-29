@@ -1,6 +1,10 @@
 class ModifyToolAssets < ActiveRecord::Migration
   def self.up
-    add_column :tool_assets, :in_scrollable, :boolean
+    begin
+      add_column :tool_assets, :in_scrollable, :boolean
+    rescue
+       "oops"
+     end
   end
 
   def self.down
