@@ -1,6 +1,6 @@
 <tr>
   <td class="label"><label>Laboratoire : </label></td>
-  <td><%= f.select :laboratory_id_equals, Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+   <td><%= f.select :laboratory_id_equals, (Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }<<["Tous les laboratoires",""]).sort{|a,b| b <=> a}, {:selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
 <% if current_user %>
     <tr>
