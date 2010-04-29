@@ -1,6 +1,3 @@
-<% tool.relations_from.each do |relation| %>
-  <%= link_to relation.tool_to.name, relation.tool_to %>
-<% end %>
-<% tool.relations_to.each do |relation| %>
-  <%= link_to relation.tool_from.name, relation.tool_from %>
+<% (tool.relations_from.collect(&:tool_to)+tool.relations_to.collect(&:tool_from)).flatten.uniq.each do |current_tool| %>
+  <%= link_to current_tool.name, current_tool %>
 <% end %>
