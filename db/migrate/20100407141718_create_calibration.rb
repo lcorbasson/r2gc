@@ -1,8 +1,14 @@
 class CreateCalibration < ActiveRecord::Migration
   def self.up
-    create_table :calibrations do |t|
-      t.string :calibration
-    end
+     begin
+        create_table :calibrations do |t|
+          t.string :calibration
+        end
+     rescue
+       "oops"
+     end
+
+
    
   end
 
