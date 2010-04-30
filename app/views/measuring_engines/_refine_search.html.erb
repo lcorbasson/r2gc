@@ -4,7 +4,7 @@
 </tr>
 <tr>
   <td class="label"><label>Laboratoire : </label></td>
-  <td><%= f.select :laboratory_id_equals, (Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }<<["Tous les laboratoires",""]).sort, {:selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :laboratory_id_equals, (Laboratory.all.collect {|s| [ s.name, "#{s.id}" ] }<<["Tous les laboratoires",""]).sort{|a,b| b <=> a}, {:selected => params[:search] ? "#{params[:search][:laboratory_id_equals]}" : nil}, :class => "select_refine_search" %></td>
 </tr>
 <% if current_user %>
   <tr>
@@ -13,10 +13,10 @@
   </tr>
   <tr>
     <td class="label"><label>Correspondant : </label></td>
-    <td><%= f.select :correspondents_id_equals, (Correspondent.all.collect {|c| [ c.name, "#{c.id}"] }).sort, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+    <td><%= f.select :correspondents_id_equals, (Correspondent.all.collect {|c| [ c.name, "#{c.id}"] }).sort{|a,b| a <=> b}, {:include_blank => true, :selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
   </tr>
 <% end %>
 <tr>
   <td class="label"><label>Marque/Constructeur : </label></td>
-  <td><%= f.select :brand_equals, (Tool.all.collect(&:brand).collect {|b| [ b, b ] }.delete_if {|a,b| a.nil? || b.nil?}.uniq).sort, {:include_blank => true, :selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
+  <td><%= f.select :brand_equals, (Tool.all.collect(&:brand).collect {|b| [ b, b ] }.delete_if {|a,b| a.nil? || b.nil?}.uniq).sort, { :selected => params[:search] ? params[:search][:brand_equals] : nil}, :class => "select_refine_search" %></td>
 </tr>       
