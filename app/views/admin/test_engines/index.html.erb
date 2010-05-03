@@ -9,10 +9,11 @@
     </thead>
     <tbody>
       <% @tools.each do |tool| %>
+      <% if current_user.can_update_tool?(tool) %>
         <tr>           
            <%= render :partial => "show", :locals => {:tool => tool} %>
         </tr>
-
+<% end %>
       <% end %>
     </tbody>
   </table>

@@ -70,7 +70,7 @@
   </tr>
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, (Correspondent.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+    <td><%= f.select :correspondent_ids, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
   </tr>
   <tr>
     <td><label>Affichage sur site</label></td>
