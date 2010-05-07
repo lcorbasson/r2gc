@@ -82,7 +82,7 @@
     <td><label>Affichage sur site</label></td>
     <td>
 
-       <%=  f.radio_button :privacy, "Tous publics", {:checked => @measuring_engine.new_record? ? true : @measuring_engine.privacy.eql?("Tous publics")} %>Tous publics
+       <%=  f.radio_button :privacy, "Tous publics", {:checked => @measuring_engine.new_record? || !@measuring_engine.privacy.eql?("Restreint")? true : false} %>Tous publics
       <%=  f.radio_button :privacy, "Restreint", {:checked => @measuring_engine.privacy.eql?("Restreint")} %>Restreint
 
 
