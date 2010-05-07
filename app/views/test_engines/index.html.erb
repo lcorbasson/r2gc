@@ -8,7 +8,7 @@
 <div id="tool_search">
 <div class="tool_show">
   <div class="tool_top_show"></div>
-  <div class="tool_middle_show">    
+  <div class="tool_middle_show">
       <%= link_to "Tous", tools_path, :class =>"tool_type_filter #{'active' if @tool_type.blank?}" %>
       <%= link_to "Moyens d'essais", test_engines_path, :class =>"tool_type_filter #{'active' if @tool_type.eql?("TestEngine")}" %>
       <%= link_to "Moyens de mesure et d'analyse", measuring_engines_path, :class =>"tool_type_filter #{'active' if @tool_type.eql?("MeasuringEngine")}" %>
@@ -23,7 +23,7 @@
           <div id="search-separate"></div>
           <h1 class="search_title">Affinez votre recherche</h1>
           <table style="width:auto;margin:auto" class="refine_search" align="center">
-         
+
             <% case @tool_type
                when "TestEngine" %>
                 <%= render :partial => "test_engines/refine_search", :locals => {:f => f} %>
@@ -38,7 +38,7 @@
                 <%= render :partial => "tools/refine_search", :locals => {:f => f} %>
             <% end %>
           </table>
-      <% end  %>    
+      <% end  %>
    </div>
   <div class="tool_bottom_show"></div>
 </div>
@@ -61,24 +61,24 @@
            <td><%= tool.laboratory %></td>
           <td>
             <%= link_to tool.name, tool %>
-          </td>         
+          </td>
           <td><%= tool.tool_subtype %></td>
           <td><%= tool.brand %></td>
           <td class="last"><%=truncate(tool.version, :length => 30) %></td>
         </tr>
       <% end %>
     </table>
-    
-  
+
+
   </div>
- 
+
 </div>
 Pour visionner la fiche complète d'un équipement, cliquez sur le nom de celui-ci.
 <div class="tools_pagination">
   <%= will_paginate @tools, :next_label => ">", :previous_label => "<" %>
 </div>
 
-<%= javascript_tag("    
+<%= javascript_tag("
      $(document).ready(function () {
 
         $('.select_refine_search').selectbox();
@@ -86,8 +86,7 @@ Pour visionner la fiche complète d'un équipement, cliquez sur le nom de celui-
           $('#search_form').trigger('submit');
         });
       });
-    
+
 
 
   ") %>
-
