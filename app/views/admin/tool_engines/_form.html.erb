@@ -67,7 +67,7 @@
   </tr>
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @tool_engine.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select(((Tool.all-@tool_engine.to_a).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort), :multiple => true %></td>
+    <td><%= select_tag :tools, @tool_engine.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select(((Tool.all-@tool_engine.to_a).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort), :selected => ["119"],:multiple => true %></td>
   </tr>
    <tr>
     <td class="label_td"><label>Correspondants</label></td>

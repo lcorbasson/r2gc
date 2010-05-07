@@ -12,7 +12,8 @@
           <div class="tool_image">
                 <div class="ppy" id="images_scroll">
                   <ul class="ppy-imglist">
-                    <% @measuring_engine.tool_public_photos.each do |asset| %>
+                    <% photos = current_user ? (@measuring_engine.tool_public_photos+@measuring_engine.tool_private_photos) : @measuring_engine.tool_public_photos%>
+                    <% photos.each do |asset| %>
                       <li>
                         <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
                       </li>
