@@ -26,6 +26,17 @@ class Admin::R2gcManagersController < ApplicationController
     end
   end
 
+  def update
+    @r2gc_manager = R2gcManager.find(params[:id])
+    if @r2gc_manager.update_attributes(params[:r2gc_manager])
+      flash[:notice] = 'Modérateur R2GC mis à jour.'
+      redirect_to admin_r2gc_managers_path
+    else
+      flash[:error] = "Une erreur s'est produite."
+      redirect_to new_admin_r2gc_manager_path
+    end
+  end
+
   def edit
     @r2gc_manager = User.find(params[:id])
   end
