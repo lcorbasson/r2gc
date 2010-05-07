@@ -113,12 +113,12 @@
 
 <%= javascript_tag("
   $(document).ready(function () {
- if ($('#measuring_engine_mi_localization_on_site').val()=='Variable'){
+ if ($('#test_engine_mi_localization_on_site').val()=='Variable'){
         $('#tr_precisions').hide();
       }else {
         $('#tr_precisions').show();
       }
-    $('#measuring_engine_mi_localization_on_site').change(function() {
+    $('#test_engine_mi_localization_on_site').change(function() {
       if ($(this).val()=='Variable'){
         $('#tr_precisions').hide();
       }else {
