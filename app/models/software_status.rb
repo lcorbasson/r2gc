@@ -7,4 +7,8 @@ class SoftwareStatus < ActiveRecord::Base
   before_destroy do |software_status|
     software_status.softwares = []
   end
+
+  def to_s
+    name
+  end
 end
