@@ -18,8 +18,9 @@
                       when "Software" : "Logiciel"
 
           end %><%= subtype %></td>
-          <td><%= link_to image('remove', :alt => 'supprimer sous type')+"Supprimer", admin_tool_subtype_path(subtype), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce sous type ?" %></td>
-
+ 
+          <td><%= link_to image('remove', :alt => 'supprimer sous type')+"Supprimer", admin_tool_subtype_path(subtype.id), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce sous type ?" %></td>
+          
         </tr>
       <% end %>
     </tbody>
