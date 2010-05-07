@@ -16,8 +16,8 @@ class Admin::TestEnginesController < ApplicationController
   def create
     @test_engine = TestEngine.new(params[:test_engine])
     if @test_engine.save
-      if params[:tools]
-        params[:tools].each do |tool_id|
+      if params[:test_engine][:linked_tools]
+        params[:test_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @test_engine,
             :tool_to => Tool.find(tool_id)
@@ -39,8 +39,10 @@ class Admin::TestEnginesController < ApplicationController
   def update
     @test_engine = TestEngine.find(params[:id])
     if @test_engine.update_attributes(params[:test_engine])
-      if params[:tools]
-        params[:tools].each do |tool_id|
+      @test_engine.relations_from.delete_all
+      @test_engine.relations_to.delete_all
+      if params[:test_engine][:linked_tools]
+        params[:test_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @test_engine,
             :tool_to => Tool.find(tool_id)

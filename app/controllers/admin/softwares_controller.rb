@@ -20,8 +20,8 @@ class Admin::SoftwaresController < ApplicationController
   def create
     @software = Software.new(params[:software])
     if @software.save
-      if params[:tools]
-        params[:tools].each do |tool_id|
+      if params[:software][:linked_tools]
+        params[:software][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @software,
             :tool_to => Tool.find(tool_id)
@@ -43,9 +43,11 @@ class Admin::SoftwaresController < ApplicationController
 
   def update
     @software = Software.find(params[:id])
-    if @software.update_attributes(params[:software])     
-      if params[:tools]
-        params[:tools].each do |tool_id|
+    if @software.update_attributes(params[:software])
+      @software.relations_from.delete_all
+      @software.relations_to.delete_all
+      if params[:software][:linked_tools]
+        params[:software][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @software,
             :tool_to => Tool.find(tool_id)

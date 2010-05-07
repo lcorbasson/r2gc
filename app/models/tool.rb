@@ -20,6 +20,8 @@ class Tool < ActiveRecord::Base
   belongs_to :laboratory
   belongs_to :calibration
 
+  attr_accessor :linked_tools
+
   named_scope :limit, lambda {|count| { :limit => count } }
 
   validates_presence_of :name

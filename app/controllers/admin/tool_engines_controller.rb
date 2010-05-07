@@ -20,8 +20,8 @@ class Admin::ToolEnginesController < ApplicationController
   def create
     @tool_engine = ToolEngine.new(params[:tool_engine])
     if @tool_engine.save
-       if params[:tools]
-        params[:tools].each do |tool_id|
+       if params[:tool_engine][:linked_tools]
+        params[:tool_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @tool_engine,
             :tool_to => Tool.find(tool_id)
@@ -44,8 +44,10 @@ class Admin::ToolEnginesController < ApplicationController
   def update
     @tool_engine = ToolEngine.find(params[:id])
     if @tool_engine.update_attributes(params[:tool_engine])
-      if params[:tools]
-        params[:tools].each do |tool_id|
+      @tool_engine.relations_from.delete_all
+      @tool_engine.relations_to.delete_all
+      if params[:tool_engine][:linked_tools]
+        params[:tool_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
             :tool_from => @tool_engine,
             :tool_to => Tool.find(tool_id)

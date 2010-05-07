@@ -67,7 +67,9 @@
   </tr>
   <tr>
     <td class="label_td"><label>Equipement liés</label></td>
-    <td><%= select_tag :tools, @tool_engine.new_record? ? options_for_select((Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) : options_for_select(((Tool.all-@tool_engine.to_a).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort), :selected => ["119"],:multiple => true %></td>
+    <td><%= f.select :linked_tools,  @tool_engine.new_record? ? (Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort :
+    (((Tool.all-(@tool_engine.to_a)).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort),
+  {:selected => (@tool_engine.relations_from.collect(&:tool_to_id)+@tool_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
   </tr>
    <tr>
     <td class="label_td"><label>Correspondants</label></td>
