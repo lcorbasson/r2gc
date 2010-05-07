@@ -2,7 +2,7 @@ class MeasuringEnginesController < SiteController
  
 
   def index
-    @search = Tool.search(params[:search])
+    @search = MeasuringEngine.search(params[:search])
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 30, :order => "name ASC")
 
     @tool_type = "MeasuringEngine"
