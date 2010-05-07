@@ -6,6 +6,16 @@ class SoftwaresController < SiteController
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 30, :order => "name ASC")
 
     @tool_type = "Software"
+    if params[:search] && !params[:search][:laboratory_id_equals].blank?
+      if !params[:search][:correspondents_search_entity_id_equals].blank?
+        search_entity = SearchEntity.find(params[:search][:correspondents_search_entity_id_equals])
+        @correspondents =  search_entity.correspondents
+      else
+        laboratory = Laboratory.find(params[:search][:laboratory_id_equals])
+        @entities =  laboratory.search_entities
+        @correspondents =  @entities.collect(&:correspondents).flatten.uniq
+      end
+    end  
     save_tools_collection @search.map{|t| t.id}
     save_search_params params[:search]
 
