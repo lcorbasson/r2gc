@@ -27,7 +27,7 @@ class Admin::R2gcManagersController < ApplicationController
   end
 
   def edit
-    @correspondent = User.find(params[:id])
+    @r2gc_manager = User.find(params[:id])
   end
 
 end
