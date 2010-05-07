@@ -100,7 +100,7 @@
   <tr>
     <td class="label_td"><label>Affichage sur site</label></td>
     <td>
-    <%=  f.radio_button :privacy, "Tous publics", {:checked => @test_engine.new_record? ? true : @test_engine.privacy.eql?("Tous publics")} %>Tous publics
+    <%=  f.radio_button :privacy, "Tous publics", {:checked => @test_engine.new_record? || !@test_engine.privacy.eql?("Restreint") ? true : false} %>Tous publics
       <%=  f.radio_button :privacy, "Restreint", {:checked => @test_engine.privacy.eql?("Restreint")} %>Restreint
     </td>
   </tr>
