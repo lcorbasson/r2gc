@@ -12,6 +12,7 @@
           <div class="tool_image">
                 <div class="ppy" id="images_scroll">
                   <ul class="ppy-imglist">
+                    <%= current_user %>
                     <% photos = current_user ? (@measuring_engine.tool_public_photos+@measuring_engine.tool_private_photos) : @measuring_engine.tool_public_photos%>
                     <% photos.each do |asset| %>
                       <li>
