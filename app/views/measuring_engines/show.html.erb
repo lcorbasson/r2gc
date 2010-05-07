@@ -7,13 +7,13 @@
   <div class="tool_middle_show">
     <table width="100%">
       <tr>
-    <% if @measuring_engine.tool_public_photos.size>0 %>
+        <% photos = current_user ? (@measuring_engine.tool_public_photos+@measuring_engine.tool_private_photos) : @measuring_engine.tool_public_photos%>
+    <% if photos.size>0 %>
         <td style="max-width:300px;vertical-align:top">
           <div class="tool_image">
                 <div class="ppy" id="images_scroll">
-                  <ul class="ppy-imglist">
-                    <%= current_user %>
-                    <% photos = current_user ? (@measuring_engine.tool_public_photos+@measuring_engine.tool_private_photos) : @measuring_engine.tool_public_photos%>
+                  <ul class="ppy-imglist">                   
+                    
                     <% photos.each do |asset| %>
                       <li>
                         <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>

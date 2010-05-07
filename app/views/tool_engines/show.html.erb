@@ -8,13 +8,14 @@
   <div class="tool_middle_show">
     <table width="100%">
       <tr>
-     <% if @tool_engine.tool_public_photos.size>0 %>
+        <% photos = current_user ? (@tool_engine.tool_public_photos+@tool_engine.tool_private_photos) : @tool_engine.tool_public_photos%>
+     <% if photos.size>0 %>
         <td style="max-width:300px;vertical-align:top">
         <div class="tool_image">
 
                 <div class="ppy" id="images_scroll">
                   <ul class="ppy-imglist">
-                    <% photos = current_user ? (@tool_engine.tool_public_photos+@tool_engine.tool_private_photos) : @tool_engine.tool_public_photos%>
+                    
                     <% photos.each do |asset| %>
                       <li>
                         <%= link_to image_tag(asset.asset.url(:profile)), asset.asset.url(:profile)  %>
