@@ -78,7 +78,7 @@ Pour visionner la fiche complète d'un équipement, cliquez sur le nom de celui-
   <%= will_paginate @tools, :next_label => ">", :previous_label => "<" %>
 </div>
 
-<%= javascript_tag("
+<%#= javascript_tag("
      $(document).ready(function () {
 
         $('.select_refine_search').selectbox();
