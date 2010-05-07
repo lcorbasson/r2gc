@@ -26,6 +26,17 @@ class Admin::CorrespondentsController < ApplicationController
     end
   end
 
+  def update
+    @correspondent = Correspondent.find(params[:id]) 
+    if @correspondent.update_attributes(params[:correspondent])
+      flash[:notice] = 'Correspondant mis à jour.'
+      redirect_to admin_correspondents_path
+    else
+      flash[:error] = "Une erreur s'est produite."
+      redirect_to new_admin_correspondent_path
+    end
+  end
+
   def edit
     @correspondent = Correspondent.find(params[:id])
   end
