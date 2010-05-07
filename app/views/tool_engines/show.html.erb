@@ -46,8 +46,7 @@
                   <div style="float:right;margin:10px;"><%= image_tag(@tool_engine.laboratory.logo.url(:thumb)) %></div>
                 <% end %>
             <label>Nom :</label> <%= @tool_engine.name %><br/>
-            <label>Type : </label>Machine-outil<br/>
-            <label>Sous-type :</label> <%= @tool_engine.tool_subtype %><br/>
+            <label>Type : </label>Machine-outil<br/>            
             <label>Marque :</label> <%= @tool_engine.brand %><br/>
             <label>Modèle :</label> <%= @tool_engine.version %><br/>
             <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
@@ -74,14 +73,15 @@
         <div>
           <label>Document explicatif :</label> <%= @tool_engine.explanatory_document %><br/>
           <label>Date d'achat :</label> <%= @tool_engine.purchase_date %><br/>
-          <label>Commentaires : </label><%= simple_format @tool_engine.comment %>
+          <label>Commentaires : </label><%= @tool_engine.comment %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>      
           <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @tool_engine.use_on_site ? "Oui" : "Non" %><br/>
           
           <label>Localisation sur le site :</label> <%=  @tool_engine.mi_localization_on_site %><br/>
-          <label>N° d’enregistrement interne:</label><%= @tool_engine.internal_number %>
+          <label>N° d’enregistrement interne:</label> <%= @tool_engine.internal_number %><br/>
+          <label>Conditions d'utilisation Machine-outils: </label><%= @tool_engine.use_conditions.join(", ") unless !@tool_engine.use_conditions %>
         </div>
       <% end %>
         <h3><a href="#">Liens</a></h3>

@@ -83,7 +83,7 @@
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>
-          <label>Equipement mobile :</label> <%= @test_engine.mi_mobility %><br/>
+          <label>Equipement mobile :</label> <%= @test_engine.mi_mobility ? "Oui" : "Non" %><br/>
           <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/>
           <label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @test_engine.borrowing ? "Oui" : "Non" %><br/>
           <label>Conditions de prêt et d’emprunt de l’équipement :</label> <br/>

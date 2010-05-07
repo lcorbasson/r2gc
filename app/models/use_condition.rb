@@ -11,4 +11,8 @@ class UseCondition < ActiveRecord::Base
     use_condition.tools = []
   end
 
+  def to_s
+    conditions
+  end
+
 end
