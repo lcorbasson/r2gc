@@ -105,7 +105,7 @@
          <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
         </div>
         <% if current_user %>
-          <h3>Correspondant(s)</h3>
+          <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents} %>
           </div>
