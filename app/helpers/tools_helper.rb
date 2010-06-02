@@ -1,6 +1,5 @@
 module ToolsHelper
 
-
-  
+ 
 
 end

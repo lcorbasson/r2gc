@@ -2,7 +2,7 @@
 <td><%= tool.tool_subtype %></td>
 <td>
   <% if current_user.can_update_tool?(tool) %>
-<%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_software_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?" %>
-<%= link_to image('plus', :alt => 'supprimer')+"Nouveau document", new_admin_software_tool_asset_path(tool) %>
+<%= link_to "Supprimer", admin_software_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?", :class => "delete_button" %>
+- <%= link_to "Nouveau document", new_admin_software_tool_asset_path(tool), :class => "new_document_button" %>
 <% end %>
 </td>

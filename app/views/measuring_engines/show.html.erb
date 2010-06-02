@@ -1,6 +1,15 @@
 <h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
 
-<p class="blue_title">Fiche équipement</p>
+<div class="breadcrumbs">
+  <span class="old">
+    <%=  link_to "Accueil", databases_path %> >
+    <%=  link_to("Interrogation de la base de données", session[:search_params] ? measuring_engines_path(:search => session[:search_params]) : measuring_engines_path)  %> >
+  </span>
+  <span class="current">
+    <%=  link_to "Fiche équipement", @measuring_engine %>
+  </span>
+</div>
+
 <%= tools_navigation_table(@measuring_engine.id,"MeasuringEngine") %>
 <div class="tool_show">
   <div class="tool_top_show"></div>
@@ -73,11 +82,11 @@
         
           <h3><a href="#">Autres précisions</a></h3>
           <div>
-            <label>Document explicatif :</label> <%= @measuring_engine.explanatory_document %><br/>
+            <label>Document(s) explicatif(s) :</label> <%= @measuring_engine.explanatory_document %><br/>
             <label>Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration %><br/>
             <label>Remarque(s) Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration_comment %><br/>
             <label>Date d'achat :</label> <%= @measuring_engine.purchase_date %><br/>
-            <label>Commentaires :</label> <%= simple_format @measuring_engine.comment %>
+            <label>Commentaires :</label> <%= @measuring_engine.comment %>
           </div>
           <h3><a href="#">Echange de l’équipement</a></h3>
           <div>

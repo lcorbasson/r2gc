@@ -23,6 +23,8 @@ class Tool < ActiveRecord::Base
   attr_accessor :linked_tools
 
   named_scope :limit, lambda {|count| { :limit => count } }
+  named_scope :ordered_by_updated_at, :order => "updated_at ASC"
+  named_scope :ordered_by_created_at, :order => "created_at ASC"
 
   validates_presence_of :name
 

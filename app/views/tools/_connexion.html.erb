@@ -2,18 +2,27 @@
 <p>
   Si vous êtes membre du réseau, identifiez-vous, sinon, utilisez le formulaire de recherche ci-dessous.
 </p>
-  <div id="login">
+  <div id="form_login">
+
     <%  form_tag login_databases_path do |f| %>
-       <%=  label_tag "Votre identifiant" %>
-       <%=  text_field_tag "login" %>
-
-       <%=  label_tag "Votre code d'accès" %>
-        <%= password_field_tag "password" %>
-
-
-       <%= submit_tag "OK", :id => "btn_login" %>
-
+      <table style="width:100%">
+        <tr>
+          <td>
+            <%=  label_tag "Votre identifiant" %>
+            <%=  text_field_tag "login" %>
+          </td>
+          <td>
+            <%=  label_tag "Votre code d'accès" %>
+            <%= password_field_tag "password" %>
+          </td>
+          <td>
+            <%= submit_tag "OK", :id => "btn_login" %>
+          </td>
+        </tr>
+      </table>
     <% end %>
+    <div style="clear:both"></div>
+   
   </div>
 <% end %>
 <br/>

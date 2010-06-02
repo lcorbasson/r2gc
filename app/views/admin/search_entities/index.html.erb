@@ -12,7 +12,7 @@
         <tr>
           <td><%= link_to search_entity.name, edit_admin_search_entity_path(search_entity) %></td>
           <td><%= search_entity.laboratory.name %></td>
-          <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_search_entity_path(search_entity), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette entité de recherche ? Les sous entités seront supprimées et les correspondants en seront détachés." %></td>
+          <td><%= link_to "Supprimer", admin_search_entity_path(search_entity), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cette entité de recherche ? Les sous entités seront supprimées et les correspondants en seront détachés.", :class => "delete_button" %></td>
 
         </tr>
       <% end %>

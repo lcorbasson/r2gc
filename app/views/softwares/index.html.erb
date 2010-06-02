@@ -4,7 +4,14 @@
 
 <%= render :partial => "tools/connexion" %>
 
-<p class="blue_title">Interrogation de la base de données</p>
+<div class="breadcrumbs">
+  <span class="old">
+    <%=  link_to "Accueil", databases_path %> >
+  </span>
+  <span class="current">
+    <%=  "Interrogation de la base de données"  %>
+  </span>
+</div>
 <div id="tool_search">
 <div class="tool_show">
   <div class="tool_top_show"></div>
@@ -43,7 +50,20 @@
   <div class="tool_bottom_show"></div>
 </div>
 </div>
+<br />
 
+<% if current_user %>
+  <div class="tools_pagination pagination_top">
+    <%= will_paginate @tools, :next_label => ">", :previous_label => "<" %>
+  </div>
+  <div class="results_export">
+    <%= link_to "Export Excel",softwares_path(:format => :csv) %>
+  </div>
+<% else %>
+  <div class="tools_pagination">
+    <%= will_paginate @tools, :next_label => ">", :previous_label => "<" %>
+  </div>
+<% end %>
 <div id="search_results">
   <div id="equipments_list">
     <table width="100%" cellspacing="0">
@@ -58,13 +78,13 @@
       </thead>
       <% @tools.each do |tool| %>
         <tr>
-           <td><%= tool.laboratory %></td>
+           <td><%= tool.laboratory   || "&nbsp;"%></td>
           <td>
             <%= link_to tool.name, tool %>
           </td>
-          <td><%= tool.tool_subtype %></td>
-          <td><%= tool.brand %></td>
-          <td class="last"><%=truncate(tool.version, :length => 30) %></td>
+          <td><%= tool.tool_subtype  || "&nbsp;" %></td>
+          <td><%= tool.brand.blank? ? "&nbsp;" : tool.brand %></td>
+          <td class="last"><%=truncate(tool.version, :length => 30)  || "&nbsp;" %></td>
         </tr>
       <% end %>
     </table>

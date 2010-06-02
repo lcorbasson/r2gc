@@ -19,7 +19,10 @@ class MeasuringEnginesController < SiteController
     save_tools_collection @search.map{|t| t.id}
     save_search_params params[:search]
 
-    radiant_render :page => "/tools"
+     respond_to do |format|
+      format.html { radiant_render :page => "/tools" }
+      format.csv  { send_data(measuring_engines_to_csv.read, :type => 'text/csv; header=present', :filename => 'moyens_de_mesure_et_danalyse.csv') }
+    end
   end
 
   def show
@@ -48,6 +51,22 @@ class MeasuringEnginesController < SiteController
 
   def save_search_params search_params
     session[:search_params] = search_params
+  end
+
+  def measuring_engines_to_csv
+    @export_tools = @search.paginate(:all,:page => 1, :per_page => @tools.total_pages*30, :order => "name ASC")
+    ic = Iconv.new('ISO-8859-1', 'UTF-8')
+    export = StringIO.new
+    CSV::Writer.generate(export, ",") do |csv|
+      headers = ["Laboratoire", "Nom", "Sous-type", "Marque/Constructeur", "Modèle/Version"]
+      csv << headers.collect {|c| begin; ic.iconv(c.to_s); rescue; c.to_s; end }
+      @export_tools.each do |tool|
+        fields = [tool.laboratory, tool.name, tool.tool_subtype, tool.brand, tool.version]
+        csv << fields.collect {|c| begin; ic.iconv(c.to_s); rescue; c.to_s; end }
+      end
+    end
+    export.rewind
+    export
   end
 
   

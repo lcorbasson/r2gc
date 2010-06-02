@@ -1,6 +1,14 @@
 <h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
 
-<p class="blue_title">Fiche équipement</p>
+<div class="breadcrumbs">
+  <span class="old">
+    <%=  link_to "Accueil", databases_path %> >
+    <%=  link_to("Interrogation de la base de données", session[:search_params] ? softwares_path(:search => session[:search_params]) :softwares_path)  %> >
+  </span>
+  <span class="current">
+    <%=  link_to "Fiche équipement", @software %>
+  </span>
+</div>
 
 
 <%= tools_navigation_table(@software.id,"Software") %>
@@ -80,6 +88,8 @@
         <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
         <div><%= simple_format @software.software_sharing_conditions %></div>
         <% if current_user %>
+          <h3><a href="#">Document(s) explicatif(s)</a></h3>
+          <div><%= simple_format @software.explanatory_document %></div>
           <h3><a href="#">Commentaires</a></h3>
           <div><%= simple_format @software.comment %></div>
         <% end %>

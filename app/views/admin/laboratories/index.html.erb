@@ -10,7 +10,7 @@
       <% @laboratories.each do |laboratory| %>
         <tr>
           <td><%= link_to laboratory.name, edit_admin_laboratory_path(laboratory) %></td>
-          <td><%= link_to image('remove', :alt => 'supprimer laboratoire')+"Supprimer", admin_laboratory_path(laboratory), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce laboratoire ? Les entités de recherche et les sous entités seront supprimées, les correspondants en seront détachés." %></td>
+          <td><%= link_to "Supprimer", admin_laboratory_path(laboratory), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer ce laboratoire ? Les entités de recherche et les sous entités seront supprimées, les correspondants en seront détachés.", :class => "delete_button" %></td>
 
         </tr>
       <% end %>

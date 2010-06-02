@@ -1,6 +1,14 @@
 <h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
 
-<p class="blue_title">Fiche équipement</p>
+<div class="breadcrumbs">
+  <span class="old">
+    <%=  link_to "Accueil", databases_path %> >
+    <%=  link_to("Interrogation de la base de données", session[:search_params] ? tool_engines_path(:search => session[:search_params]) : tool_engines_path)  %> >
+  </span>
+  <span class="current">
+    <%=  link_to "Fiche équipement", @tool_engine %>
+  </span>
+</div>
 
 <%= tools_navigation_table(@tool_engine.id,"ToolEngine") %>
 <div class="tool_show">
@@ -71,7 +79,7 @@
         <div><%= simple_format @tool_engine.specifications %></div>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
-          <label>Document explicatif :</label> <%= @tool_engine.explanatory_document %><br/>
+          <label>Document(s) explicatif(s) :</label> <%= @tool_engine.explanatory_document %><br/>
           <label>Date d'achat :</label> <%= @tool_engine.purchase_date %><br/>
           <label>Commentaires : </label><%= @tool_engine.comment %>
         </div>

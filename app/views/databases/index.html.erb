@@ -3,7 +3,7 @@
 
 
 
-<p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
+<p class="blue_title"><%= link_to "Accéder à la base de données (<span class='small'>Dernière mise à jour le #{l(find_last_update, :format => :maj_database)}</span>)", tools_path %></p>
 
 <%= @page.parts.find_by_name("haut").content  %>
 
@@ -16,8 +16,8 @@
   <div class="scrollable">
 
       <!-- root element for the items -->
-      <div class="items">
-          <% ToolAsset.all.select{|a| a.in_scrollable.eql?(1) }.each do |a| %>
+      <div class="items">    
+          <% ToolAsset.all.select{|a| a.in_scrollable.eql?(true) }.each do |a| %>
               <%= link_to image_tag(a.asset.url(:thumb)),a.tool, :title => a.legend  %>
           <% end %>
       </div>
@@ -33,8 +33,9 @@
 <div class="tools_details">
   Logiciels : <%=  Software.count %>,  Moyens d'essai : <%=  TestEngine.count %>, Machines-outils: <%= ToolEngine.count %>, Moyens de mesure et d'analyse : <%= MeasuringEngine.count %><br/>
 </div>
+
 <%= @page.parts.find_by_name("bas").content  %><br/>
-<p class="blue_title"><%= link_to "Accéder à la base de données", tools_path %></p>
+<p class="blue_title"><%= link_to "Accéder à la base de données (<span class='small'>Dernière mise à jour le #{l(find_last_update, :format => :maj_database)}</span>)", tools_path %></p>
 <script>
 // execute your scripts when the DOM is ready. this is a good habit
 $(function() {
