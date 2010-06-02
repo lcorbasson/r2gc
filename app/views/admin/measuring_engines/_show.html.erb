@@ -2,7 +2,7 @@
 <td><%= tool.tool_subtype %></td>
 <td>
   <% if current_user.can_update_tool?(tool) %>
-    <%= link_to "Supprimer", admin_measuring_engine_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement ?", :class => "delete_button" %>
+    <%= link_to "Supprimer", admin_measuring_engine_path(tool), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet équipement : #{tool.name} ?", :class => "delete_button" %>
     <%= link_to "Nouveau document", new_admin_measuring_engine_tool_asset_path(tool), :class => "new_document_button" %>
   <% end %>
 </td>

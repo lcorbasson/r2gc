@@ -28,7 +28,7 @@ class Admin::TestEnginesController < ApplicationController
       redirect_to admin_test_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
-      redirect_to :back
+      render :action => :new
     end
   end
 

@@ -1,17 +1,23 @@
-<table id="table_form">
-  <tr>
-    <td><label>Document</label></td>
-    <td><%= f.file_field :asset %></td>
-  </tr>
-  <tr>
-    <td><label>Légende</label></td>
-    <td><%= f.text_field :legend %></td>
-  </tr>
- 
-  <%= hidden_field_tag :tool_id, @tool.id%>
-  <%= hidden_field_tag "asset_type", "schema" %>
-</table>
+ <div style="margin-top:10px;">
+    <div class="nested_title">
+      <span class="asset_type">Schémas (<%= f.link_to_add "+ Ajouter un schéma", :tool_schemas %>)</span><hr/>
+    </div>
+    <% f.fields_for :tool_schemas do |schemas_form| %>
+      <table class="nested_table" style="width:100%;margin-top:20px;">
+        <tr>
+          <td><label>Document</label></td>
+          <td><%= schemas_form.file_field :asset %></td>
+        </tr>
+        <tr>
+          <td><label>Légende</label></td>
+          <td><%= schemas_form.text_field :legend %></td>
+        </tr>
+       
 
+      </table>
+      <%= schemas_form.link_to_remove "Supprimer cette brochure" %>
+    <% end %>
+</div>
 
 
 

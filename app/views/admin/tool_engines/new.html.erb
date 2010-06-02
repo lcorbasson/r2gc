@@ -1,7 +1,8 @@
 <h1>Nouvelle machine outil</h1>
-<% form_for([:admin, @tool_engine]) do |f| %>
+<% nested_form_for([:admin, @tool_engine], :html => {:multipart => true}) do |f| %>
   <%= render :partial => "form", :locals => {:f => f} %>
   <p class="buttons">
     <%= submit_tag "Enregistrer", :class => "button" %>
+    ou <%= link_to "Annuler", :back %>
   </p>
 <% end %>

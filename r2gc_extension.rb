@@ -10,7 +10,7 @@ class R2gcExtension < Radiant::Extension
   define_routes do |map|
     map.root :controller => "databases"
     map.namespace(:admin)  do |admin|
-      admin.resources :tools do |tool|
+      admin.resources :tools, :collection => { :update_tools => :get } do |tool|
         tool.resources :tool_assets
         tool.resources :tool_public_photos
         tool.resources :tool_private_photos
@@ -105,8 +105,8 @@ class R2gcExtension < Radiant::Extension
 
       tab 'Utilisateurs' do
         add_item("Correspondants", "/admin/correspondents")
-        add_item("Utilisateurs R2GC", "/admin/r2gc_users")
-        add_item("Modérateurs R2GC", "/admin/r2gc_managers")
+        add_item("Utilisateurs laboratoires", "/admin/r2gc_users")
+        add_item("Modérateurs", "/admin/r2gc_managers")
       end      
 
       Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']

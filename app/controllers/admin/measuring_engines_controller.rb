@@ -27,7 +27,7 @@ class Admin::MeasuringEnginesController < ApplicationController
       redirect_to admin_measuring_engines_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
-      redirect_to :back
+      render :action => :new
     end
   end
 

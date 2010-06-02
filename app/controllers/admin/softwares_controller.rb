@@ -18,8 +18,8 @@ class Admin::SoftwaresController < ApplicationController
   end
 
   def create
-    @software = Software.new(params[:software])
-    if @software.save
+    @software = Software.new(params[:software])  
+    if @software.save      
       if params[:software][:linked_tools]
         params[:software][:linked_tools].each do |tool_id|
           ToolRelation.create!(
@@ -32,7 +32,7 @@ class Admin::SoftwaresController < ApplicationController
       redirect_to admin_softwares_path()
     else
       flash[:error] = "Une erreur s'est produite lors de l'enregistrement."
-      redirect_to :back
+      render :action => :new
     end
   end
 

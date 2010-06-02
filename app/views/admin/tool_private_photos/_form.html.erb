@@ -1,16 +1,25 @@
-<table id="table_form">
-  <tr>
-    <td><label>Document</label></td>
-    <td><%= f.file_field :asset %></td>
-  </tr>
-  <tr>
-    <td><label>Légende</label></td>
-    <td><%= f.text_field :legend %></td>
-  </tr> 
-  <%= hidden_field_tag :tool_id, @tool.id%>
-  <%= hidden_field_tag "asset_type", "private_photo" %>
-</table>
+ <div style="margin-top:10px;">
+    <div class="nested_title">
+      <span class="asset_type">Photos non diffusables (<%= f.link_to_add "+ Ajouter une photo non diffusable", :tool_private_photos %>)</span><hr/>
+    </div>
+    <% f.fields_for :tool_private_photos do |private_photos_form| %>
+      <table class="nested_table" style="width:100%;margin-top:20px;">
+        <tr>
+          <td colspan="2">
+            <%= image_tag private_photos_form.object.asset.url %>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Document</label></td>
+          <td><%= private_photos_form.file_field :asset %></td>
+        </tr>
+        <tr>
+          <td><label>Légende</label></td>
+          <td><%= private_photos_form.text_field :legend %></td>
+        </tr>
+        
 
-
-
-
+      </table>
+      <%= private_photos_form.link_to_remove "Supprimer cette pĥoto" %>
+    <% end %>
+</div>

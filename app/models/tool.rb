@@ -14,11 +14,18 @@ class Tool < ActiveRecord::Base
   has_many :tool_public_photos, :dependent => :destroy
   has_many :tool_private_photos, :dependent => :destroy
   has_many :tool_schemas, :dependent => :destroy
- 
+
+  
+  accepts_nested_attributes_for :tool_public_photos, :allow_destroy => true
+  accepts_nested_attributes_for :tool_private_photos, :allow_destroy => true
+  accepts_nested_attributes_for :tool_schemas, :allow_destroy => true
+  accepts_nested_attributes_for :tool_brochures, :allow_destroy => true
 
   belongs_to :tool_subtype
   belongs_to :laboratory
   belongs_to :calibration
+
+  belongs_to :main_correspondent, :class_name => "Correspondent", :foreign_key => "main_correspondent_id"
 
   attr_accessor :linked_tools
 

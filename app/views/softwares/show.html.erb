@@ -53,7 +53,7 @@
             <div style="float:right;margin:10px;"><%= image_tag(@software.laboratory.logo.url(:thumb)) %></div>
           <% end %>
        
-            <label>Nom :</label> <%= @software.name %><br/>
+            <label>Nom :</label> <b><%= @software.name %></b><br/>
             <label>Type : </label>Logiciel<br/>
             <label>Sous type :</label> <%= @software.tool_subtype %><br/>
             <label>Marque :</label> <%= @software.brand %><br/>

@@ -1,3 +1,4 @@
+<div style="width:45%;float:left">
 <table id="table_form">
   <tr>
     <td class="label_td"><label>Nom</label></td>
@@ -5,10 +6,10 @@
   </tr>
   <tr>
     <td class="label_td"><label>Sous-type</label></td>
-    <td><%= f.select :tool_subtype_id, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]}.sort %></td>
+    <td><%= f.select :tool_subtype_id, ToolSubtype.for_test_engines.collect{|s| [s.name, s.id]}.sort, :include_blank => true %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Marque</label></td>
+    <td class="label_td"><label>Marque/Constructeur</label></td>
     <td><%= f.text_field :brand %></td>
   </tr>
   <tr>
@@ -21,7 +22,7 @@
   </tr>
    <tr>
     <td class="label_td"><label>Laboratoire</label></td>
-    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]}.sort %></td>
+    <td><%= f.select :laboratory_id, Laboratory.all.collect{|a| [a.name, a.id]}.sort, :include_blank => true %></td>
   </tr>
   <tr>
     <td class="label_td"><label>Principes de fonctionnement</label></td>
@@ -44,14 +45,8 @@
     <td class="label_td"><label>Remarque(s) Etalonnage/calibration/vérification</label></td>
     <td><%= f.text_area :calibration_comment %></td>
   </tr>
-  <tr>
-    <td class="label_td"><label>Date d’achat de l’équipement</label></td>
-    <td><%= f.text_field :purchase_date %></td>
-  </tr>
-  <tr>
-    <td class="label_td"><label>Autre(s) commentaire(s)</label></td>
-    <td><%= f.text_area :comment %></td>
-  </tr>
+  
+  
   <tr>
     <td class="label_td"><label>Equipement mobile</label></td>
     <td>
@@ -87,20 +82,32 @@
   </tr>
   
   <tr>
-    <td class="label_td"><label>Lien internet</label></td>
+    <td class="label_td"><label>Lien internet sur l’équipement (site constructeur/marque)</label></td>
     <td><%= f.text_field :website %></td>
   </tr>
   <tr>
+    <td class="label_td"><label>Autre(s) commentaire(s)</label></td>
+    <td><%= f.text_area :comment %></td>
+  </tr>
+  <tr>
+    <td class="label_td"><label>Date d’achat de l’équipement</label></td>
+    <td><%= f.text_field :purchase_date %></td>
+  </tr>
+  <tr id="linked_tools">
     <td class="label_td"><label>Equipement liés</label></td>
-     <td><%= f.select :linked_tools,  @test_engine.new_record? ? (Tool.all.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort :
-    (((Tool.all-(@test_engine.to_a)).collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort),
+     <td><%= f.select :linked_tools,  @test_engine.new_record? || !@test_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort :
+    (((@test_engine.laboratory.tools-(@test_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),
   {:selected => (@test_engine.relations_from.collect(&:tool_to_id)+@test_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
 
   </tr>
    <tr>
-    <td class="label_td"><label>Correspondants</label></td>
-    <td><%= f.select :correspondent_ids, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
-  </tr>
+      <td class="label_td"><label>Correspondant principal</label></td>
+      <td><%= f.select :main_correspondent_id, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
+    </tr>
+     <tr>
+      <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
+      <td><%= f.select :correspondent_ids, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+    </tr>
   <tr>
     <td class="label_td"><label>Affichage sur site</label></td>
     <td>
@@ -109,24 +116,44 @@
     </td>
   </tr>
 </table>
+</div>
+<% unless @test_engine.new_record? %>
+<div style="width:45%;float:right">
+  <%= render :partial => "admin/tool_public_photos/form", :locals => {:f => f} %>
+  <%= render :partial => "admin/tool_private_photos/form", :locals => {:f => f} %>
+  <%= render :partial => "admin/tool_schemas/form", :locals => {:f => f} %>
+  <%= render :partial => "admin/tool_brochures/form", :locals => {:f => f} %>
 
-
+</div>
+<% end %>
 <%= javascript_tag("
-  $(document).ready(function () {
- if ($('#test_engine_mi_localization_on_site').val()=='Variable'){
-        $('#tr_precisions').hide();
+  jQuery(document).ready(function () {
+ if (jQuery('#test_engine_mi_localization_on_site').val()=='Variable'){
+        jQuery('#tr_precisions').hide();
       }else {
-        $('#tr_precisions').show();
+        jQuery('#tr_precisions').show();
       }
     $('#test_engine_mi_localization_on_site').change(function() {
-      if ($(this).val()=='Variable'){
-        $('#tr_precisions').hide();
+      if (jQuery(this).val()=='Variable'){
+        jQuery('#tr_precisions').hide();
       }else {
-        $('#tr_precisions').show();
+        jQuery('#tr_precisions').show();
       }
 
     });
   });") %>
+
+  <script>
+  jQuery(document).ready(function () {
+    jQuery("#test_engine_laboratory_id").change(function() {
+       jQuery.ajax({
+            type: "GET",
+            data: "laboratory_id="+jQuery(this).val()+"form=<%= f %>",
+            url: "<%=  update_tools_admin_tools_path %>"
+        });
+    })
+  });
+</script>
 
 
 

@@ -1,17 +1,23 @@
-<table id="table_form">
-  <tr>
-    <td><label>Document</label></td>
-    <td><%= f.file_field :asset %></td>
-  </tr>
-  <tr>
-    <td><label>Légende</label></td>
-    <td><%= f.text_field :legend %></td>
-  </tr>
-  
-  <%= hidden_field_tag :tool_id, @tool.id%>
-  <%= hidden_field_tag "asset_type", "brochure" %>
-</table>
+ <div style="margin-top:10px;">
+    <div class="nested_title">
+      <span class="asset_type">Brochures (<%= f.link_to_add "+ Ajouter une brochure", :tool_brochures %>)</span><hr/>
+    </div>
+    <% f.fields_for :tool_brochures do |brochures_form| %>
+      <table class="nested_table" style="width:100%;margin-top:20px;">
+        <tr>
+          <td><label>Document</label></td>
+          <td><%= brochures_form.file_field :asset %></td>
+        </tr>
+        <tr>
+          <td><label>Légende</label></td>
+          <td><%= brochures_form.text_field :legend %></td>
+        </tr>
 
+
+      </table>
+      <%= brochures_form.link_to_remove "Supprimer cette brochure" %>
+    <% end %>
+</div>
 
 
 

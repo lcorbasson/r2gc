@@ -10,7 +10,7 @@
     <tbody>
       <% @tools.each do |tool| %>
       <% if current_user.can_update_tool?(tool) %>
-        <tr>           
+        <tr id="tool<%= tool.id%>">
            <%= render :partial => "show", :locals => {:tool => tool} %>
         </tr>
 <% end %>
@@ -28,4 +28,5 @@
   
   </ul>
 </div>
+
 

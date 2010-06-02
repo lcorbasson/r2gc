@@ -17,5 +17,12 @@ class Admin::ToolsController < ApplicationController
     
   end
 
+  def update_tools
+    @laboratory = Laboratory.find(params[:laboratory_id])
+    render :update do |page|
+      page.replace_html :linked_tools, :partial => "admin/tools/index_select", :locals => {:f => params[:form]}
+    end
+  end
+
   
 end

@@ -55,7 +55,7 @@
             <% if @test_engine.laboratory && @test_engine.laboratory.logo_file_name %>
                   <div style="float:right;margin:10px;"><%= image_tag(@test_engine.laboratory.logo.url(:thumb)) %></div>
                 <% end %>
-            <label>Nom :</label> <%= @test_engine.name %><br/>
+            <label>Nom :</label> <b><%= @test_engine.name %></b><br/>
             <label>Type : </label>Moyen d'essai<br/>
             <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
             <label>Marque :</label> <%= @test_engine.brand %><br/>
