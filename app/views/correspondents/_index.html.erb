@@ -3,7 +3,7 @@
     <% correspondents.each_with_index do |correspondent, i| %>    
       <li>
         <a href="#" class="correspondent_tooltip" name ="<%=correspondent.comments %>">
-          <span class="correspondent_name"><%= correspondent.name %></span><br/>
+          <span class="correspondent_name"><%= correspondent.name_frontend %></span><br/>
           <% if correspondent.email %>
              Email : <%= mail_to correspondent.email,correspondent.email %><br/>
           <% end %>

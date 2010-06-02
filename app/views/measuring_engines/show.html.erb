@@ -55,14 +55,14 @@
               <% end %>
           <label>Nom :</label> <b><%= @measuring_engine.name %></b><br/>
           <label>Type : </label>Moyen de mesure et d'analyse<br/>
-          <label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/>
-          <label>Marque :</label> <%= @measuring_engine.brand %><br/>
-          <label>Modèle :</label> <%= @measuring_engine.version %><br/>
-          <label>Quantité :</label> <%= @measuring_engine.quantity %><br/>
-          <label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/>
+          <% if !@measuring_engine.tool_subtype.blank? %><label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/><% end %>
+          <% if !@measuring_engine.brand.blank?  %><label>Marque/Constructeur :</label> <%= @measuring_engine.brand %><br/><% end %>
+          <% if !@measuring_engine.version.blank? %><label>Modèle :</label> <%= @measuring_engine.version %><br/><% end %>
+          <% if !@measuring_engine.quantity.blank? %><label>Quantité :</label> <%= @measuring_engine.quantity %><br/><% end %>
+          <% if !@measuring_engine.laboratory.blank? %><label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/><% end %>
           <% if current_user %>
-            <label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/>
-            <label>Sous-entité(s) :</label> <%= @measuring_engine.search_subentities %><br/>
+            <% if @measuring_engine.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @measuring_engine.search_entities %><br/><% end %>
+            <% if @measuring_engine.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @measuring_engine.search_subentities %><br/><% end %>
             <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", to_pdf_measuring_engine_path(@measuring_engine, :format => "pdf"), :class => "download_pdf" %>
           <% end %>
@@ -74,46 +74,51 @@
     </table>
 
     <div id="accordion">
-      <% if current_user %>
-          <h3><a href="#">Principes de fonctionnement</a></h3>
-          <div><%= simple_format @measuring_engine.operating_principles %></div>
-          <h3><a href="#">Caractéristiques techniques</a></h3>
-          <div><%= simple_format @measuring_engine.specifications %></div>
+      
+          <% if @measuring_engine.operating_principles %>
+            <h3><a href="#">Principes de fonctionnement</a></h3>
+            <div><%= simple_format @measuring_engine.operating_principles %></div>
+          <% end %>
+            <% if current_user %>
+          <% if @measuring_engine.specifications %>
+            <h3><a href="#">Caractéristiques techniques</a></h3>
+            <div><%= simple_format @measuring_engine.specifications %></div>
+          <% end %>
         
           <h3><a href="#">Autres précisions</a></h3>
           <div>
-            <label>Document(s) explicatif(s) :</label> <%= @measuring_engine.explanatory_document %><br/>
-            <label>Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration %><br/>
-            <label>Remarque(s) Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration_comment %><br/>
-            <label>Date d'achat :</label> <%= @measuring_engine.purchase_date %><br/>
-            <label>Commentaires :</label> <%= @measuring_engine.comment %>
+            <% if !@measuring_engine.explanatory_document.blank? %><label>Document(s) explicatif(s) :</label> <%= @measuring_engine.explanatory_document %><br/><% end %>
+            <% if !@measuring_engine.calibration.blank? %><label>Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration %><br/><% end %>
+            <% if !@measuring_engine.calibration_comment.blank? %><label>Remarque(s) Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration_comment %><br/><% end %>
+            <% if !@measuring_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @measuring_engine.purchase_date %><br/><% end %>
+            <% if !@measuring_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= @measuring_engine.comment %><% end %>
           </div>
           <h3><a href="#">Echange de l’équipement</a></h3>
           <div>
-            <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @measuring_engine.use_on_site ? "Oui" : "Non" %><br/>
-            <label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/>
-            <label>Conditions de prêt et d’emprunt ME et MMA:</label> <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ") if  @measuring_engine.use_conditions%> <br/>
-            <label>Localisation sur le site :</label> <%= @measuring_engine.mi_localization_on_site %><br/>
-            <label>Précisions:</label> <%=  @measuring_engine.localization_on_site_precision %><br/>
-            <label>N° d’enregistrement interne:</label> <%= @measuring_engine.internal_number %><br/>
+            <% if !@measuring_engine.use_on_site.blank?  %><label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @measuring_engine.use_on_site ? "Oui" : "Non" %><br/><% end %>
+            <% if !@measuring_engine.borrowing.blank? %><label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/><% end %>
+            <% if @measuring_engine.use_conditions.size>0 %><label>Condition de prêt et d’emprunt de l’équipement :</label> <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ") if  @measuring_engine.use_conditions%> <br/><% end %>
+            <% if !@measuring_engine.mi_localization_on_site.blank? %><label>Localisation sur le site :</label> <%= @measuring_engine.mi_localization_on_site %><br/><% end %>
+            <% if !@measuring_engine.localization_on_site_precision.blank? %><label>Précisions:</label> <%=  @measuring_engine.localization_on_site_precision %><br/><% end %>
+            <% if !@measuring_engine.internal_number.blank? %><label>N° d’enregistrement interne:</label> <%= @measuring_engine.internal_number %><br/><% end %>
           </div>
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-      
-
-
+         <% if @measuring_engine.relations_from.size>0 || @measuring_engine.relations_to.size>0 %>
           <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %><br/>
+         <% end %>
+         <% if !@measuring_engine.website.blank? %>
           <label>Lien web : </label>
-          <%= link_to @measuring_engine.website, @measuring_engine.website unless !@measuring_engine.website%><br/>
-        
+          <%= link_to @measuring_engine.website, @measuring_engine.website, :target => "_blank" unless !@measuring_engine.website%><br/>
+        <%  end %>
         </div>
          <h3><a href="#">Demande d'informations</a></h3>
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @measuring_engine} %>
         </div>
-        <% if current_user %>
+        <% if current_user && @measuring_engine.correspondents %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @measuring_engine.correspondents} %>

@@ -1,7 +1,11 @@
 <table id="table_form">
   <tr>
     <td><label>Nom</label></td>
-    <td><%= f.text_field :name %></td>
+    <td><%= f.text_field :last_name %></td>
+  </tr>
+  <tr>
+    <td><label>Prénom</label></td>
+    <td><%= f.text_field :first_name %></td>
   </tr>
    <tr>
     <td><label>Login</label></td>
@@ -31,11 +35,11 @@
   <% end %>
    <tr>
     <td><label>Entités de recherche</label></td>
-    <td><%= f.select :search_entity_id, SearchEntity.all.collect{|t| [t.name, t.id]} %></td>
+    <td><%= f.select :search_entity_id, SearchEntity.all.collect{|t| [t.name, t.id]}, :include_blank => true %></td>
   </tr>
   <tr>
     <td><label>Sous entité</label></td>
-    <td><%= f.select :search_subentity_id, SearchSubentity.all.collect{|t| [t.name, t.id]} %></td>
+    <td><%= f.select :search_subentity_id, SearchSubentity.all.collect{|t| [t.name, t.id]}, :include_blank => true %></td>
   </tr>
    <tr>
     <td><label>Equipements</label></td>

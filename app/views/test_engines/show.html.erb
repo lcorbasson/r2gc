@@ -57,14 +57,14 @@
                 <% end %>
             <label>Nom :</label> <b><%= @test_engine.name %></b><br/>
             <label>Type : </label>Moyen d'essai<br/>
-            <label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/>
-            <label>Marque :</label> <%= @test_engine.brand %><br/>
-            <label>Modèle :</label> <%= @test_engine.version %><br/>
-            <label>Quantité :</label> <%= @test_engine.quantity %><br/>
-            <label>Laboratoire :</label> <%= @test_engine.laboratory %><br/>
+            <% if !@test_engine.tool_subtype.blank? %><label>Sous-type :</label> <%= @test_engine.tool_subtype %><br/><% end %>
+            <% if !@test_engine.brand.blank? %><label>Marque/Constructeur :</label> <%= @test_engine.brand %><br/><% end %>
+            <% if !@test_engine.version.blank? %><label>Modèle :</label> <%= @test_engine.version %><br/><% end %>
+            <% if !@test_engine.quantity.blank? %><label>Quantité :</label> <%= @test_engine.quantity %><br/><% end %>
+            <% if !@test_engine.laboratory.blank? %><label>Laboratoire :</label> <%= @test_engine.laboratory %><br/><% end %>
              <% if current_user %>
-              <label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/>
-              <label>Sous-entité(s) :</label> <%= @test_engine.search_subentities %><br/>
+              <% if @test_engine.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/><% end %>
+              <% if @test_engine.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @test_engine.search_subentities %><br/><% end %>
             <br/><br/>
               <%= link_to "Télécharger la fiche au format PDF", to_pdf_test_engine_path(@test_engine, :format => "pdf"), :class => "download_pdf" %>
               <% end %>
@@ -76,43 +76,51 @@
    
 
     <div id="accordion">
-      <% if current_user %>
+      
+      <% if @test_engine.operating_principles %>
         <h3><a href="#">Principes de fonctionnement</a></h3>
         <div><%= simple_format @test_engine.operating_principles %></div>
+      <% end %>
+        <% if current_user %>
+      <% if @test_engine.specifications %>
         <h3><a href="#">Caractéristiques techniques</a></h3>
         <div><%= simple_format @test_engine.specifications %></div>
+      <% end %>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
-          <label>Document(s) explicatif(s) :</label> <%= @test_engine.explanatory_document %><br/>
-          <label>Etalonnage/calibration/vérification :</label> <%= @test_engine.calibration %><br/>
-          <label>Remarque(s) Etalonnage/calibration/vérification :</label> <%=  @test_engine.calibration_comment %><br/>
-          <label>Date d'achat :</label> <%= @test_engine.purchase_date %><br/>
-          <label>Commentaires :</label> <%= @test_engine.comment %>
+          <% if !@test_engine.explanatory_document.blank? %><label>Document(s) explicatif(s) :</label> <%= @test_engine.explanatory_document %><br/><% end %>
+          <% if !@test_engine.calibration.blank? %><label>Etalonnage/calibration/vérification :</label> <%= @test_engine.calibration %><br/><% end %>
+          <% if !@test_engine.calibration_comment.blank? %><label>Remarque(s) Etalonnage/calibration/vérification :</label> <%=  @test_engine.calibration_comment %><br/><% end %>
+          <% if !@test_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @test_engine.purchase_date %><br/><% end %>
+          <% if !@test_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= @test_engine.comment %><% end %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>
-          <label>Equipement mobile :</label> <%= @test_engine.mi_mobility ? "Oui" : "Non" %><br/>
-          <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/>
-          <label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @test_engine.borrowing ? "Oui" : "Non" %><br/>
-          <label>Conditions de prêt et d’emprunt de l’équipement :</label> <br/>
-          <label>Localisation sur le site :</label> <%=  @test_engine.mi_localization_on_site %><br/>
-          <label>Précisions:</label> <%=  @test_engine.localization_on_site_precision %><br/>
-          <label>N° d’enregistrement interne: </label><%= @test_engine.internal_number %>
+          <% if !@test_engine.mi_mobility.blank? %><label>Equipement mobile :</label> <%= @test_engine.mi_mobility ? "Oui" : "Non" %><br/><% end %>
+          <% if !@test_engine.use_on_site.blank? %><label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/><% end %>
+          <% if !@test_engine.borrowing.blank? %><label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @test_engine.borrowing ? "Oui" : "Non" %><br/><% end %>
+          <% if !@test_engine.mi_localization_on_site.blank? || !@test_engine.localization_on_site_precision.blank? || !@test_engine.internal_number.blank? %><label>Conditions de prêt et d’emprunt de l’équipement :</label> <br/><% end %>
+          <% if !@test_engine.mi_localization_on_site.blank? %><label>Localisation sur le site :</label> <%=  @test_engine.mi_localization_on_site %><br/><% end %>
+          <% if !@test_engine.localization_on_site_precision.blank? %><label>Précisions:</label> <%=  @test_engine.localization_on_site_precision %><br/><% end %>
+          <% if !@test_engine.internal_number.blank? %><label>N° d’enregistrement interne: </label><%= @test_engine.internal_number %><% end %>
         </div>
        <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s) : </label>
-          <%= render :partial => "tool_relations/index", :locals => {:tool => @test_engine} %><br/>
-          <label>Lien web : </label>
-          <%= link_to @test_engine.website, @test_engine.website unless !@test_engine.website %><br/>
-         
+          <% if @test_engine.relations_from.size>0 || @test_engine.relations_to.size>0 %>
+            <label>Equipement(s) lié(s) : </label>
+            <%= render :partial => "tool_relations/index", :locals => {:tool => @test_engine} %><br/>
+          <% end %>
+          <% if !@test_engine.website.blank? %>
+            <label>Lien web : </label>
+            <%= link_to @test_engine.website, @test_engine.website, :target => "_blank" unless !@test_engine.website %><br/>
+          <% end %>
         </div>
         <h3><a href="#">Demande d'informations</a></h3>
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
         </div>
-        <% if current_user %>
+        <% if current_user && @test_engine.correspondents.size>0 %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents} %>

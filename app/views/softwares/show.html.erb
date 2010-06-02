@@ -55,19 +55,19 @@
        
             <label>Nom :</label> <b><%= @software.name %></b><br/>
             <label>Type : </label>Logiciel<br/>
-            <label>Sous type :</label> <%= @software.tool_subtype %><br/>
-            <label>Marque :</label> <%= @software.brand %><br/>
-            <label>Version :</label> <%= @software.version %><br/>           
-            <label>Laboratoire :</label> <%= @software.laboratory %><br/>
+            <% if !@software.tool_subtype.blank? %><label>Sous type :</label> <%= @software.tool_subtype %><br/><% end %>
+            <% if !@software.brand.blank? %><label>Marque :</label> <%= @software.brand %><br/><% end %>
+            <% if !@software.version.blank? %><label>Version :</label> <%= @software.version %><br/> <% end %>
+            <% if !@software.laboratory.blank? %><label>Laboratoire :</label> <%= @software.laboratory %><br/><% end %>
             <% if current_user %>
-              <label>Entité(s) de recherche :</label> <%= @software.search_entities %><br/>
-              <label>Sous-entité(s) :</label> <%= @software.search_subentities %><br/>
+              <% if @software.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @software.search_entities %><br/><% end %>
+              <% if @software.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @software.search_subentities %><br/><% end %>
             <% end %>
-            <label>Statut du logiciel :</label> <%= @software.software_statuses.join(", ") if @software.software_statuses%><br/>
-            <label>Domaines d'applications :</label> <%= @software.software_application_domains.join(", ") if @software.software_application_domains%><br/>
-            <label>Précisions :</label> <%= @software.software_application_domain_comment %><br/>
+            <% if !@software.software_statuses.size>0 %><label>Statut du logiciel :</label> <%= @software.software_statuses.join(", ") if @software.software_statuses%><br/><% end %>
+            <% if !@software.software_application_domains.size>0 %><label>Domaines d'applications :</label> <%= @software.software_application_domains.join(", ") if @software.software_application_domains%><br/><% end %>
+            <% if !@software.software_application_domain_comment.blank? %><label>Précisions :</label> <%= @software.software_application_domain_comment %><br/><% end %>
             <% if current_user %>
-              <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/>
+              <% if !@software.software_can_develop_programs.blank? %><label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/><% end %>
             <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf"), :class => "download_pdf" %>
             <% end %>
@@ -79,27 +79,41 @@
 
 
     <div id="accordion">
+      <% if !@software.software_description.blank? %>
         <h3><a href="#">Description et usages du Logiciel</a></h3>
         <div><%= simple_format @software.software_description %></div>
-        <% if current_user %>
+      <% end %>
+        <% if current_user && !@software.specifications.blank? %>
           <h3><a href="#">Spécificités techniques du Logiciel</a></h3>
           <div><%= simple_format @software.specifications %></div>
         <% end %>
-        <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
-        <div><%= simple_format @software.software_sharing_conditions %></div>
         <% if current_user %>
-          <h3><a href="#">Document(s) explicatif(s)</a></h3>
-          <div><%= simple_format @software.explanatory_document %></div>
-          <h3><a href="#">Commentaires</a></h3>
-          <div><%= simple_format @software.comment %></div>
+          <% if !@software.software_sharing_conditions.blank? %>
+            <h3><a href="#">Caractéristiques de partage et de diffusion du logiciel</a></h3>
+            <div><%= simple_format @software.software_sharing_conditions %></div>
+          <% end %>
+        <% end %>
+        <% if current_user %>
+          <% if !@software.explanatory_document.blank? %>
+            <h3><a href="#">Document(s) explicatif(s)</a></h3>
+            <div><%= simple_format @software.explanatory_document %></div>
+          <% end %>
+          <% if !@software.comment.blank? %>
+            <h3><a href="#">Autre(s) commentaire(s)</a></h3>
+            <div><%= simple_format @software.comment %></div>
+          <% end %>
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s) : </label>
-          <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
-          <label>Lien(s) web : </label>
-          <%  @software.website.split(",").each do |link| %>
-            <%= link_to link, link %>
+          <% if @software.relations_from.size>0 || @software.relations_to.size>0 %>
+            <label>Equipement(s) lié(s) : </label>
+            <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
+          <% end %>
+          <% if !@software.website.blank? %>
+            <label>Lien(s) web : </label>
+            <%  @software.website.split(",").each do |link| %>
+              <%= link_to link, link, :target => "_blank" %>
+            <% end %>
           <% end %>
      <br/>
           
@@ -109,7 +123,7 @@
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @software} %>
         </div>
-        <% if current_user %>
+        <% if current_user && @software.correspondents%>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents} %>

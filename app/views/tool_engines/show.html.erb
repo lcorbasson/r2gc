@@ -55,13 +55,13 @@
                 <% end %>
             <label>Nom :</label> <b><%= @tool_engine.name %></b><br/>
             <label>Type : </label>Machine-outil<br/>            
-            <label>Marque :</label> <%= @tool_engine.brand %><br/>
-            <label>Modèle :</label> <%= @tool_engine.version %><br/>
-            <label>Quantité :</label> <%= @tool_engine.quantity %><br/>
-            <label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/>
+            <% if !@tool_engine.brand.blank? %><label>Marque/Constructeur :</label> <%= @tool_engine.brand %><br/><% end %>
+            <% if !@tool_engine.version.blank? %><label>Modèle :</label> <%= @tool_engine.version %><br/><% end %>
+            <% if !@tool_engine.quantity.blank? %><label>Quantité :</label> <%= @tool_engine.quantity %><br/><% end %>
+            <% if !@tool_engine.laboratory.blank? %><label>Laboratoire :</label> <%= @tool_engine.laboratory %><br/><% end %>
             <% if current_user %>
-              <label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/>
-              <label>Sous-entité(s) :</label> <%= @tool_engine.search_subentities %><br/>
+              <% if @tool_engine.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/><% end %>
+              <% if @tool_engine.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @tool_engine.search_subentities %><br/><% end %>
               <br/><br/>
               <%= link_to "Télécharger la fiche au format PDF", to_pdf_tool_engine_path(@tool_engine, :format => "pdf"), :class => "download_pdf" %>
               <% end %>
@@ -72,39 +72,47 @@
     </table>
 
     <div id="accordion">
-      <% if current_user %>
+      
+      <% if !@tool_engine.operating_principles.blank? %>
         <h3><a href="#">Principes de fonctionnement</a></h3>
         <div><%= simple_format @tool_engine.operating_principles %></div>
+      <% end %>
+        <% if current_user %>
+      <% if !@tool_engine.specifications.blank? %>
         <h3><a href="#">Caractéristiques techniques</a></h3>
         <div><%= simple_format @tool_engine.specifications %></div>
+      <% end %>
         <h3><a href="#">Autres précisions</a></h3>
         <div>
-          <label>Document(s) explicatif(s) :</label> <%= @tool_engine.explanatory_document %><br/>
-          <label>Date d'achat :</label> <%= @tool_engine.purchase_date %><br/>
-          <label>Commentaires : </label><%= @tool_engine.comment %>
+          <% if !@tool_engine.explanatory_document.blank? %><label>Document(s) explicatif(s) :</label> <%= @tool_engine.explanatory_document %><br/><% end %>
+          <% if !@tool_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @tool_engine.purchase_date %><br/><% end %>
+          <% if !@tool_engine.comment.blank? %><label>Autre(s) commentaire(s) : </label><%= @tool_engine.comment %><% end %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>      
-          <label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @tool_engine.use_on_site ? "Oui" : "Non" %><br/>
+          <% if !@tool_engine.use_on_site.blank? %><label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @tool_engine.use_on_site ? "Oui" : "Non" %><br/><% end %>
           
-          <label>Localisation sur le site :</label> <%=  @tool_engine.mi_localization_on_site %><br/>
-          <label>N° d’enregistrement interne:</label> <%= @tool_engine.internal_number %><br/>
-          <label>Conditions d'utilisation Machine-outils: </label><%= @tool_engine.use_conditions.join(", ") unless !@tool_engine.use_conditions %>
+          <% if !@tool_engine.mi_localization_on_site.blank? %><label>Localisation sur le site :</label> <%=  @tool_engine.mi_localization_on_site %><br/><% end %>
+          <% if !@tool_engine.internal_number.blank? %><label>N° d’enregistrement interne:</label> <%= @tool_engine.internal_number %><br/><% end %>
+          <% if !@tool_engine.use_conditions.blank? %><label>Conditions d'utilisation Machine-outils: </label><%= @tool_engine.use_conditions.join(", ") unless !@tool_engine.use_conditions %><% end %>
         </div>
       <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
-          <label>Equipement(s) lié(s) : </label>
-          <%= render :partial => "tool_relations/index", :locals => {:tool => @tool_engine} %><br/>
-          <label>Lien web : </label>
-          <%= link_to @tool_engine.website, @tool_engine.website unless !@tool_engine.website %><br/>
-         
+          <% if @tool_engine.relations_from.size>0 || @tool_engine.relations_to.size>0 %>
+            <label>Equipement(s) lié(s) : </label>
+            <%= render :partial => "tool_relations/index", :locals => {:tool => @tool_engine} %><br/>
+          <% end %>
+          <% if !@tool_engine.website.blank? %>
+            <label>Lien web : </label>
+            <%= link_to @tool_engine.website, @tool_engine.website, :target => "_blank" unless !@tool_engine.website %><br/>
+         <% end %>
         </div>
         <h3><a href="#">Demande d'informations</a></h3>
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @tool_engine} %>
         </div>
-        <% if current_user %>
+        <% if current_user && @tool_engine.correspondents.size>0 %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.correspondents} %>

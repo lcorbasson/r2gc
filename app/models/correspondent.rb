@@ -10,4 +10,12 @@ class Correspondent < User
   def to_s
     name
   end
+
+  def name
+    "#{last_name} #{first_name}"
+  end
+
+  def name_frontend
+    "#{first_name} #{last_name}"
+  end
 end
