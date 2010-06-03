@@ -75,6 +75,10 @@ class R2gcExtension < Radiant::Extension
     map.resources :databases, :collection => {:login =>:any}    
     map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
     map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'
+
+
+
+    map.connect '/public/system/tool_schemas/assets/:asset_id/:style', :controller => 'tool_schemas', :action => 'download'
   end
 
   def activate

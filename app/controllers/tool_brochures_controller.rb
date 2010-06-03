@@ -7,7 +7,7 @@ class ToolBrochuresController < SiteController
       path = brochure.asset.path
   
 
-      x_send_file path, :type => File.mime_type?(path)
+      send_file path, :type => File.mime_type?(path), :disposition => 'inline'
     end
 
   

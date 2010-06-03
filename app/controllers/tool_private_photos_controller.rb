@@ -7,7 +7,7 @@ class ToolPrivatePhotosController < SiteController
       path = photo.asset.path
   
 
-      x_send_file path, :type => File.mime_type?(path), :disposition => 'inline'
+      send_file path, :type => File.mime_type?(path), :disposition => 'inline'
     end
 
   
