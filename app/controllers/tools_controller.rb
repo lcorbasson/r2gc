@@ -44,7 +44,9 @@ class ToolsController < SiteController
 
   def send_informations_mail
     if params[:email] && params[:last_name] && params[:first_name] && params[:message]
-      ApplicationNotifier.deliver_send_informations_mail(params[:email], "#{params[:last_name]} #{params[:first_name]}", tool.name, params[:message] )
+      tool = Tool.find(params[:tool_id])      
+      tool.main_correspondent.blank? ? correspondents = tool.correspondents.collect(&:email) : correspondents = tool.main_correspondent.email
+      Notifier.deliver_send_informations_mail(correspondents, params[:email], "#{params[:last_name]} #{params[:first_name]}", tool.name, params[:message] )
       flash[:notice] = 'Votre message a bien été transmis.'
       redirect_to :back
     else

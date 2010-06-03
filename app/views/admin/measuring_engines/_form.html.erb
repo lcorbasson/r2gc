@@ -88,8 +88,8 @@
   </tr>
   <tr id="linked_tools">
     <td><label>Equipement liés</label></td>
-    <td><%= f.select :linked_tools,  @measuring_engine.new_record? || !@measuring_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort :
-    (((@measuring_engine.laboratory.tools-(@measuring_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),
+    <td><%= f.select :linked_tools,  @measuring_engine.new_record? || !@measuring_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
+    (((@measuring_engine.laboratory.tools-(@measuring_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
   {:selected => (@measuring_engine.relations_from.collect(&:tool_to_id)+@measuring_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
   </tr>
    <tr>

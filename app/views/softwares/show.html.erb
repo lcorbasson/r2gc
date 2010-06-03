@@ -105,17 +105,28 @@
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
+          <% if (@software.tool_public_photos.size>0 || @software.tool_brochures.size>0 || (current_user && (@software.tool_private_photos.size>0 || @software.tool_brochures.size>0))) %>
+            <label>Documents annexes : </label><br/><br/>
+            <%= render :partial => "tool_public_photos/index", :locals => { :photos => @software.tool_public_photos} %>
+            <%= render :partial => "tool_private_photos/index", :locals => { :photos => @software.tool_private_photos} %>
+            <%= render :partial => "tool_brochures/index", :locals => { :brochures => @software.tool_brochures} %>
+            <%= render :partial => "tool_schemas/index", :locals => { :schemas => @software.tool_schemas} %>
+          <br/>
+          <% end %>
           <% if @software.relations_from.size>0 || @software.relations_to.size>0 %>
             <label>Equipement(s) lié(s) : </label>
             <%= render :partial => "tool_relations/index", :locals => {:tool => @software} %><br/>
           <% end %>
           <% if !@software.website.blank? %>
             <label>Lien(s) web : </label>
-            <%  @software.website.split(",").each do |link| %>
-              <%= link_to link, link, :target => "_blank" %>
-            <% end %>
+            <div style="margin-left:10px;">
+              <%  @software.website.split(",").each do |link| %>
+                - <%= link_to link, link, :target => "_blank" %>
+              <% end %>
+            </div>
           <% end %>
-     <br/>
+          <br/>
+          
           
         
         </div>

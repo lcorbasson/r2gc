@@ -105,14 +105,27 @@
         <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
+          <% if (@measuring_engine.tool_public_photos.size>0 || @measuring_engine.tool_brochures.size>0 || (current_user && (@measuring_engine.tool_private_photos.size>0 || @measuring_engine.tool_brochures.size>0))) %>
+            <label>Documents annexes : </label><br /><br />
+            <%= render :partial => "tool_public_photos/index", :locals => { :photos => @measuring_engine.tool_public_photos} %>
+            <%= render :partial => "tool_private_photos/index", :locals => { :photos => @measuring_engine.tool_private_photos} %>
+            <%= render :partial => "tool_brochures/index", :locals => { :brochures => @measuring_engine.tool_brochures} %>
+            <%= render :partial => "tool_schemas/index", :locals => { :schemas => @measuring_engine.tool_schemas} %>
+            <br />
+        <% end %>
          <% if @measuring_engine.relations_from.size>0 || @measuring_engine.relations_to.size>0 %>
           <label>Equipement(s) lié(s) : </label>
           <%= render :partial => "tool_relations/index", :locals => {:tool => @measuring_engine} %><br/>
          <% end %>
          <% if !@measuring_engine.website.blank? %>
-          <label>Lien web : </label>
-          <%= link_to @measuring_engine.website, @measuring_engine.website, :target => "_blank" unless !@measuring_engine.website%><br/>
-        <%  end %>
+            <label>Lien(s) web : </label><br />
+            <div style="margin-left:10px;">
+              <% @measuring_engine.website.split(",").each do |link| %>
+                - <%= link_to link, link, :target => "_blank" unless !link%><br/>
+             <% end %>
+            </div>
+         <%  end %>
+          
         </div>
          <h3><a href="#">Demande d'informations</a></h3>
         <div>

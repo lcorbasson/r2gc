@@ -70,8 +70,8 @@
     </tr>
     <tr id="linked_tools">
       <td class="label_td"><label>Equipement liés</label></td>
-      <td><%= f.select :linked_tools,  @tool_engine.new_record? || !@tool_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort :
-      (((@tool_engine.laboratory.tools-(@tool_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),
+      <td><%= f.select :linked_tools,  @tool_engine.new_record? || !@tool_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
+      (((@tool_engine.laboratory.tools-(@tool_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
     {:selected => (@tool_engine.relations_from.collect(&:tool_to_id)+@tool_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
     </tr>
     <tr>

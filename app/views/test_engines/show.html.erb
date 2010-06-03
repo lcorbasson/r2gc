@@ -107,14 +107,26 @@
        <% end %>
         <h3><a href="#">Liens</a></h3>
         <div>
+          <% if (@test_engine.tool_public_photos.size>0 || @test_engine.tool_brochures.size>0 || (current_user && (@test_engine.tool_private_photos.size>0 || @test_engine.tool_brochures.size>0))) %>
+            <label>Documents annexes : </label><br/><br/>
+            <%= render :partial => "tool_public_photos/index", :locals => { :photos => @test_engine.tool_public_photos} %>
+            <%= render :partial => "tool_private_photos/index", :locals => { :photos => @test_engine.tool_private_photos} %>
+            <%= render :partial => "tool_brochures/index", :locals => { :brochures => @test_engine.tool_brochures} %>
+            <%= render :partial => "tool_schemas/index", :locals => { :schemas => @test_engine.tool_schemas} %>
+            <br/>
+          <% end %>
           <% if @test_engine.relations_from.size>0 || @test_engine.relations_to.size>0 %>
             <label>Equipement(s) lié(s) : </label>
             <%= render :partial => "tool_relations/index", :locals => {:tool => @test_engine} %><br/>
           <% end %>
           <% if !@test_engine.website.blank? %>
-            <label>Lien web : </label>
-            <%= link_to @test_engine.website, @test_engine.website, :target => "_blank" unless !@test_engine.website %><br/>
+            <label>Lien(s) web : </label>
+            <div style="margin-left:10px;">
+              <% @test_engine.website.split(",").each do |link| %>
+                - <%= link_to link, link, :target => "_blank" unless !link %><br/>
+              <% end %>
           <% end %>
+          
         </div>
         <h3><a href="#">Demande d'informations</a></h3>
         <div>

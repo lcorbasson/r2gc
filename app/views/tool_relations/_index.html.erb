@@ -1,3 +1,5 @@
-<% (tool.relations_from.collect(&:tool_to)+tool.relations_to.collect(&:tool_from)).flatten.uniq.each do |current_tool| %>
-  <%= link_to current_tool.name, current_tool %>
+<div style="margin-left:10px;">
+<br /><% (tool.relations_from.collect(&:tool_to)+tool.relations_to.collect(&:tool_from)).flatten.uniq.each do |current_tool| %>
+  - <%= link_to current_tool.name, current_tool %><br />
 <% end %>
+</div>

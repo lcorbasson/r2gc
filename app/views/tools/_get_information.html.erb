@@ -1,9 +1,9 @@
 Votre demande d’information sera envoyée au correspond de l’équipement. Vous recevrez une réponse dès que possible.<br /><br />
-<div class="tool_show">
-  <div class="tool_top_show"></div>
-  <div class="tool_middle_show">
+<div class="tool_show_mail">
+  <div class="tool_top_show_mail"></div>
+  <div class="tool_middle_show_mail">
       <% form_tag(send_informations_mail_tools_path()) do  %>
-        <%= hidden_field_tag "tool_id", tool.id %>
+        <%= hidden_field_tag "tool_id", tool.id %>       
         <table class="front_forms">
           <tr>
             <td><label>Nom*</label></td>
@@ -30,6 +30,6 @@ Votre demande d’information sera envoyée au correspond de l’équipement. Vo
 
       <% end %>
   </div>
-  <div class="tool_bottom_show"></div>
+  <div class="tool_bottom_show_mail"></div>
 </div>
 
