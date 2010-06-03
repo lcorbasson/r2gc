@@ -63,8 +63,8 @@
               <% if @software.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @software.search_entities %><br/><% end %>
               <% if @software.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @software.search_subentities %><br/><% end %>
             <% end %>
-            <% if !@software.software_statuses.size>0 %><label>Statut du logiciel :</label> <%= @software.software_statuses.join(", ") if @software.software_statuses%><br/><% end %>
-            <% if !@software.software_application_domains.size>0 %><label>Domaines d'applications :</label> <%= @software.software_application_domains.join(", ") if @software.software_application_domains%><br/><% end %>
+            <% if @software.software_statuses.size>0 %><label>Statut du logiciel :</label> <%= @software.software_statuses.join(", ") if @software.software_statuses%><br/><% end %>
+            <% if @software.software_application_domains.size>0 %><label>Domaines d'applications :</label> <%= @software.software_application_domains.join(", ") if @software.software_application_domains%><br/><% end %>
             <% if !@software.software_application_domain_comment.blank? %><label>Précisions :</label> <%= @software.software_application_domain_comment %><br/><% end %>
             <% if current_user %>
               <% if !@software.software_can_develop_programs.blank? %><label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/><% end %>
