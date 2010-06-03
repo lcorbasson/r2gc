@@ -77,9 +77,7 @@ class R2gcExtension < Radiant::Extension
      #add Radiant Render
      SiteController.send :include, SiteControllerExtension
 
-      tab 'Accueil base de données' do
-        add_item("Accueil", "/admin/r2gc_statics")
-      end
+     
 
       tab 'Equipements' do
          add_item("Logiciels", "/admin/softwares")        

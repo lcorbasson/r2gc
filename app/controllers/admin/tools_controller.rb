@@ -6,11 +6,11 @@ class Admin::ToolsController < ApplicationController
  
   
   def index
-    @equipments = Tool.all
+    @tools = Tool.all
   end
 
   def new
-    @equipment = Tool.new
+    @tool = Tool.new
   end
 
   def show
