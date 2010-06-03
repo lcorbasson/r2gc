@@ -5,7 +5,7 @@ class ToolsController < SiteController
   def index
     @search = Tool.search(params[:search])
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 30, :order => "name ASC")
-
+    @export_tools = @search.paginate(:all,:page => 1, :per_page => @tools.total_pages*30, :order => "name ASC")
     
     @tool_type = ""
      if params[:search] && !params[:search][:laboratory_id_equals].blank?
@@ -18,7 +18,7 @@ class ToolsController < SiteController
         @correspondents =  @entities.collect(&:correspondents).flatten.uniq
       end
     end  
-    save_tools_collection @search.map{|t| t.id}
+    save_tools_collection @export_tools.map{|t| t.id}
     save_search_params params[:search]
 
     respond_to do |format|
@@ -68,7 +68,7 @@ class ToolsController < SiteController
   end
 
   def tools_to_csv
-    @export_tools = @search.paginate(:all,:page => 1, :per_page => @tools.total_pages*30, :order => "name ASC")
+    
     ic = Iconv.new('ISO-8859-1', 'UTF-8')
     export = StringIO.new
     CSV::Writer.generate(export, ",") do |csv|
