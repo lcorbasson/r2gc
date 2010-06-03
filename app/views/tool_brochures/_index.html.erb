@@ -1,0 +1,9 @@
+<% if brochures.size>0 %>
+  Plaquettes :<br />
+  <ul style="padding-left:5px;">
+  <% brochures.each do |brochure| %>
+    <li style="list-style:none;margin-left:10px;">- <%= link_to "#{brochure.legend.blank? ? brochure.asset_file_name.split(".").first : brochure.legend} (#{File.extname(brochure.asset_file_name).delete(".")})", download_tool_brochure_path(brochure) %></li>
+  <% end %>
+  </ul>
+  <br />
+<% end %>

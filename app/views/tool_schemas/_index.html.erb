@@ -1,0 +1,9 @@
+<% if current_user && schemas.size>0 %>
+  Schémas :<br />
+  <ul style="padding-left:5px;">
+    <% schemas.each do |schema| %>
+      <li style="list-style:none;margin-left:10px;">-<%= link_to "#{schema.legend.blank? ? schema.asset_file_name.split(".").first : schema.legend} (#{File.extname(schema.asset_file_name).delete(".")})", download_tool_schema_path(schema) %></li>
+    <% end %>
+  </ul>
+  <br />
+<% end %>
