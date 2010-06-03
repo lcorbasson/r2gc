@@ -125,9 +125,10 @@
               <% @test_engine.website.split(",").each do |link| %>
                 - <%= link_to link, link, :target => "_blank" unless !link %><br/>
               <% end %>
+            </div>
           <% end %>
           
-        </div>
+        
         <h3><a href="#">Demande d'informations</a></h3>
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
