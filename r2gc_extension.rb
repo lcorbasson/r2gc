@@ -84,7 +84,7 @@ class R2gcExtension < Radiant::Extension
   def activate
      #add Radiant Render
      SiteController.send :include, SiteControllerExtension
-
+     
      
 
       tab 'Equipements' do

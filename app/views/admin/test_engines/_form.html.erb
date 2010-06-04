@@ -1,4 +1,6 @@
+<% unless @test_engine.new_record? %>
 <div style="width:45%;float:left">
+  <% end %>
 <table id="table_form">
   <tr>
     <td class="label_td"><label>Nom</label></td>
@@ -116,7 +118,9 @@
     </td>
   </tr>
 </table>
+  <% unless @test_engine.new_record? %>
 </div>
+<% end %>
 <% unless @test_engine.new_record? %>
 <div style="width:45%;float:right">
   <%= render :partial => "admin/tool_public_photos/form", :locals => {:f => f} %>
@@ -133,7 +137,7 @@
       }else {
         jQuery('#tr_precisions').show();
       }
-    $('#test_engine_mi_localization_on_site').change(function() {
+    jQuery('#test_engine_mi_localization_on_site').change(function() {
       if (jQuery(this).val()=='Variable'){
         jQuery('#tr_precisions').hide();
       }else {

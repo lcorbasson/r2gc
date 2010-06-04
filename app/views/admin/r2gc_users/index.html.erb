@@ -3,12 +3,14 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <% @r2gc_users.each do |r2gc_user| %>
         <tr>
           <td><%= link_to r2gc_user.name, edit_admin_r2gc_user_path(r2gc_user) %></td>
+         <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_r2gc_user_path(r2gc_user), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer cet utilisateur ?" %></td>
         </tr>
       <% end %>
     </tbody>

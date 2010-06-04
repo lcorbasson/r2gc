@@ -41,6 +41,17 @@ class Admin::R2gcUsersController < ApplicationController
     @r2gc_user = User.find(params[:id])
   end
 
+  def destroy
+    @r2gc_user = User.find(params[:id])
+    if @r2gc_user.destroy
+      flash[:notice] = 'Utilisateur supprimé.'
+      redirect_to admin_r2gc_users_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
+      redirect_to admin_r2gc_users_path()
+    end
+  end
+
 
   
 end

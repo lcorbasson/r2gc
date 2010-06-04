@@ -41,6 +41,17 @@ class Admin::CorrespondentsController < ApplicationController
     @correspondent = Correspondent.find(params[:id])
   end
 
+  def destroy
+    @correspondent = Correspondent.find(params[:id])
+    if @correspondent.destroy
+      flash[:notice] = 'Correspondent supprimé.'
+      redirect_to admin_correspondents_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
+      redirect_to admin_correspondents_path()
+    end
+  end
+
 
   
 end

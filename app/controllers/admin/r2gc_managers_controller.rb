@@ -41,4 +41,15 @@ class Admin::R2gcManagersController < ApplicationController
     @r2gc_manager = User.find(params[:id])
   end
 
+  def destroy
+    @r2gc_manager = User.find(params[:id])
+    if @r2gc_manager.destroy
+      flash[:notice] = 'Modérateur supprimé.'
+      redirect_to admin_r2gc_managers_path()
+    else
+      flash[:error] = "Une erreur s'est produite lors de la suppression."
+      redirect_to admin_r2gc_managers_path()
+    end
+  end
+
 end

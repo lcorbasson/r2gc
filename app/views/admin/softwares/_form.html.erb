@@ -1,4 +1,6 @@
+<% unless @software.new_record? %>
 <div style="width:45%;float:left">
+<% end %>
 <table id="table_form">
   <tr>
     <td class="label_td"><label>Nom</label></td>
@@ -87,7 +89,9 @@
 </td>
   </tr>
 </table>
+  <% unless @software.new_record? %>
 </div>
+<% end %>
 <% unless @software.new_record? %>
 <div style="width:45%;float:right">
   <%= render :partial => "admin/tool_public_photos/form", :locals => {:f => f} %>

@@ -67,7 +67,7 @@
             <% if @software.software_application_domains.size>0 %><label>Domaines d'applications :</label> <%= @software.software_application_domains.join(", ") if @software.software_application_domains%><br/><% end %>
             <% if !@software.software_application_domain_comment.blank? %><label>Précisions :</label> <%= @software.software_application_domain_comment %><br/><% end %>
             <% if current_user %>
-              <% if !@software.software_can_develop_programs.blank? %><label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/><% end %>
+              <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/>
             <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf"), :class => "download_pdf" %>
             <% end %>
