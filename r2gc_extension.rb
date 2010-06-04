@@ -8,7 +8,7 @@ class R2gcExtension < Radiant::Extension
   url "https://github.com/uneek/R2GC"
 
   define_routes do |map|
-    map.root :controller => "databases"
+#    map.root :controller => "databases"
     map.namespace(:admin)  do |admin|
       admin.resources :tools, :collection => { :update_tools => :get } do |tool|
         tool.resources :tool_assets
