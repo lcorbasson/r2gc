@@ -1,14 +1,6 @@
 <h1 class="tools_title">Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
 
-<div class="breadcrumbs">
-  <span class="old">
-    <%=  link_to "Accueil", databases_path %> >
-    <%=  link_to("Interrogation de la base de données", session[:search_params] ? tool_engines_path(:search => session[:search_params]) : tool_engines_path)  %> >
-  </span>
-  <span class="current">
-    <%=  link_to "Fiche équipement", @tool_engine %>
-  </span>
-</div>
+
 
 <%= tools_navigation_table(@tool_engine.id,"ToolEngine") %>
 <div class="tool_show">
@@ -137,9 +129,7 @@
   <div class="tool_bottom_show"></div>
 </div>
 
-<p class="link_to_back">
-  <%= link_to " << Retour", :back %>
-</p>
+
 <% if current_user %>
 <%= javascript_tag("$(function() {
     $('#accordion').accordion({active:1} );
