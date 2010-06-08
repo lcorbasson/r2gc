@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th>Nom</th>
+        <th>Laboratoire</th>
         <th></th>
       </tr>
     </thead>
@@ -10,6 +11,7 @@
       <% @correspondents.each do |correspondent| %>
         <tr>
           <td><%= link_to correspondent.name, edit_admin_correspondent_path(correspondent) %></td>
+          <td><%= link_to correspondent.search_entity.laboratory if correspondent.search_entity%></td>
           <td><%= link_to image('remove', :alt => 'supprimer')+"Supprimer", admin_correspondent_path(correspondent), :method => :delete, :confirm => "Etes-vous sûr de vouloir supprimer le correspondant #{correspondent.name} ?" %></td>
         </tr>
       <% end %>
