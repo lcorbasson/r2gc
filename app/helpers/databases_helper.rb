@@ -1,8 +1,6 @@
 module DatabasesHelper
   
    def find_last_update
-    max_update = Tool.find(:first, :order => "updated_at DESC").updated_at
-    max_create = Tool.find(:first, :order => "created_at DESC").created_at
-    max_update > max_create ? max_update : max_create
+    Tool.find(:first, :order => "updated_at DESC").updated_at       
   end
 end
