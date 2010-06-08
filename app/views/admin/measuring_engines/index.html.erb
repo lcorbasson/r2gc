@@ -1,3 +1,7 @@
+ <%  form_for @search,:html => { :id => "search_form" } do |f| %>
+    Rechercher : <%= f.text_field :name_like %>
+  <% end %>
+<br /><br />
 <div class="outset">
   <table class="index">
     <thead>
@@ -25,5 +29,6 @@
     <li><%= link_to "Nouveau moyen de mesure et d'analyse", new_admin_measuring_engine_path() %></li>
   
   </ul>
+ 
 </div>
 

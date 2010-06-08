@@ -1,3 +1,7 @@
+ <%  form_for @search,:html => { :id => "search_form" } do |f| %>
+    Rechercher : <%= f.text_field :name_like %>
+  <% end %>
+<br /><br />
 <div class="outset">
   <table class="index">
     <thead>

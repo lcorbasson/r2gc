@@ -6,7 +6,8 @@ class Admin::ToolEnginesController < ApplicationController
  
   
  def index
-     @tools = ToolEngine.all(:order => "name")
+     @search = ToolEngine.search(params[:search])
+    @tools = @search.paginate(:all,:page => params[:page], :per_page => 5000, :order => "name ASC")
   end
 
   def show

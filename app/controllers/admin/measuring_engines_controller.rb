@@ -5,7 +5,9 @@ class Admin::MeasuringEnginesController < ApplicationController
     :denied_message => 'You must have designer privileges to perform this action.'
 
   def index
-    @tools = MeasuringEngine.all(:order => "name")
+    @search = MeasuringEngine.search(params[:search])
+    @tools = @search.paginate(:all,:page => params[:page], :per_page => 5000, :order => "name ASC")
+    
   end
 
   def new
