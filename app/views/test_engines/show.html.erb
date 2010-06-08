@@ -100,6 +100,9 @@
         <div>
           <% if (@test_engine.tool_public_photos.size>0 || @test_engine.tool_brochures.size>0 || (current_user && (@test_engine.tool_private_photos.size>0 || @test_engine.tool_brochures.size>0))) %>
             <label>Documents annexes : </label><br/><br/>
+            <%  if @test_engine.tool_public_photos.size>0 || (current_user && @test_engine.tool_private_photos.size>0)%>
+              Photo(s) :<br />
+            <% end %>
             <%= render :partial => "tool_public_photos/index", :locals => { :photos => @test_engine.tool_public_photos} %>
             <%= render :partial => "tool_private_photos/index", :locals => { :photos => @test_engine.tool_private_photos} %>
             <%= render :partial => "tool_brochures/index", :locals => { :brochures => @test_engine.tool_brochures} %>
@@ -127,7 +130,7 @@
         <% if current_user && @test_engine.correspondents.size>0 %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
-            <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents} %>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents, :main_correspondent =>  @test_engine.main_correspondent} %>
           </div>
         <% end %>
     </div>

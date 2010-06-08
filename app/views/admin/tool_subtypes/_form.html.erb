@@ -1,7 +1,7 @@
 <table id="table_form">
   <tr>
     <td><label>Type</label></td>
-    <td><label><%= f.select :tool_type, [["Moyen d'essai", "TestEngine"],["Moyen de mesure et d'analyse", "MeasuringEngine"],["Logiciel", "Software"],["Machine outil", "ToolEngine"]]%></label></td>
+    <td><label><%= f.select :tool_type, [["Moyen d'essai", "TestEngine"],["Moyen de mesure et d'analyse", "MeasuringEngine"],["Logiciel", "Software"],["Machine outil", "ToolEngine"]], :include_blank => true%></label></td>
   </tr>
   <tr>
     <td><label>Sous-type</label></td>

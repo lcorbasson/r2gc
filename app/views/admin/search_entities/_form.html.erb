@@ -5,7 +5,7 @@
   </tr>
   <tr>
     <td><label>Laboratoire</label></td>
-    <td><label><%= f.select :laboratory_id, Laboratory.all.collect{|l| [l.name, l.id]}%></label></td>
+    <td><label><%= f.select :laboratory_id, Laboratory.all.collect{|l| [l.name, l.id]}, :include_blank => true%></label></td>
   </tr>
   <tr>
     <td><label>Correspondants</label></td>

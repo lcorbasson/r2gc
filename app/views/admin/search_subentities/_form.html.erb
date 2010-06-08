@@ -5,7 +5,7 @@
   </tr>
    <tr>
     <td><label>Entité de recherche</label></td>
-    <td><label><%= f.select :search_entity_id, SearchEntity.all.collect{|e| ["#{e.name}(Laboratoire #{e.laboratory.name})", e.id]}%></label></td>
+    <td><label><%= f.select :search_entity_id, SearchEntity.all.collect{|e| ["#{e.name}(Laboratoire #{e.laboratory.name})", e.id]}, :include_blank => true%></label></td>
   </tr>
   <tr>
     <td><label>Correspondants</label></td>

@@ -2,7 +2,7 @@
   <ul class="correspondents_list">
     <% correspondents.each_with_index do |correspondent, i| %>    
       <li>
-        <a href="#" class="correspondent_tooltip" name ="<%=correspondent.comments %>">
+        
           <span class="correspondent_name"><%= correspondent.name_frontend %></span><br/>
           <% if correspondent.email %>
              Email : <%= mail_to correspondent.email,correspondent.email %><br/>
@@ -10,7 +10,20 @@
           <% if correspondent.phone_number %>
               Tél. : <%= correspondent.phone_number %><br/>
          <% end %>
-        </a>
+       
+      </li>
+    <% end %>
+    <% if main_correspondent %>
+      <li>
+        
+          <span class="correspondent_name"><%= main_correspondent.name_frontend %></span><br/>
+          <% if main_correspondent.email %>
+             Email : <%= mail_to main_correspondent.email,main_correspondent.email %><br/>
+          <% end %>
+          <% if main_correspondent.phone_number %>
+              Tél. : <%= main_correspondent.phone_number %><br/>
+         <% end %>
+        
       </li>
     <% end %>
   </ul>

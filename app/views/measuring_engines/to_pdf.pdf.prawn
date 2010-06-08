@@ -23,101 +23,144 @@ end
 pdf.bounding_box [left, 670], :width => 400  do
     pdf.text "Nom :  #{@measuring_engine.name}"
     pdf.text "Type :  Moyen de mesure et d'analyse"
-    pdf.text "Sous type :  #{@measuring_engine.tool_subtype}"
-    pdf.text "Marque :  #{@measuring_engine.brand}"
-    pdf.text "Version :  #{@measuring_engine.version}"
-    pdf.text "Quantité :  #{@measuring_engine.quantity}"
-    pdf.text "Laboratoire :  #{@measuring_engine.laboratory}"
-    pdf.text "Entité(s) de recherche :  #{@measuring_engine.search_entities}"
-    pdf.text "Sous entité(s) :  #{@measuring_engine.search_subentities}"
+    if !@measuring_engine.tool_subtype.blank?
+        pdf.text "Sous type :  #{@measuring_engine.tool_subtype}"
+    end
+    if !@measuring_engine.brand.blank?
+        pdf.text "Marque :  #{@measuring_engine.brand}"
+    end
+    if !@measuring_engine.version.blank?
+        pdf.text "Version :  #{@measuring_engine.version}"
+    end
+    if !@measuring_engine.quantity.blank?
+        pdf.text "Quantité :  #{@measuring_engine.quantity}"
+    end
+    if !@measuring_engine.laboratory.blank?
+        pdf.text "Laboratoire :  #{@measuring_engine.laboratory}"
+    end
+    if @measuring_engine.search_entities.size>0
+        pdf.text "Entité(s) de recherche :  #{@measuring_engine.search_entities}"
+    end
+    if @measuring_engine.search_subentities.size>0
+        pdf.text "Sous entité(s) :  #{@measuring_engine.search_subentities}"
+    end
 end
-pdf.move_down(30)
-pdf.fill_color "92C5DA"
-pdf.text "Principes de fonctionnement"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.operating_principles}"
+if !@measuring_engine.operating_principles.blank?
+    pdf.move_down(30)
+    pdf.fill_color "92C5DA"
+    pdf.text "Principes de fonctionnement"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.operating_principles}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Caractéristiques techniques"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.specifications}"
+if !@measuring_engine.specifications.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Caractéristiques techniques"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.specifications}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Document explicatif"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.explanatory_document}"
+if !@measuring_engine.explanatory_document.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Document explicatif"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.explanatory_document}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Etalonnage/calibration/vérification"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.calibration}"
+if !@measuring_engine.calibration.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Etalonnage/calibration/vérification"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.calibration}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Remarque(s) Etalonnage/calibration/vérification"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.calibration_comment}"
+if !@measuring_engine.calibration_comment.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Remarque(s) Etalonnage/calibration/vérification"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.calibration_comment}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Date d'achat"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.purchase_date}"
+if !@measuring_engine.purchase_date.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Date d'achat"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.purchase_date}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Commentaires"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.comment}"
+if !@measuring_engine.comment.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Commentaires"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.comment}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Prêt possible uniquement sur le site de l’organisme propriétaire"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.use_on_site ? "Oui" : "Non"}"
+if !@measuring_engine.use_on_site.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Prêt possible uniquement sur le site de l’organisme propriétaire"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.use_on_site ? "Oui" : "Non"}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Emprunt possible en dehors du site de l’organisme propriétaire"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.borrowing ? "Oui" : "Non"}"
+if !@measuring_engine.borrowing.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Emprunt possible en dehors du site de l’organisme propriétaire"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.borrowing ? "Oui" : "Non"}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Localisation sur le site"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.mi_localization_on_site}"
+if !@measuring_engine.mi_localization_on_site.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Localisation sur le site"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.mi_localization_on_site}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Précisions"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.localization_on_site_precision}"
+if !@measuring_engine.localization_on_site_precision.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Précisions"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.localization_on_site_precision}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "N° d’enregistrement interne"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.internal_number}"
+if !@measuring_engine.internal_number.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "N° d’enregistrement interne"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.internal_number}"
+end
 
+if !@measuring_engine.comment.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Equipement(s) lié(s)"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.comment}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Equipement(s) lié(s)"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.comment}"
+if !@measuring_engine.website.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Lien(s) web"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.website}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Lien(s) web"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.website}"
-
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Correspondant(s)"
-pdf.fill_color "333333"
-pdf.text "#{@measuring_engine.correspondents.collect(&:name).join(', ')}"
+if @measuring_engine.correspondents.size>0
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Correspondant(s)"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.correspondents.collect(&:name).join(', ')}"
+end

@@ -1,6 +1,7 @@
 <h1>Nouvelle machine outil</h1>
 <% nested_form_for([:admin, @tool_engine], :html => {:multipart => true}) do |f| %>
   <%= render :partial => "form", :locals => {:f => f} %>
+Si vous souhaitez ajouter des photos ou documents, il est nécessaire d'enregistrer d'abord la fiche équipement, puis de l'éditer
   <p class="buttons">
     <%= submit_tag "Enregistrer", :class => "button" %>
     ou <%= link_to "Annuler", :back %>
