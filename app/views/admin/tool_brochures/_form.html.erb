@@ -5,6 +5,11 @@
     <% f.fields_for :tool_brochures do |brochures_form| %>
       <table class="nested_table" style="width:100%;margin-top:20px;">
         <tr>
+          <td colspan="2">
+            - <%=  brochures_form.object.asset_file_name %>
+          </td>
+        </tr>
+        <tr>
           <td><label>Document</label></td>
           <td><%= brochures_form.file_field :asset %></td>
         </tr>
