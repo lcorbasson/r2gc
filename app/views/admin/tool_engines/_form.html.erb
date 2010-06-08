@@ -7,11 +7,11 @@
       <td><%= f.text_field :name %></td>
     </tr>
     <tr>
-      <td class="label_td"><label>Marque/Constructeur</label></td>
+      <td class="label_td"><label>Marque(s)/Constructeur(s)</label></td>
       <td><%= f.text_field :brand %></td>
     </tr>
     <tr>
-      <td class="label_td"><label>Modèle</label></td>
+      <td class="label_td"><label>Modèle(s)</label></td>
       <td><%= f.text_field :version %></td>
     </tr>
     <tr>
@@ -31,7 +31,7 @@
       <td><%= f.text_area :specifications %></td>
     </tr>
     <tr>
-      <td class="label_td"><label>Document explicatif </label></td>
+      <td class="label_td"><label>Document(s) explicatif(s) </label></td>
       <td><%= f.text_area :explanatory_document %></td>
     </tr>
 
@@ -71,7 +71,7 @@
       <td><%= f.text_field :purchase_date %></td>
     </tr>
     <tr id="linked_tools">
-      <td class="label_td"><label>Equipement liés</label></td>
+      <td class="label_td"><label>Equipement(s) lié(s)</label></td>
       <td><%= f.select :linked_tools,  @tool_engine.new_record? || !@tool_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
       (((@tool_engine.laboratory.tools-(@tool_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
     {:selected => (@tool_engine.relations_from.collect(&:tool_to_id)+@tool_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>

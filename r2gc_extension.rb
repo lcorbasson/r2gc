@@ -89,7 +89,7 @@ class R2gcExtension < Radiant::Extension
 
       tab 'Equipements' do
          add_item("Logiciels", "/admin/softwares")        
-         add_item("Machines-outil", "/admin/tool_engines")
+         add_item("Machines-outils", "/admin/tool_engines")
          add_item("Moyens d'essai", "/admin/test_engines")
          add_item("Moyen de mesure et d'analyse", "/admin/measuring_engines")        
       end
@@ -97,15 +97,15 @@ class R2gcExtension < Radiant::Extension
       tab 'Laboratoires - Entités de recherche' do
          add_item("Laboratoires", "/admin/laboratories")
          add_item("Entités de recherche", "/admin/search_entities")
-         add_item("Sous entités", "/admin/search_subentities")
+         add_item("Sous-entités", "/admin/search_subentities")
       end
 
       tab 'Paramètres' do
         add_item("Domaines d'application logiciel", "/admin/software_application_domains")
         add_item("Statuts logiciel", "/admin/software_statuses")
-        add_item("Conditions d'utilisation", "/admin/use_conditions")
+        add_item("Condition d'utilisation", "/admin/use_conditions")
         add_item("Etalonnage/Calibration/Verification", "/admin/calibrations")
-        add_item("Sous types", "/admin/tool_subtypes")
+        add_item("Sous-types", "/admin/tool_subtypes")
       end  
 
 
