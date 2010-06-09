@@ -11,7 +11,7 @@
     <td><%= f.select :tool_subtype_id, ToolSubtype.for_softwares.collect{|s| [s.name, s.id]}.sort, :include_blank => true %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>Marque</label></td>
+    <td class="label_td"><label>Marque(s)</label></td>
     <td><%= f.text_field :brand %></td>
   </tr>
   <tr>
@@ -60,7 +60,7 @@
     <td><%= f.text_area :explanatory_document %></td>
   </tr>
   <tr>
-    <td class="label_td"><label>LLien internet sur l’équipement (site constructeur/marque) </label></td>
+    <td class="label_td"><label>Lien internet sur l’équipement (site constructeur/marque) </label></td>
     <td><%= f.text_field :website %></td>
   </tr>
   <tr>
@@ -69,7 +69,7 @@
   </tr>
    
   <tr id="linked_tools">
-    <td class="label_td"><label>Equipement(s) liés</label></td>
+    <td class="label_td"><label>Equipement(s) lié(s)</label></td>
     <td><%= f.select :linked_tools,  @software.new_record? || @software.laboratory.blank? ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
     (((@software.laboratory.tools-(@software.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
   {:selected => (@software.relations_from.collect(&:tool_to_id)+@software.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>

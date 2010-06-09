@@ -43,7 +43,7 @@
 
     </tr>
     <tr>
-      <td class="label_td"><label>Conditions d'utilisation</label></td>
+      <td class="label_td"><label>Condition(s) d'utilisation</label></td>
       <td><%= f.select :use_condition_ids, (UseCondition.for_tools.collect{|c| [c.conditions, c.id]}<<["- Aucune -",""]).sort,{}, {:multiple => true} %></td>
     </tr>
      <tr>
