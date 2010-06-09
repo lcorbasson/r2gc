@@ -141,12 +141,15 @@ if !@measuring_engine.internal_number.blank?
     pdf.text "#{@measuring_engine.internal_number}"
 end
 
-if !@measuring_engine.comment.blank?
+if @measuring_engine.relations_from.size>0 || @measuring_engine.relations_to.size>0
     pdf.move_down(20)
     pdf.fill_color "92C5DA"
     pdf.text "Equipement(s) lié(s)"
     pdf.fill_color "333333"
-    pdf.text "#{@measuring_engine.comment}"
+    (@measuring_engine.relations_from.collect(&:tool_to)+@measuring_engine.relations_to.collect(&:tool_from)).flatten.uniq.each do |current_tool|
+        pdf.text "- current_tool.name %>"
+        pdf.move_down(5)
+    end
 end
 
 if !@measuring_engine.website.blank?
@@ -163,4 +166,12 @@ if @measuring_engine.correspondents.size>0
     pdf.text "Correspondant(s)"
     pdf.fill_color "333333"
     pdf.text "#{@measuring_engine.correspondents.collect(&:name).join(', ')}"
+end
+
+if !@measuring_engine.main_correspondent.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Correspondant principal"
+    pdf.fill_color "333333"
+    pdf.text "#{@measuring_engine.main_correspondent}"
 end

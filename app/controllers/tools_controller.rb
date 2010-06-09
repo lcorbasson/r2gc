@@ -43,15 +43,69 @@ class ToolsController < SiteController
   end
 
   def send_informations_mail
-    if params[:email] && params[:last_name] && params[:first_name] && params[:message]
+    if !params[:email].blank? && !params[:last_name].blank? && !params[:first_name].blank? && !params[:message].blank?
       tool = Tool.find(params[:tool_id])      
       tool.main_correspondent.blank? ? correspondents = tool.correspondents.collect(&:email) : correspondents = tool.main_correspondent.email
       Notifier.deliver_send_informations_mail(correspondents, params[:email], "#{params[:last_name]} #{params[:first_name]}", tool.name, params[:message] )
-      flash[:notice] = 'Votre message a bien été transmis.'
-      redirect_to :back
+      render :update do |page|
+        page.replace_html :good_flash_message, 'Votre demande d’information est envoyée au correspondant de l’équipement. Vous recevrez une réponse dès que possible'
+      end
     else
-      flash[:error] = 'Veuillez remplir les champs obligatoires(*).'
-      redirect_to :back
+      render :update do |page|
+        page.replace_html :bad_flash_message, 'Veuillez remplir les champs obligatoires(*).'
+      end
+    end
+  end
+
+  def forgot_password
+    radiant_render :page => "/tools"
+  end
+
+  def reset_password
+    @user = User.find_by_email(params[:email])
+    if @user
+      value = ''
+      8.times { value  << (97 + rand(25)).chr }
+      value
+      @user.password = value
+      @user.password_confirmation = @user.password
+      if @user.save
+        Notifier.deliver_password_reset_instructions(@user,value)
+        render :update do |page|          
+          page.redirect_to tools_path
+          page << "jQuery('#general_good_flash_message').show();"
+          page.replace_html :general_good_flash_message, "Un email de confirmation a été envoyé à l'adresse #{@user.email}"
+        end
+      else
+        render :update do |page|
+          page << "jQuery('#general_bad_flash_message').show();"
+         page.replace_html :general_bad_flash_message, "Une erreur s'est produite lors de la réinitialisation de votre mot de passe."
+        end
+      end
+    else
+      render :update do |page|
+        page << "jQuery('#general_bad_flash_message').show();"
+        page.replace_html :general_bad_flash_message, "Adresse email introuvable"
+      end
+    end
+  end
+
+  def edit_password
+    
+  end
+
+  def update_password
+    @user.password = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+    if @user.save
+      render :update do |page|
+        page.replace_html :general_good_flash_message, "Votre mot de passe a été réinitialisé."
+        page.redirect tools_path
+      end
+    else
+      render :update do |page|
+        page.replace_html :general_good_flash_message, "Une erreur s'est produite lors de la réinitialisation de votre mot de passe."
+      end
     end
   end
 

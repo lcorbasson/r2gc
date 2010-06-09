@@ -24,55 +24,101 @@ pdf.bounding_box [left, 670], :width => 400  do
     pdf.text "Nom :  #{@software.name}"
     pdf.text "Type :  Logiciel"
     pdf.text "Sous type :  #{@software.tool_subtype}"
-    pdf.text "Marque :  #{@software.brand}"
-    pdf.text "Version :  #{@software.version}"
-    pdf.text "Quantité :  #{@software.quantity}"
-    pdf.text "Laboratoire :  #{@software.laboratory}"
-    pdf.text "Entité(s) de recherche :  #{@software.search_entities}"
-    pdf.text "Sous entité(s) :  #{@software.search_subentities}"
-    pdf.text "Statut du logiciel :  #{@software.software_statuses}"
-    pdf.text "Domaines d'applications :  #{@software.software_application_domains}"
-    pdf.text "Précisions :  #{@software.software_application_domain_comment}"
-    pdf.text "Logiciel permettant de développer des programmes internes ? :  #{@software.software_can_develop_programs.eql?(1) ? 'oui' : 'non'}"
+    unless @software.brand.blank?
+        pdf.text "Marque :  #{@software.brand}"
+    end
+    unless @software.version.blank?
+        pdf.text "Version :  #{@software.version}"
+    end
+    unless @software.quantity.blank?
+        pdf.text "Quantité :  #{@software.quantity}"
+    end
+    unless @software.laboratory.blank?
+        pdf.text "Laboratoire :  #{@software.laboratory}"
+    end
+    if @software.search_entities.size>0
+        pdf.text "Entité(s) de recherche :  #{@software.search_entities}"
+    end
+    if @software.search_subentities.size>0
+        pdf.text "Sous entité(s) :  #{@software.search_subentities}"
+    end
+    if @software.software_statuses.size>0
+        pdf.text "Statut du logiciel :  #{@software.software_statuses}"
+    end
+    if @software.software_application_domains.size>0
+        pdf.text "Domaines d'applications :  #{@software.software_application_domains}"
+    end
+    unless @software.software_application_domain_comment.blank?
+        pdf.text "Précisions :  #{@software.software_application_domain_comment}"
+    end
+    unless @software.software_can_develop_programs.blank?
+        pdf.text "Logiciel permettant de développer des programmes internes ? :  #{@software.software_can_develop_programs.eql?(1) ? 'oui' : 'non'}"
+    end
 end
-pdf.move_down(30)
-pdf.fill_color "92C5DA"
-pdf.text "Description et usages du Logiciel"
-pdf.fill_color "333333"
-pdf.text "#{@software.software_description}"
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Spécificités techniques du Logiciel"
-pdf.fill_color "333333"
-pdf.text "#{@software.specifications}"
+unless @software.software_description.blank?
+    pdf.move_down(30)
+    pdf.fill_color "92C5DA"
+    pdf.text "Description et usages du Logiciel"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.software_description}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Caractéristiques de partage et de diffusion du logiciel"
-pdf.fill_color "333333"
-pdf.text "#{@software.software_sharing_conditions}"
+unless @software.specifications.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Spécificités techniques du Logiciel"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.specifications}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Commentaires"
-pdf.fill_color "333333"
-pdf.text "#{@software.comment}"
+unless @software.software_sharing_conditions.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Caractéristiques de partage et de diffusion du logiciel"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.software_sharing_conditions}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Equipement(s) lié(s)"
-pdf.fill_color "333333"
-pdf.text "#{@software.comment}"
+unless @software.comment.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Commentaires"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.comment}"
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Lien(s) web"
-pdf.fill_color "333333"
-pdf.text "#{@software.website}"
+if @software.relations_from.size>0 || @software.relations_to.size>0
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Equipement(s) lié(s)"
+    pdf.fill_color "333333"
+    (@software.relations_from.collect(&:tool_to)+@software.relations_to.collect(&:tool_from)).flatten.uniq.each do |current_tool|
+        pdf.text "- current_tool.name %>"
+        pdf.move_down(5)
+    end
+end
 
-pdf.move_down(20)
-pdf.fill_color "92C5DA"
-pdf.text "Correspondant(s)"
-pdf.fill_color "333333"
-pdf.text "#{@software.correspondents.collect(&:name).join(', ')}"
+unless @software.website.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Lien(s) web"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.website}"
+end
+
+if @software.correspondents.size>0
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Correspondant(s)"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.correspondents.collect(&:name).join(', ')}"
+end
+
+if !@software.main_correspondent.blank?
+    pdf.move_down(20)
+    pdf.fill_color "92C5DA"
+    pdf.text "Correspondant principal"
+    pdf.fill_color "333333"
+    pdf.text "#{@software.main_correspondent}"
+end

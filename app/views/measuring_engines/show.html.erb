@@ -82,7 +82,7 @@
             <% if !@measuring_engine.calibration.blank? %><label>Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration %><br/><% end %>
             <% if !@measuring_engine.calibration_comment.blank? %><label>Remarque(s) Etalonnage/calibration/vérification :</label> <%= @measuring_engine.calibration_comment %><br/><% end %>
             <% if !@measuring_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @measuring_engine.purchase_date %><br/><% end %>
-            <% if !@measuring_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= @measuring_engine.comment %><% end %>
+            <% if !@measuring_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= simple_format(@measuring_engine.comment).gsub("<p>","") %><% end %>
           </div>
           <h3><a href="#">Echange de l’équipement</a></h3>
           <div>

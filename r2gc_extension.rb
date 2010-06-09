@@ -67,7 +67,7 @@ class R2gcExtension < Radiant::Extension
     map.resources :tool_private_photos, :member => {:download => :any}
     map.resources :tool_brochures, :member => {:download => :any}
     map.resources :tool_schemas, :member => {:download => :any}
-    map.resources :tools, :collection => {:get_information => :get, :send_informations_mail => :post}
+    map.resources :tools, :collection => {:edit_password => :any, :update_password => :any, :reset_password => :any, :forgot_password => :get, :get_information => :get, :send_informations_mail => :post}
     map.resources :softwares, :member => {:to_pdf => :get}
     map.resources :measuring_engines, :member => {:to_pdf => :get}
     map.resources :tool_engines, :member => {:to_pdf => :get}

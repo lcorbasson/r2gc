@@ -78,7 +78,7 @@
         <div>
           <% if !@tool_engine.explanatory_document.blank? %><label>Document(s) explicatif(s) :</label> <%= @tool_engine.explanatory_document %><br/><% end %>
           <% if !@tool_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @tool_engine.purchase_date %><br/><% end %>
-          <% if !@tool_engine.comment.blank? %><label>Autre(s) commentaire(s) : </label><%= @tool_engine.comment %><% end %>
+          <% if !@tool_engine.comment.blank? %><label>Autre(s) commentaire(s) : </label><%= simple_format(@tool_engine.comment).gsub("<p>","") %><% end %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>      

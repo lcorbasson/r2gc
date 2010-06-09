@@ -83,7 +83,7 @@
           <% if !@test_engine.calibration.blank? %><label>Etalonnage/calibration/vérification :</label> <%= @test_engine.calibration %><br/><% end %>
           <% if !@test_engine.calibration_comment.blank? %><label>Remarque(s) Etalonnage/calibration/vérification :</label> <%=  @test_engine.calibration_comment %><br/><% end %>
           <% if !@test_engine.purchase_date.blank? %><label>Date d'achat de l'équipement :</label> <%= @test_engine.purchase_date %><br/><% end %>
-          <% if !@test_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= @test_engine.comment %><% end %>
+          <% if !@test_engine.comment.blank? %><label>Autre(s) commentaire(s) :</label> <%= simple_format(@test_engine.comment).gsub("<p>","") %><% end %>
         </div>
         <h3><a href="#">Echange de l’équipement</a></h3>
         <div>

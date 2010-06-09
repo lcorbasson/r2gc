@@ -92,7 +92,7 @@
           <% end %>
           <% if !@software.comment.blank? %>
             <h3><a href="#">Autre(s) commentaire(s)</a></h3>
-            <div><%= simple_format @software.comment %></div>
+            <div><%= simple_format(@software.comment).gsub("<p>","") %></div>
           <% end %>
         <% end %>
         <h3><a href="#">Liens</a></h3>
