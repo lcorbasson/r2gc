@@ -102,13 +102,13 @@
   {:selected => (@test_engine.relations_from.collect(&:tool_to_id)+@test_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
 
   </tr>
-   <tr>
+   <tr id="main_correspondent">
       <td class="label_td"><label>Correspondant principal</label></td>
-      <td><%= f.select :main_correspondent_id, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
+      <td><%= f.select :main_correspondent_id, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
     </tr>
-     <tr>
+     <tr id="correspondents">
       <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
-      <td><%= f.select :correspondent_ids, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+      <td><%= f.select :correspondent_ids, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
     </tr>
   <tr>
     <td class="label_td"><label>Affichage sur site</label></td>
@@ -152,8 +152,8 @@
     jQuery("#test_engine_laboratory_id").change(function() {
        jQuery.ajax({
             type: "GET",
-            data: "laboratory_id="+jQuery(this).val()+"form=<%= f %>",
-            url: "<%=  update_tools_admin_tools_path %>"
+            data: "laboratory_id="+jQuery(this).val(),
+            url: "<%=  update_tools_admin_test_engines_path %>"
         });
     })
   });

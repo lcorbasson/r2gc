@@ -21,6 +21,7 @@ class Admin::ToolsController < ApplicationController
     @laboratory = Laboratory.find(params[:laboratory_id])
     render :update do |page|
       page.replace_html :linked_tools, :partial => "admin/tools/index_select", :locals => {:f => params[:form]}
+      page.replace_html :correspondents, :partial => "admin/tools/select_correspondents", :locals => {:f => params[:form]}
     end
   end
 

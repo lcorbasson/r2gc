@@ -8,7 +8,7 @@ class R2gcExtension < Radiant::Extension
   url "https://github.com/uneek/R2GC"
 
   define_routes do |map|
-    map.root :controller => "databases"
+    map.root :controller => "actualities"
     map.namespace(:admin)  do |admin|
       admin.resources :tools, :collection => { :update_tools => :get } do |tool|
         tool.resources :tool_assets
@@ -17,28 +17,28 @@ class R2gcExtension < Radiant::Extension
         tool.resources :tool_brochures
         tool.resources :tool_schemas
       end
-      admin.resources :softwares do |software|
+      admin.resources :softwares, :collection => {:update_tools => :get} do |software|
         software.resources :tool_assets
         software.resources :tool_public_photos
         software.resources :tool_private_photos
         software.resources :tool_brochures
         software.resources :tool_schemas
       end
-      admin.resources :test_engines do |test_engine|
+      admin.resources :test_engines, :collection => {:update_tools => :get} do |test_engine|
         test_engine.resources :tool_assets
         test_engine.resources :tool_public_photos
         test_engine.resources :tool_private_photos
         test_engine.resources :tool_brochures
         test_engine.resources :tool_schemas
       end
-      admin.resources :measuring_engines do |measuring_engine|
+      admin.resources :measuring_engines, :collection => {:update_tools => :get} do |measuring_engine|
         measuring_engine.resources :tool_assets
         measuring_engine.resources :tool_public_photos
         measuring_engine.resources :tool_private_photos
         measuring_engine.resources :tool_brochures
         measuring_engine.resources :tool_schemas
       end
-      admin.resources :tool_engines do |tool_engine|
+      admin.resources :tool_engines, :collection => {:update_tools => :get} do |tool_engine|
         tool_engine.resources :tool_assets
         tool_engine.resources :tool_public_photos
         tool_engine.resources :tool_private_photos

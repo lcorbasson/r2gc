@@ -70,6 +70,15 @@ class Admin::MeasuringEnginesController < ApplicationController
     end
   end
 
+   def update_tools
+    @laboratory = Laboratory.find(params[:laboratory_id]) if !params[:laboratory_id].blank?
+    render :update do |page|
+      page.replace_html :linked_tools, :partial => "admin/measuring_engines/select_linked_tools"
+      page.replace_html :correspondents, :partial => "admin/measuring_engines/select_correspondents"
+      page.replace_html :main_correspondent, :partial => "admin/measuring_engines/select_main_correspondent"
+    end
+  end
+
 
   
 end

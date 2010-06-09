@@ -1,6 +1,7 @@
 class Laboratory < ActiveRecord::Base
 
  has_many :search_entities, :dependent => :destroy
+ has_many :correspondents, :through => :search_entities
  has_many :tools
 
 

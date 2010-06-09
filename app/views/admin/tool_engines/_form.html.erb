@@ -75,15 +75,16 @@
       <td><%= f.select :linked_tools,  @tool_engine.new_record? || !@tool_engine.laboratory ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
       (((@tool_engine.laboratory.tools-(@tool_engine.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
     {:selected => (@tool_engine.relations_from.collect(&:tool_to_id)+@tool_engine.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
-    </tr>
-    <tr>
-      <td class="label_td"><label>Correspondant principal</label></td>
-      <td><%= f.select :main_correspondent_id, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
-    </tr>
-     <tr>
-      <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
-      <td><%= f.select :correspondent_ids, (User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
-    </tr>
+    </tr>    
+      <tr id="main_correspondent">
+        <td class="label_td"><label>Correspondant principal</label></td>
+        <td><%= f.select :main_correspondent_id, (@tool_engine.new_record? || !@tool_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @tool_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
+      </tr>
+       <tr id="correspondents">
+        <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
+        <td><%= f.select :correspondent_ids, (@tool_engine.new_record? || !@tool_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @tool_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+      </tr>
+   
     <tr>
       <td class="label_td"><label>Affichage sur site</label></td>
      <td>
@@ -128,8 +129,8 @@
     jQuery("#tool_engine_laboratory_id").change(function() {
        jQuery.ajax({
             type: "GET",
-            data: "laboratory_id="+jQuery(this).val()+"form=<%= f %>",
-            url: "<%=  update_tools_admin_tools_path %>"
+            data: "laboratory_id="+jQuery(this).val(),
+            url: "<%=  update_tools_admin_tool_engines_path %>"
         });
     })
   });
