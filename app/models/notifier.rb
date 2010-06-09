@@ -11,7 +11,7 @@ class Notifier < ActionMailer::Base
    def password_reset_instructions(user, password)
     subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
     recipients user.email
-    from       "noreply@pole-gce.fr"
+    from       "contact@pole-gce.fr"
     body :user => user, :password => password
   end
 
