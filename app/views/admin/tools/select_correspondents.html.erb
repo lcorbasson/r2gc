@@ -1,0 +1,9 @@
+<td class="label_td"><label>Correspondants</label></td>
+    <td>      
+<%= select_tag "software_linked_tools", options_for_select((@laboratory.tools.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),{:multiple => true} %>
+<%#= f.select :linked_tools,  (@laboratory.tools.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort,
+  {},{:multiple => true} %></td>
+
+
+
+    

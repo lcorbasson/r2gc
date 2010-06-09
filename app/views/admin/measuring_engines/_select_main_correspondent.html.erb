@@ -1,0 +1,5 @@
+<td class="label_td"><label>Correspondant principal</label></td>
+    <td>
+      <%= select_tag "measuring_engine_main_correspondent", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) %>
+</td>
+

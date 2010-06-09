@@ -1,0 +1,8 @@
+<td class="label_td"><label>Equipement liés</label></td>
+    <td>      
+      <%= select_tag "software_linked_tools", options_for_select((@laboratory ? @laboratory.tools.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""] : Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),{:multiple => true} %>
+</td>
+
+
+
+    

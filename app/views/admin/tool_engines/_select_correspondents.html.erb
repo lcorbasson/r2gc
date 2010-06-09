@@ -1,0 +1,5 @@
+<td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
+    <td>
+      <%= select_tag "tool_engine_correspondents", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort),{:multiple => true} %>
+</td>
+
