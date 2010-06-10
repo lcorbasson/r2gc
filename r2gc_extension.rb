@@ -8,8 +8,13 @@ class R2gcExtension < Radiant::Extension
   url "https://github.com/uneek/R2GC"
 
   define_routes do |map|
-    map.root :controller => "actualities"
+    if RAILS_ENV == "production"
+      map.root :controller => "databases"
+    else
+      map.root :controller => "actualities"
+    end
     map.namespace(:admin)  do |admin|
+      admin.resources :helps, :collection => { :download => :get }
       admin.resources :tools, :collection => { :update_tools => :get } do |tool|
         tool.resources :tool_assets
         tool.resources :tool_public_photos
@@ -113,7 +118,11 @@ class R2gcExtension < Radiant::Extension
         add_item("Correspondants", "/admin/correspondents")
         add_item("Utilisateurs laboratoires", "/admin/r2gc_users")
         add_item("Modérateurs", "/admin/r2gc_managers")
-      end      
+      end
+
+      tab 'Aide' do
+        add_item("Aide", "/admin/helps")
+      end
 
       Radiant::Config['roles.admin.sees_everything'] = 'true' unless Radiant::Config['roles.admin.sees_everything']
       if Role.table_exists?
