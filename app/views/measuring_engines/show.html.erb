@@ -46,8 +46,8 @@
               <% end %>
           <label>Nom :</label> <b><%= @measuring_engine.name %></b><br/>
           <label>Type : </label>Moyen de mesure et d'analyse<br/>
-          <% if !@measuring_engine.tool_subtype.blank? %><label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/><% end %>
-          <% if !@measuring_engine.brand.blank?  %><label>Marque/Constructeur :</label> <%= @measuring_engine.brand %><br/><% end %>
+          <% unless @measuring_engine.tool_subtype.blank? %><label>Sous-type :</label> <%= @measuring_engine.tool_subtype %><br/><% end %>
+          <% unless @measuring_engine.brand.blank?  %><label>Marque/Constructeur :</label> <%= @measuring_engine.brand %><br/><% end %>
           <% if !@measuring_engine.version.blank? %><label>Modèle :</label> <%= @measuring_engine.version %><br/><% end %>
           <% if !@measuring_engine.quantity.blank? %><label>Quantité :</label> <%= @measuring_engine.quantity %><br/><% end %>
           <% if !@measuring_engine.laboratory.blank? %><label>Laboratoire :</label> <%= @measuring_engine.laboratory %><br/><% end %>
@@ -88,7 +88,7 @@
           <div>
             <% if !@measuring_engine.use_on_site.blank?  %><label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @measuring_engine.use_on_site ? "Oui" : "Non" %><br/><% end %>
             <% if !@measuring_engine.borrowing.blank? %><label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @measuring_engine.borrowing ? "Oui" : "Non" %><br/><% end %>
-            <% if @measuring_engine.use_conditions.size>0 %><label>Condition de prêt et d’emprunt de l’équipement :</label> <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ") if  @measuring_engine.use_conditions%> <br/><% end %>
+            <% if @measuring_engine.use_conditions.size>0 %><label>Condition de prêt et d’emprunt de l’équipement :</label> <%= @measuring_engine.use_conditions.collect(&:conditions).join(", ")%> <br/><% end %>
             <% if !@measuring_engine.mi_localization_on_site.blank? %><label>Localisation sur le site :</label> <%= @measuring_engine.mi_localization_on_site %><br/><% end %>
             <% if !@measuring_engine.localization_on_site_precision.blank? %><label>Précisions:</label> <%=  @measuring_engine.localization_on_site_precision %><br/><% end %>
             <% if !@measuring_engine.internal_number.blank? %><label>N° d’enregistrement interne:</label> <%= @measuring_engine.internal_number %><br/><% end %>
@@ -126,7 +126,7 @@
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @measuring_engine} %>
         </div>
-        <% if current_user && @measuring_engine.correspondents %>
+        <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents =>  @measuring_engine.correspondents, :main_correspondent =>  @measuring_engine.main_correspondent} %>

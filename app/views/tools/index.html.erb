@@ -68,6 +68,7 @@
 <% end %>
 <div id="search_results">
   <div id="equipments_list">
+    <% if @tools.size>0 %>
     <table width="100%" cellspacing="0">
       <thead>
         <tr>
@@ -90,6 +91,9 @@
         </tr>
       <% end %>
     </table>
+     <% else %>
+      Aucun résultat ne répond à votre recherche
+    <% end %>
 
 
   </div>

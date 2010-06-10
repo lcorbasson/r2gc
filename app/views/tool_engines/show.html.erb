@@ -121,7 +121,7 @@
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @tool_engine} %>
         </div>
-        <% if current_user && @tool_engine.correspondents.size>0 %>
+        <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.correspondents, :main_correspondent =>  @tool_engine.main_correspondent} %>

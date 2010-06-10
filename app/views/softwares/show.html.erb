@@ -130,7 +130,7 @@
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @software} %>
         </div>
-        <% if current_user && @software.correspondents%>
+        <% if current_user%>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents, :main_correspondent =>  @software.main_correspondent} %>

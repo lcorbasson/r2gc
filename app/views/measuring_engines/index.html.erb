@@ -69,29 +69,32 @@
 <% end %>
 <div id="search_results">
   <div id="equipments_list">
-    <table width="100%" cellspacing="0">
-      <thead>
-        <tr>
-          <th>Laboratoire</th>
-          <th>Nom</th>
-          <th>Sous-type</th>
-          <th>Marque/Constructeur</th>
-          <th class="last">Modèle/Version</th>
-        </tr>
-      </thead>
-      <% @tools.each do |tool| %>
-        <tr>
-           <td><%= tool.laboratory  || "&nbsp;" %></td>
-          <td>
-            <%= link_to tool.name, tool %>
-          </td>
-          <td><%= tool.tool_subtype  || "&nbsp;" %></td>
-          <td><%= tool.brand.blank? ? "&nbsp;" : tool.brand %></td>
-          <td class="last"><%=truncate(tool.version, :length => 30)  || "&nbsp;" %></td>
-        </tr>
-      <% end %>
-    </table>
-
+    <% if @tools.size>0 %>
+      <table width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Laboratoire</th>
+            <th>Nom</th>
+            <th>Sous-type</th>
+            <th>Marque/Constructeur</th>
+            <th class="last">Modèle/Version</th>
+          </tr>
+        </thead>
+        <% @tools.each do |tool| %>
+          <tr>
+             <td><%= tool.laboratory  || "&nbsp;" %></td>
+            <td>
+              <%= link_to tool.name, tool %>
+            </td>
+            <td><%= tool.tool_subtype  || "&nbsp;" %></td>
+            <td><%= tool.brand.blank? ? "&nbsp;" : tool.brand %></td>
+            <td class="last"><%=truncate(tool.version, :length => 30)  || "&nbsp;" %></td>
+          </tr>
+        <% end %>
+      </table>
+  <% else %>
+      Aucun résultat ne répond à votre recherche
+    <% end %>
 
   </div>
 

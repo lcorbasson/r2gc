@@ -90,7 +90,10 @@
           <% if !@test_engine.mi_mobility.blank? %><label>Equipement mobile :</label> <%= @test_engine.mi_mobility ? "Oui" : "Non" %><br/><% end %>
           <% if !@test_engine.use_on_site.blank? %><label>Prêt possible uniquement sur le site de l’organisme propriétaire :</label> <%= @test_engine.use_on_site ? "Oui" : "Non" %><br/><% end %>
           <% if !@test_engine.borrowing.blank? %><label>Emprunt possible en dehors du site de l’organisme propriétaire :</label> <%= @test_engine.borrowing ? "Oui" : "Non" %><br/><% end %>
-          <% if !@test_engine.mi_localization_on_site.blank? || !@test_engine.localization_on_site_precision.blank? || !@test_engine.internal_number.blank? %><label>Conditions de prêt et d’emprunt de l’équipement :</label> <br/><% end %>
+          <% if @test_engine.use_conditions.size>0 %>
+            <label>Conditions de prêt et d’emprunt de l’équipement :</label>
+            <%= @test_engine.use_conditions.collect(&:conditions).join(", ")%> <br/>
+         <% end %>
           <% if !@test_engine.mi_localization_on_site.blank? %><label>Localisation sur le site :</label> <%=  @test_engine.mi_localization_on_site %><br/><% end %>
           <% if !@test_engine.localization_on_site_precision.blank? %><label>Précisions:</label> <%=  @test_engine.localization_on_site_precision %><br/><% end %>
           <% if !@test_engine.internal_number.blank? %><label>N° d’enregistrement interne: </label><%= @test_engine.internal_number %><% end %>
@@ -121,13 +124,13 @@
               <% end %>
             </div>
           <% end %>
-          
+        </div>
         
         <h3><a href="#">Demande d'informations</a></h3>
         <div>
          <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
         </div>
-        <% if current_user && @test_engine.correspondents.size>0 %>
+        <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
             <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents, :main_correspondent =>  @test_engine.main_correspondent} %>

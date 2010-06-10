@@ -83,7 +83,7 @@ end
 unless @software.comment.blank?
     pdf.move_down(20)
     pdf.fill_color "92C5DA"
-    pdf.text "Commentaires"
+    pdf.text "Autre(s) commentaire(s)"
     pdf.fill_color "333333"
     pdf.text "#{@software.comment}"
 end

@@ -51,7 +51,7 @@ end
 unless @test_engine.explanatory_document.blank?
     pdf.move_down(20)
     pdf.fill_color "92C5DA"
-    pdf.text "Document explicatif"
+    pdf.text "Document(s) explicatif(s)"
     pdf.fill_color "333333"
     pdf.text "#{@test_engine.explanatory_document}"
 end
@@ -83,7 +83,7 @@ end
 unless @test_engine.comment.blank?
     pdf.move_down(20)
     pdf.fill_color "92C5DA"
-    pdf.text "Commentaires"
+    pdf.text "Autre(s) commentaire(s)"
     pdf.fill_color "333333"
     pdf.text "#{@test_engine.comment}"
 end
