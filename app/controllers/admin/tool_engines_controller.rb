@@ -76,6 +76,7 @@ class Admin::ToolEnginesController < ApplicationController
 
   def update_tools
     @laboratory = Laboratory.find(params[:laboratory_id]) if !params[:laboratory_id].blank?
+    @tool_engine = ToolEngine.find(params[:tool_id]) if !params[:tool_id].blank?
     render :update do |page|
       page.replace_html :linked_tools, :partial => "admin/tool_engines/select_linked_tools"
       page.replace_html :correspondents, :partial => "admin/tool_engines/select_correspondents"

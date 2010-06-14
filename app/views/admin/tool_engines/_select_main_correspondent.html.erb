@@ -1,5 +1,6 @@
 <td class="label_td"><label>Correspondant principal</label></td>
     <td>
-      <%= select_tag "tool_engine_main_correspondent", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort) %>
+      <%= select_tag "tool_engine[main_correspondent_id]", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,
+      @tool_engine ? @tool_engine.main_correspondent : nil) %>
 </td>
 

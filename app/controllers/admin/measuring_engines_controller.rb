@@ -16,7 +16,7 @@ class Admin::MeasuringEnginesController < ApplicationController
 
   def create
     @measuring_engine = MeasuringEngine.new(params[:measuring_engine])
-    if @measuring_engine.save
+    if @measuring_engine.save     
       if params[:measuring_engine][:linked_tools]
         params[:measuring_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
@@ -72,6 +72,7 @@ class Admin::MeasuringEnginesController < ApplicationController
 
    def update_tools
     @laboratory = Laboratory.find(params[:laboratory_id]) if !params[:laboratory_id].blank?
+    @measuring_engine = MeasuringEngine.find(params[:tool_id]) if !params[:tool_id].blank?
     render :update do |page|
       page.replace_html :linked_tools, :partial => "admin/measuring_engines/select_linked_tools"
       page.replace_html :correspondents, :partial => "admin/measuring_engines/select_correspondents"

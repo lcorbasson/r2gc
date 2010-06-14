@@ -46,9 +46,9 @@ class Admin::SoftwaresController < ApplicationController
     @software = Software.find(params[:id])
     if @software.update_attributes(params[:software])
       @software.relations_from.delete_all
-      @software.relations_to.delete_all
+      @software.relations_to.delete_all      
       if params[:software][:linked_tools]
-        params[:software][:linked_tools].each do |tool_id|
+        params[:software][:linked_tools].each do |tool_id|          
           ToolRelation.create!(
             :tool_from => @software,
             :tool_to => Tool.find(tool_id)
@@ -77,6 +77,7 @@ class Admin::SoftwaresController < ApplicationController
 
   def update_tools
     @laboratory = Laboratory.find(params[:laboratory_id]) if !params[:laboratory_id].blank?
+    @software = Software.find(params[:tool_id])  if !params[:tool_id].blank?
     render :update do |page|
       page.replace_html :linked_tools, :partial => "admin/softwares/select_linked_tools"
       page.replace_html :correspondents, :partial => "admin/softwares/select_correspondents"

@@ -70,8 +70,9 @@
    
   <tr id="linked_tools">
     <td class="label_td"><label>Equipement(s) lié(s)</label></td>
-    <td><%= f.select :linked_tools,  @software.new_record? || @software.laboratory.blank? ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
-    (((@software.laboratory.tools-(@software.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]}),
+    <td><%= f.select :linked_tools,
+  (@software.new_record? || @software.laboratory.blank? ? (Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]} :
+    (((@software.laboratory.tools-(@software.to_a)).collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort{|a,b| a[0].remove_simple_accent <=> b[0]})),
   {:selected => (@software.relations_from.collect(&:tool_to_id)+@software.relations_to.collect(&:tool_from_id)).flatten.uniq},{:multiple => true} %></td>
   </tr>
    <tr id="main_correspondent">
@@ -106,7 +107,7 @@
     jQuery("#software_laboratory_id").change(function() {
        jQuery.ajax({
             type: "GET",
-            data: "laboratory_id="+jQuery(this).val(),
+            data: "laboratory_id="+jQuery(this).val()+"&tool_id=<%= @software.id %>",
             url: "<%=  update_tools_admin_softwares_path %>"
         });     
     })

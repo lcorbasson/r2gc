@@ -1,6 +1,7 @@
 <td class="label_td"><label>Equipement liés</label></td>
     <td>      
-      <%= select_tag "test_engine_linked_tools", options_for_select((@laboratory ? @laboratory.tools.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""] : Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort),{:multiple => true} %>
+      <%= select_tag "test_engine[linked_tools]", options_for_select((@laboratory ? @laboratory.tools.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""] : Tool.all.collect{|c| ["#{c.main_correspondent ? c.name+' - '+c.main_correspondent.name : c.name}", c.id]}<<["- Aucun -",""]).sort,
+      @test_engine ? @test_engine.relations_from.collect(&:tool_to_id)+@test_engine.relations_to.collect(&:tool_from_id).flatten.uniq : nil),{:multiple => true} %>
 </td>
 
 

@@ -152,7 +152,7 @@
     jQuery("#test_engine_laboratory_id").change(function() {
        jQuery.ajax({
             type: "GET",
-            data: "laboratory_id="+jQuery(this).val(),
+            data: "laboratory_id="+jQuery(this).val()+"&tool_id=<%= @test_engine.id %>",
             url: "<%=  update_tools_admin_test_engines_path %>"
         });
     })
