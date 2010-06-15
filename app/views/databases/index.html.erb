@@ -42,13 +42,14 @@
 <script>
 // execute your scripts when the DOM is ready. this is a good habit
 $(function() {
-    // initialize scrollable
-    $("div.scrollable").scrollable({
-      loop: true
-    }).circular().autoscroll({
-      steps: 6,
-      interval: 8000
-    });
+
+    // initialize scrollable together with the autoscroll plugin
+var root = $("div.scrollable").scrollable({circular: true}).autoscroll({ autoplay: false });
+
+// provide scrollable API for the action buttons
+window.api = root.data("scrollable");
+
+
 
 
 });
