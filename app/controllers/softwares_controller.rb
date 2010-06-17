@@ -35,7 +35,7 @@ class SoftwaresController < SiteController
 
   def to_pdf
     @software = Software.find(params[:id])
-    prawnto :filename =>  "#{@software.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
+    prawnto :filename =>  "#{@software.name.remove_accent}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
   private

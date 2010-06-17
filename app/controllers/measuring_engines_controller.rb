@@ -35,7 +35,7 @@ class MeasuringEnginesController < SiteController
 
   def to_pdf
     @measuring_engine = MeasuringEngine.find(params[:id])
-    prawnto :filename =>  "#{@measuring_engine.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
+    prawnto :filename =>  "#{@measuring_engine.name.remove_accent}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
   private

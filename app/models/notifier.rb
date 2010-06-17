@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     recipients recipients
     from sender_email
     subject "Demande d'informations pour l'équipement #{tool_name}"    
-    body :content => content, :name => sender_name, :email => sender_email, :tool_name => tool_name
+    body :content => content, :sender_name => sender_name, :email => sender_email, :tool_name => tool_name
   end
 
    def password_reset_instructions(user, password)

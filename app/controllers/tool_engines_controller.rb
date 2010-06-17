@@ -34,7 +34,7 @@ class ToolEnginesController < SiteController
  
   def to_pdf
     @tool_engine = ToolEngine.find(params[:id])
-    prawnto :filename =>  "#{@tool_engine.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
+    prawnto :filename =>  "#{@tool_engine.name.remove_accent}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
   

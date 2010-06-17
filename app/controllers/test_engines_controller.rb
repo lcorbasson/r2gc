@@ -35,7 +35,7 @@ class TestEnginesController < SiteController
 
  def to_pdf
    @test_engine = TestEngine.find(params[:id])
-    prawnto :filename =>  "#{@test_engine.name}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
+    prawnto :filename =>  "#{@test_engine.name.remove_accent}.pdf", :inline => false, :template => "to_pdf.pdf.prawn"
   end
 
  
