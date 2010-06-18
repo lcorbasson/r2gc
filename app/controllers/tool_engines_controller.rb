@@ -57,7 +57,7 @@ class ToolEnginesController < SiteController
 
   def tool_engines_to_csv
     
-    ic = Iconv.new('ISO-8859-1', 'UTF-8')
+    ic = Iconv.new("windows-1252", "UTF-8")
     export = StringIO.new
     CSV::Writer.generate(export, ",") do |csv|
       headers = ["Laboratoire", "Nom", "Sous-type", "Marque/Constructeur", "Modèle/Version"]
