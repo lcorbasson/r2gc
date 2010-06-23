@@ -97,7 +97,7 @@ class R2gcExtension < Radiant::Extension
          add_item("Logiciels", "/admin/softwares")        
          add_item("Machines-outils", "/admin/tool_engines")
          add_item("Moyens d'essai", "/admin/test_engines")
-         add_item("Moyen de mesure et d'analyse", "/admin/measuring_engines")        
+         add_item("Moyens de Mesure et d'analyse", "/admin/measuring_engines")
       end
 
       tab 'Laboratoires - Entités de recherche' do

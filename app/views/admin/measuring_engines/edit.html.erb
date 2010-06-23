@@ -1,5 +1,5 @@
 
-<h1>Edition de du moyen de mesure et d'analyse <%= @measuring_engine.name %></h1>
+<h1>Edition du moyen de mesure et d'analyse <%= @measuring_engine.name %></h1>
 <% nested_form_for([:admin, @measuring_engine], :html => {:multipart => true}) do |f| %>
   <%= render :partial => "form", :locals => {:f => f} %>
   <p class="buttons">
