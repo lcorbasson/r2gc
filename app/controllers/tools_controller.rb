@@ -48,7 +48,7 @@ class ToolsController < SiteController
       tool.main_correspondent.blank? ? correspondents = tool.correspondents.collect(&:email) : correspondents = tool.main_correspondent.email
       Notifier.deliver_send_informations_mail(correspondents, params[:email], "#{params[:last_name]} #{params[:first_name]}", tool.name, params[:message] )
       render :update do |page|
-        page.replace_html :good_flash_message, 'Votre demande d’information a bien été envoyée.'
+        page.replace_html ".tool_show_mail", "<span class='notice_message'>Votre demande d’information a bien été envoyée.</span>"
       end
     else
       render :update do |page|
