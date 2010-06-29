@@ -96,11 +96,11 @@
   </tr>
    <tr id="main_correspondent">
       <td class="label_td"><label>Correspondant principal</label></td>
-      <td><%= f.select :main_correspondent_id, (@measuring_engine.new_record? || !@measuring_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @measuring_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
+      <td><%= f.select :main_correspondent_id, (@measuring_engine.new_record? || !@measuring_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @measuring_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{:selected => @measuring_engine.main_correspondent ? @measuring_engine.main_correspondent.id : nil} %></td>
     </tr>
      <tr id="correspondents">
       <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
-      <td><%= f.select :correspondent_ids, (@measuring_engine.new_record? || !@measuring_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @measuring_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+      <td><%= f.select :secondary_correspondent_ids, (@measuring_engine.new_record? || !@measuring_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @measuring_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{ :selected => @measuring_engine.secondary_correspondents ? @measuring_engine.secondary_correspondents.collect(&:id) : nil}, :multiple => true %></td>
     </tr>
   <tr>
     <td><label>Affichage sur site</label></td>

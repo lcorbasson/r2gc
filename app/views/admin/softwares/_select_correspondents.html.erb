@@ -1,8 +1,8 @@
 <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
     <td>
-      <%= select_tag "software[correspondent_ids]", options_for_select(
+      <%= select_tag "software[secondary_correspondent_ids]", options_for_select(
         (@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,
-      @software ? @software.correspondents : nil
+      @software ? @software.secondary_correspondents.collect(&:id) : nil
       ),{:multiple => true} %>
 </td>
 

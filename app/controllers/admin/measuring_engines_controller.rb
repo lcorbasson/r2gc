@@ -16,7 +16,17 @@ class Admin::MeasuringEnginesController < ApplicationController
 
   def create
     @measuring_engine = MeasuringEngine.new(params[:measuring_engine])
-    if @measuring_engine.save     
+    if @measuring_engine.save
+      if params[:measuring_engine][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first,
+          :conditions => { :tool_id => @measuring_engine.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @measuring_engine,
+          :correspondent_id => params[:measuring_engine][:main_correspondent_id],
+          :main => true
+        )
+      end
       if params[:measuring_engine][:linked_tools]
         params[:measuring_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
@@ -41,6 +51,16 @@ class Admin::MeasuringEnginesController < ApplicationController
   def update
     @measuring_engine = MeasuringEngine.find(params[:id])
     if @measuring_engine.update_attributes(params[:measuring_engine])
+      if params[:measuring_engine][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first,
+          :conditions => { :tool_id => @measuring_engine.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @measuring_engine,
+          :correspondent_id => params[:measuring_engine][:main_correspondent_id],
+          :main => true
+        )
+      end
       @measuring_engine.relations_from.delete_all
       @measuring_engine.relations_to.delete_all
       if params[:measuring_engine][:linked_tools]

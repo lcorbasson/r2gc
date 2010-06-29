@@ -3,7 +3,7 @@
       <%= select_tag "measuring_engine[correspondent_ids]",
         options_for_select(
         (@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,
-        @measuring_engine ? @measuring_engine.correspondents : nil
+        @measuring_engine ? @measuring_engine.secondary_correspondents.collect(&:id) : nil
         ),
           {:multiple => true} %>
 </td>

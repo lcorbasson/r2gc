@@ -1,6 +1,7 @@
 class Correspondent < User
-  
-  has_and_belongs_to_many :tools
+
+  has_many :correspondent_tools
+  has_many :tools, :through => :correspondent_tools
 
   belongs_to :search_entity
   belongs_to :search_subentity

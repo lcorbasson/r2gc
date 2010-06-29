@@ -1,6 +1,6 @@
 <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
     <td>
-      <%= select_tag "tool_engine[correspondent_ids]", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,
-      @tool_engine ? @tool_engine.correspondents : nil),{:multiple => true} %>
+      <%= select_tag "tool_engine[secondary_correspondent_ids]", options_for_select((@laboratory ? @laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,
+      @tool_engine ? @tool_engine.secondary_correspondents.collect(&:id) : nil),{:multiple => true} %>
 </td>
 

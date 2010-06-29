@@ -104,11 +104,11 @@
   </tr>
    <tr id="main_correspondent">
       <td class="label_td"><label>Correspondant principal</label></td>
-      <td><%= f.select :main_correspondent_id, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{} %></td>
+      <td><%= f.select :main_correspondent_id, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{:selected => @test_engine.main_correspondent ? @test_engine.main_correspondent.id : nil} %></td>
     </tr>
      <tr id="correspondents">
       <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
-      <td><%= f.select :correspondent_ids, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{}, :multiple => true %></td>
+      <td><%= f.select :correspondent_ids, (@test_engine.new_record? || !@test_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @test_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{ :selected => @test_engine.secondary_correspondents ? @test_engine.secondary_correspondents.collect(&:id) : nil}, :multiple => true %></td>
     </tr>
   <tr>
     <td class="label_td"><label>Affichage sur site</label></td>

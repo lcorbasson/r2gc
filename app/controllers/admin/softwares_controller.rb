@@ -20,7 +20,17 @@ class Admin::SoftwaresController < ApplicationController
 
   def create
     @software = Software.new(params[:software])  
-    if @software.save      
+    if @software.save
+      if params[:software][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first,
+          :conditions => { :tool_id => @software.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @software,
+          :correspondent_id => params[:software][:main_correspondent_id],
+          :main => true
+        )
+      end
       if params[:software][:linked_tools]
         params[:software][:linked_tools].each do |tool_id|
           ToolRelation.create!(
@@ -45,6 +55,16 @@ class Admin::SoftwaresController < ApplicationController
   def update
     @software = Software.find(params[:id])
     if @software.update_attributes(params[:software])
+      if params[:software][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first, 
+          :conditions => { :tool_id => @software.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @software,
+          :correspondent_id => params[:software][:main_correspondent_id],
+          :main => true
+        )
+      end
       @software.relations_from.delete_all
       @software.relations_to.delete_all      
       if params[:software][:linked_tools]

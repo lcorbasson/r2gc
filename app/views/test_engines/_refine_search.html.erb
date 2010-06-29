@@ -13,7 +13,7 @@
       </tr>
       <tr>
     <td class="label"><label>Correspondant : </label></td>
-    <td><%= f.select :correspondents_id_or_main_correspondent_id_equals, (@correspondents ? [["Tous",""]]+(@correspondents.collect {|c| [ c.name, "#{c.id}"] }.sort{|a,b| a <=> b}) : [["Tous",""]]+(User.correspondents.collect {|c| [ c.name, "#{c.id}"] }).sort{|a,b| a <=> b}), {:selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
+    <td><%= f.select :correspondents_id_equals, (@correspondents ? [["Tous",""]]+(@correspondents.collect {|c| [ c.name, "#{c.id}"] }.sort{|a,b| a <=> b}) : [["Tous",""]]+(User.correspondents.collect {|c| [ c.name, "#{c.id}"] }).sort{|a,b| a <=> b}), {:selected => params[:search] ? "#{params[:search][:correspondents_id_equals]}" : nil}, :class => "select_refine_search" %></td>
   </tr>
     <% end %>
     <tr>

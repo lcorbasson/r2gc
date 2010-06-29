@@ -17,6 +17,16 @@ class Admin::TestEnginesController < ApplicationController
   def create
     @test_engine = TestEngine.new(params[:test_engine])
     if @test_engine.save
+       if params[:test_engine][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first,
+          :conditions => { :tool_id => @test_engine.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @test_engine,
+          :correspondent_id => params[:test_engine][:main_correspondent_id],
+          :main => true
+        )
+      end
       if params[:test_engine][:linked_tools]
         params[:test_engine][:linked_tools].each do |tool_id|
           ToolRelation.create!(
@@ -40,6 +50,16 @@ class Admin::TestEnginesController < ApplicationController
   def update
     @test_engine = TestEngine.find(params[:id])
     if @test_engine.update_attributes(params[:test_engine])
+       if params[:test_engine][:main_correspondent_id]
+        existing_relation = CorrespondentTool.find(:first,
+          :conditions => { :tool_id => @test_engine.id, :main => true })
+        existing_relation.destroy if existing_relation
+        CorrespondentTool.create!(
+          :tool => @test_engine,
+          :correspondent_id => params[:test_engine][:main_correspondent_id],
+          :main => true
+        )
+      end
       @test_engine.relations_from.delete_all
       @test_engine.relations_to.delete_all
       if params[:test_engine][:linked_tools]
