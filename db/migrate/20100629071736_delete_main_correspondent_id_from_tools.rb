@@ -16,7 +16,7 @@ class DeleteMainCorrespondentIdFromTools < ActiveRecord::Migration
         end
       end
     end
-    remove_column :correspondent_tools, :main_correspondent_id
+    remove_column :tools, :main_correspondent_id
   end
 
   def self.down
