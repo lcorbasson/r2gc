@@ -25,11 +25,23 @@ class Admin::SoftwaresController < ApplicationController
         existing_relation = CorrespondentTool.find(:first,
           :conditions => { :tool_id => @software.id, :main => true })
         existing_relation.destroy if existing_relation
-        CorrespondentTool.create!(
-          :tool => @software,
-          :correspondent_id => params[:software][:main_correspondent_id],
-          :main => true
-        )
+        unless params[:measuring_engine][:main_correspondent_id].blank?
+          CorrespondentTool.create!(
+            :tool => @software,
+            :correspondent_id => params[:software][:main_correspondent_id],
+            :main => true
+          )
+        end
+      end
+      @software.secondary_correspondent_tools.delete_all
+      if params[:software][:secondary_correspondent_ids].size>0
+        params[:software][:secondary_correspondent_ids].each do |correspondent_id|
+          CorrespondentTool.create!(
+            :tool => @software,
+            :correspondent_id => correspondent_id,
+            :main => false
+          )
+        end
       end
       if params[:software][:linked_tools]
         params[:software][:linked_tools].each do |tool_id|
@@ -54,17 +66,32 @@ class Admin::SoftwaresController < ApplicationController
 
   def update
     @software = Software.find(params[:id])
+    
     if @software.update_attributes(params[:software])
-      if params[:software][:main_correspondent_id]
+      unless params[:software][:main_correspondent_id].blank?
         existing_relation = CorrespondentTool.find(:first, 
           :conditions => { :tool_id => @software.id, :main => true })
         existing_relation.destroy if existing_relation
-        CorrespondentTool.create!(
-          :tool => @software,
-          :correspondent_id => params[:software][:main_correspondent_id],
-          :main => true
-        )
+        unless params[:measuring_engine][:main_correspondent_id].blank?
+          CorrespondentTool.create!(
+            :tool => @software,
+            :correspondent_id => params[:software][:main_correspondent_id],
+            :main => true
+          )
+        end
       end
+      @software.secondary_correspondent_tools.delete_all
+      if params[:software][:secondary_correspondent_ids].size>0
+        params[:software][:secondary_correspondent_ids].each do |correspondent_id|
+          CorrespondentTool.create!(
+            :tool => @software,
+            :correspondent_id => correspondent_id,
+            :main => false
+          )
+        end
+      end
+
+      
       @software.relations_from.delete_all
       @software.relations_to.delete_all      
       if params[:software][:linked_tools]

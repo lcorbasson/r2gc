@@ -82,7 +82,7 @@
       </tr>
        <tr id="correspondents">
         <td class="label_td"><label>Correspondant(s) secondaire(s)</label></td>
-        <td><%= f.select :correspondent_ids, (@tool_engine.new_record? || !@tool_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @tool_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{ :selected => @tool_engine.secondary_correspondents ? @tool_engine.secondary_correspondents.collect(&:id) : nil}, :multiple => true %></td>
+        <td><%= f.select :secondary_correspondent_ids, (@tool_engine.new_record? || !@tool_engine.laboratory ? User.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""] : @tool_engine.laboratory.correspondents.collect{|c| [c.name, c.id]}<<["- Aucun -",""]).sort,{ :selected => @tool_engine.secondary_correspondents ? @tool_engine.secondary_correspondents.collect(&:id) : nil}, :multiple => true %></td>
       </tr>
    
     <tr>

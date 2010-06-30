@@ -21,11 +21,24 @@ class Admin::MeasuringEnginesController < ApplicationController
         existing_relation = CorrespondentTool.find(:first,
           :conditions => { :tool_id => @measuring_engine.id, :main => true })
         existing_relation.destroy if existing_relation
-        CorrespondentTool.create!(
-          :tool => @measuring_engine,
-          :correspondent_id => params[:measuring_engine][:main_correspondent_id],
-          :main => true
-        )
+        unless params[:measuring_engine][:main_correspondent_id].blank?
+          CorrespondentTool.create!(
+            :tool => @measuring_engine,
+            :correspondent_id => params[:measuring_engine][:main_correspondent_id],
+            :main => true
+          )
+        end
+      end
+
+      @measuring_engine.secondary_correspondent_tools.delete_all
+      if params[:measuring_engine][:secondary_correspondent_ids].size>0
+        params[:measuring_engine][:secondary_correspondent_ids].each do |correspondent_id|
+          CorrespondentTool.create!(
+            :tool => @measuring_engine,
+            :correspondent_id => correspondent_id,
+            :main => false
+          )
+        end
       end
       if params[:measuring_engine][:linked_tools]
         params[:measuring_engine][:linked_tools].each do |tool_id|
@@ -55,11 +68,23 @@ class Admin::MeasuringEnginesController < ApplicationController
         existing_relation = CorrespondentTool.find(:first,
           :conditions => { :tool_id => @measuring_engine.id, :main => true })
         existing_relation.destroy if existing_relation
-        CorrespondentTool.create!(
-          :tool => @measuring_engine,
-          :correspondent_id => params[:measuring_engine][:main_correspondent_id],
-          :main => true
-        )
+        unless params[:measuring_engine][:main_correspondent_id].blank?
+          CorrespondentTool.create!(
+            :tool => @measuring_engine,
+            :correspondent_id => params[:measuring_engine][:main_correspondent_id],
+            :main => true
+          )
+        end
+      end
+      @measuring_engine.secondary_correspondent_tools.delete_all
+      if params[:measuring_engine][:secondary_correspondent_ids].size>0
+        params[:measuring_engine][:secondary_correspondent_ids].each do |correspondent_id|
+          CorrespondentTool.create!(
+            :tool => @measuring_engine,
+            :correspondent_id => correspondent_id,
+            :main => false
+          )
+        end
       end
       @measuring_engine.relations_from.delete_all
       @measuring_engine.relations_to.delete_all
