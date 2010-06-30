@@ -25,7 +25,7 @@ class Admin::ToolEnginesController < ApplicationController
         existing_relation = CorrespondentTool.find(:first,
           :conditions => { :tool_id => @tool_engine.id, :main => true })
         existing_relation.destroy if existing_relation
-        unless params[:measuring_engine][:main_correspondent_id].blank?
+        unless params[:tool_engine][:main_correspondent_id].blank?
           CorrespondentTool.create!(
             :tool => @tool_engine,
             :correspondent_id => params[:tool_engine][:main_correspondent_id],
@@ -72,7 +72,7 @@ class Admin::ToolEnginesController < ApplicationController
         existing_relation = CorrespondentTool.find(:first,
           :conditions => { :tool_id => @tool_engine.id, :main => true })
         existing_relation.destroy if existing_relation
-        unless params[:measuring_engine][:main_correspondent_id].blank?
+        unless params[:tool_engine][:main_correspondent_id].blank?
           CorrespondentTool.create!(
             :tool => @tool_engine,
             :correspondent_id => params[:tool_engine][:main_correspondent_id],
