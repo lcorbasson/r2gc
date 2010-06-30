@@ -1,8 +1,8 @@
 class Admin::RolesController < Admin::ResourceController
-  only_allow_access_to :index, :show, :new, :create, :edit, :update, :remove_user, :add_user, :users, :destroy,
-    :when => :admin,
-    :denied_url => { :controller => 'pages', :action => 'index' },
-    :denied_message => 'You must have administrative privileges to edit Roles.'
+  only_allow_access_to :create, :edit, :update, :index, :new, :destroy,
+    :when => [:admin, :pgce_user],
+    :denied_url => { :controller => 'admin/pages', :action => 'index' },
+    :denied_message => "Vous n'avez pas accès à cette ressource."
   skip_before_filter :verify_authenticity_token, :only => [:users, :remove_user, :add_user]
   def index
     @roles = Role.find(:all)
