@@ -30,7 +30,7 @@ class Admin::TestEnginesController < ApplicationController
         end
       end
       @test_engine.secondary_correspondent_tools.delete_all
-      if params[:test_engine][:secondary_correspondent_ids].size>0
+      if params[:test_engine][:secondary_correspondent_ids] && params[:test_engine][:secondary_correspondent_ids].size>0
         params[:test_engine][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @test_engine,
@@ -78,7 +78,7 @@ class Admin::TestEnginesController < ApplicationController
         end
       end
       @test_engine.secondary_correspondent_tools.delete_all
-      if params[:test_engine][:secondary_correspondent_ids].size>0
+      if params[:test_engine][:secondary_correspondent_ids] && params[:test_engine][:secondary_correspondent_ids].size>0
         params[:test_engine][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @test_engine,

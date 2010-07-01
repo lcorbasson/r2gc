@@ -34,7 +34,7 @@ class Admin::SoftwaresController < ApplicationController
         end
       end
       @software.secondary_correspondent_tools.delete_all
-      if params[:software][:secondary_correspondent_ids].size>0
+      if params[:software][:secondary_correspondent_ids] && params[:software][:secondary_correspondent_ids].size>0
         params[:software][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @software,
@@ -81,7 +81,7 @@ class Admin::SoftwaresController < ApplicationController
         end
       end
       @software.secondary_correspondent_tools.delete_all
-      if params[:software][:secondary_correspondent_ids].size>0
+      if params[:software][:secondary_correspondent_ids] && params[:software][:secondary_correspondent_ids].size>0
         params[:software][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @software,

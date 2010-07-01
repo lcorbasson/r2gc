@@ -34,7 +34,7 @@ class Admin::ToolEnginesController < ApplicationController
         end
       end
       @tool_engine.secondary_correspondent_tools.delete_all
-      if params[:tool_engine][:secondary_correspondent_ids].size>0
+      if params[:tool_engine][:secondary_correspondent_ids] && params[:tool_engine][:secondary_correspondent_ids].size>0
         params[:tool_engine][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @tool_engine,
@@ -82,7 +82,7 @@ class Admin::ToolEnginesController < ApplicationController
       end
 
       @tool_engine.secondary_correspondent_tools.delete_all
-      if params[:tool_engine][:secondary_correspondent_ids].size>0
+      if params[:tool_engine][:secondary_correspondent_ids] && params[:tool_engine][:secondary_correspondent_ids].size>0
         params[:tool_engine][:secondary_correspondent_ids].each do |correspondent_id|
           CorrespondentTool.create!(
             :tool => @tool_engine,
