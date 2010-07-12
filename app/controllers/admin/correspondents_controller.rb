@@ -17,7 +17,14 @@ class Admin::CorrespondentsController < ApplicationController
   def create
     @correspondent = Correspondent.new(params[:correspondent])
     @correspondent.roles << Role.find_by_role_name("r2gc_correspondent")
+    @correspondent.login = @correspondent.email
+    value = []
+    8.times { value  << (97 + rand(25)).chr }
+    password = value
+    @correspondent.password = password
+    @correspondent.password_confirmation = password
     if @correspondent.save
+#      Notifier.deliver_send_connexion_mail_for_correspondent(@correspondent, password )
       flash[:notice] = 'Correspondant créé.'
       redirect_to admin_correspondents_path
     else

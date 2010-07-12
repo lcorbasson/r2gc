@@ -156,3 +156,15 @@
     $('#images_scroll').popeye({opacity:0.8});
 $('a.correspondent_tooltip').tooltip({showURL:false,fade: 250});
 });") %>
+
+<% if current_user && (current_user.r2gc_manager? || current_user.r2gc_correspondent?) %>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      admin_link = "<a href='/admin' target='_blank' class='admin_link'>Accéder à l'administration</a>";
+      database_link = jQuery(".link_to_database");
+      database_link.append(admin_link);
+
+    });
+  </script>
+<% end %>
+

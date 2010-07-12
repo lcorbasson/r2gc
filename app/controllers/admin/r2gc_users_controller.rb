@@ -17,7 +17,14 @@ class Admin::R2gcUsersController < ApplicationController
   def create
     @r2gc_user = R2gcUser.new(params[:r2gc_user])
     @r2gc_user.roles << Role.find_by_role_name("r2gc_user")
+    @r2gc_user.login = @r2gc_user.email
+    value = []
+    8.times { value  << (97 + rand(25)).chr }
+    password = value
+    @r2gc_user.password = password
+    @r2gc_user.password_confirmation = password
     if @r2gc_user.save
+      #      Notifier.deliver_send_connexion_mail_for_correspondent(@r2gc_user, password )
       flash[:notice] = 'Utilisateur R2GC créé.'
       redirect_to admin_r2gc_users_path
     else

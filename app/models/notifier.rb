@@ -15,4 +15,36 @@ class Notifier < ActionMailer::Base
     body :user => user, :password => password
   end
 
+ def send_connexion_mail_for_manager(user, password)
+  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user, :password => password
+
+ end
+
+ def send_connexion_mail_for_correspondent(user, password)
+  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user, :password => password
+
+ end
+
+ def send_connexion_mail_for_user(user, password)
+  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user, :password => password
+
+ end
+
+ def send_connexion_mail_for_manager_and_correspondent(user, password)
+  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user, :password => password
+
+ end
+
 end

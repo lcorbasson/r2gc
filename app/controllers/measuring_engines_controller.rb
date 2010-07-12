@@ -16,7 +16,7 @@ class MeasuringEnginesController < SiteController
         @correspondents =  @entities.collect(&:correspondents).flatten.uniq
       end
     end   
-    save_tools_collection @export_tools.map{|t| t.id}
+    save_tools_collection @tools.map{|t| t.id}
     save_search_params params[:search]
 
      respond_to do |format|

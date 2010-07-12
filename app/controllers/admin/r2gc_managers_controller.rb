@@ -17,7 +17,14 @@ class Admin::R2gcManagersController < ApplicationController
   def create
     @r2gc_manager = R2gcManager.new(params[:r2gc_manager])
     @r2gc_manager.roles << Role.find_by_role_name("r2gc_manager")
+    @r2gc_manager.login = @r2gc_manager.email
+    value = []
+    8.times { value  << (97 + rand(25)).chr }
+    password = value
+    @r2gc_manager.password = password
+    @r2gc_manager.password_confirmation = password
     if @r2gc_manager.save
+#      Notifier.deliver_send_connexion_mail_for_correspondent(@r2gc_manager, password )
       flash[:notice] = 'Modérateur R2GC créé.'
       redirect_to admin_r2gc_managers_path
     else

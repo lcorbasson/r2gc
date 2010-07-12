@@ -1,34 +1,21 @@
 <table id="table_form">
   <tr>
-    <td><label>Nom</label></td>
+    <td><label>Nom *</label></td>
     <td><%= f.text_field :last_name %></td>
   </tr>
   <tr>
-    <td><label>Prénom</label></td>
+    <td><label>Prénom *</label></td>
     <td><%= f.text_field :first_name %></td>
   </tr>
   <tr>
-    <td><label>Laboratoire</label></td>
+    <td><label>Laboratoire *</label></td>
     <td><%= f.select :first_name, Laboratory.all.collect{|l| [l.name, l.id]}, :include_blank => true %></td>
-  </tr>
+  </tr> 
   <tr>
-    <td><label>Login</label></td>
-    <td><%= f.text_field :login %></td>
-  </tr>
-  <tr>
-    <td><label>Email</label></td>
+    <td><label>Email *</label></td>
     <td><%= f.text_field :email %></td>
   </tr>
-   <% if @r2gc_user.new_record? %>
-    <tr>
-      <td><label>Mot de passe</label></td>
-      <td><%= f.password_field :password %></td>
-    </tr>
-    <tr>
-      <td><label>Confirmation Mot de passe</label></td>
-      <td><%= f.password_field :password_confirmation %></td>
-    </tr>
-  <% end %>
+  
 </table>
 
 

@@ -10,13 +10,9 @@
   <tr>
     <td><label>Laboratoire *</label></td>
     <td><%= f.select :first_name, Laboratory.all.collect{|l| [l.name, l.id]}, :include_blank => true %></td>
-  </tr>
+  </tr>   
    <tr>
-    <td><label>Login *</label></td>
-    <td><%= f.text_field :login %></td>
-  </tr>
-   <tr>
-    <td><label>Email</label></td>
+    <td><label>Email *</label></td>
     <td><%= f.text_field :email %></td>
   </tr>
    <tr>
@@ -26,17 +22,7 @@
    <tr>
     <td><label>Remarques</label></td>
     <td><%= f.text_area :comments %></td>
-  </tr>
-  <% if @correspondent.new_record? %>
-    <tr>
-      <td><label>Mot de passe *</label></td>
-      <td><%= f.password_field :password %></td>
-    </tr>
-    <tr>
-      <td><label>Confirmation Mot de passe *</label></td>
-      <td><%= f.password_field :password_confirmation %></td>
-    </tr>
-  <% end %>
+  </tr>  
    <tr>
     <td><label>Entités de recherche</label></td>
     <td><%= f.select :search_entity_id, SearchEntity.all.collect{|t| [t.name, t.id]}, :include_blank => true %></td>
