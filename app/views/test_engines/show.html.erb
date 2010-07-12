@@ -56,9 +56,11 @@
              <% if current_user %>
               <% if @test_engine.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @test_engine.search_entities %><br/><% end %>
               <% if @test_engine.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @test_engine.search_subentities %><br/><% end %>
-            <br/><br/>
+              
+              <br/><br/>
               <%= link_to "Télécharger la fiche au format PDF", to_pdf_test_engine_path(@test_engine, :format => "pdf"), :class => "download_pdf" %>
-              <% end %>
+<br/><br/> <em>Dernière mise à jour le <%= l(@test_engine.updated_at, :format => :maj_database) %></em>
+<% end %>
           </div>
            <div style="clear:both"></div>
         </td>
@@ -127,13 +129,13 @@
         </div>
         
         <h3><a href="#">Demande d'informations</a></h3>
-        <div>
+        <div style="max-height:380px;overflow:hidden">
          <%= render :partial => "tools/get_information", :locals => {:tool => @test_engine} %>
         </div>
         <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
-            <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.correspondents, :main_correspondent =>  @test_engine.main_correspondent} %>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @test_engine.secondary_correspondents, :main_correspondent =>  @test_engine.main_correspondent} %>
           </div>
         <% end %>
     </div>

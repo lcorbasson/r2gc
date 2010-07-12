@@ -60,6 +60,7 @@
             <% if !@software.software_application_domain_comment.blank? %><label>Précisions :</label> <%= @software.software_application_domain_comment %><br/><% end %>
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/>
+            <br/> <em>Dernière mise à jour le <%= l(@software.updated_at, :format => :maj_database) %></em>
             <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf"), :class => "download_pdf" %>
             <% end %>
@@ -127,13 +128,13 @@
         
         </div>
         <h3><a href="#">Demande d'informations</a></h3>
-        <div>
+        <div style="max-height:380px;overflow:hidden">
          <%= render :partial => "tools/get_information", :locals => {:tool => @software} %>
         </div>
         <% if current_user%>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
-            <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.correspondents, :main_correspondent =>  @software.main_correspondent} %>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @software.secondary_correspondents, :main_correspondent =>  @software.main_correspondent} %>
           </div>
         <% end %>
     </div>

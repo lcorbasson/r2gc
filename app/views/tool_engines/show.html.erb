@@ -54,6 +54,7 @@
             <% if current_user %>
               <% if @tool_engine.search_entities.size>0 %><label>Entité(s) de recherche :</label> <%= @tool_engine.search_entities %><br/><% end %>
               <% if @tool_engine.search_subentities.size>0 %><label>Sous-entité(s) :</label> <%= @tool_engine.search_subentities %><br/><% end %>
+              <br/> <em>Dernière mise à jour le <%= l(@tool_engine.updated_at, :format => :maj_database) %></em>
               <br/><br/>
               <%= link_to "Télécharger la fiche au format PDF", to_pdf_tool_engine_path(@tool_engine, :format => "pdf"), :class => "download_pdf" %>
               <% end %>
@@ -118,13 +119,13 @@
        
         </div>
         <h3><a href="#">Demande d'informations</a></h3>
-        <div>
+        <div style="max-height:380px;overflow:hidden">
          <%= render :partial => "tools/get_information", :locals => {:tool => @tool_engine} %>
         </div>
         <% if current_user %>
           <h3><a href="#">Correspondant(s)</a></h3>
           <div>
-            <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.correspondents, :main_correspondent =>  @tool_engine.main_correspondent} %>
+            <%= render :partial => "correspondents/index", :locals => {:correspondents => @tool_engine.secondary_correspondents, :main_correspondent =>  @tool_engine.main_correspondent} %>
           </div>
         <% end %>
     </div>
