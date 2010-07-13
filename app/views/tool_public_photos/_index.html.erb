@@ -1,7 +1,7 @@
 <% if photos.size>0 %>  
   <ul style="padding-left:0;">
   <% photos.each do |photo| %>
-    <li style="float:left;margin:5px;list-style:none"><%= link_to image_tag(photo.asset.url(:thumb)), download_tool_public_photo_path(photo) %></li>
+    <li style="float:left;margin:5px;list-style:none;height:100px;"><%= link_to image_tag(photo.asset.url(:thumb)), download_tool_public_photo_path(photo) %></li>
   <% end %>
   </ul>
   <br />
