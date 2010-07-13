@@ -1,0 +1,6 @@
+<div style="clear:both"></div>
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :class => "message #{name}_message" %>
+<% end
+flash.discard unless RAILS_ENV['test']
+%>
