@@ -15,22 +15,36 @@ class Admin::CorrespondentsController < ApplicationController
   end
 
   def create
-    @correspondent = Correspondent.new(params[:correspondent])
-    @correspondent.roles << Role.find_by_role_name("r2gc_correspondent")
-    @correspondent.login = @correspondent.email
-    value = []
-    8.times { value  << (97 + rand(25)).chr }
-    password = value
-    @correspondent.password = password
-    @correspondent.password_confirmation = password
-    if @correspondent.save
-#      Notifier.deliver_send_connexion_mail_for_correspondent(@correspondent, password )
-      flash[:notice] = 'Correspondant créé.'
-      redirect_to admin_correspondents_path
+    if User.find_by_email(params[:correspondent][:email]) && User.find_by_email(params[:correspondent][:email]).r2gc_manager?
+      @correspondent = User.find_by_email(params[:correspondent][:email])
+      @correspondent.roles << Role.find_by_role_name("r2gc_correspondent")
+       if @correspondent.update_attributes(params[:correspondent])
+  #      Notifier.deliver_send_connexion_mail_for_correspondent(@correspondent, password )
+        flash[:notice] = 'Correspondant créé.'
+        redirect_to admin_correspondents_path
+      else
+        flash[:error] = "#{@correspondent.errors.full_messages.join(",")}"
+        render :action => :new
+      end
     else
-      flash[:error] = "Une erreur s'est produite."
-      redirect_to new_admin_correspondent_path
+      @correspondent = Correspondent.new(params[:correspondent])
+      @correspondent.roles << Role.find_by_role_name("r2gc_correspondent")
+      @correspondent.login = @correspondent.email
+      value = []
+      8.times { value  << (97 + rand(25)).chr }
+      password = value
+      @correspondent.password = password
+      @correspondent.password_confirmation = password
+      if @correspondent.save
+  #      Notifier.deliver_send_connexion_mail_for_correspondent(@correspondent, password )
+        flash[:notice] = 'Correspondant créé.'
+        redirect_to admin_correspondents_path
+      else
+        flash[:error] = "#{@correspondent.errors.full_messages.join(",")}"
+        render :action => :new
+      end
     end
+    
   end
 
   def update
@@ -50,7 +64,10 @@ class Admin::CorrespondentsController < ApplicationController
 
   def destroy
     @correspondent = Correspondent.find(params[:id])
-    if @correspondent.destroy
+    roles = @correspondent.roles
+    roles.delete(Role.find_by_role_name("r2gc_correspondent"))
+    
+    if @correspondent.update_attribute(:roles, roles)
       flash[:notice] = 'Correspondent supprimé.'
       redirect_to admin_correspondents_path()
     else

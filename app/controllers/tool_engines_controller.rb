@@ -59,7 +59,7 @@ class ToolEnginesController < SiteController
     
     ic = Iconv.new("windows-1252", "UTF-8")
     export = StringIO.new
-    CSV::Writer.generate(export, ",") do |csv|
+    CSV::Writer.generate(export, ";") do |csv|
       headers = ["Laboratoire", "Nom", "Sous-type", "Marque/Constructeur", "Modèle/Version"]
       csv << headers.collect {|c| begin; ic.iconv(c.to_s); rescue; c.to_s; end }
       @export_tools.each do |tool|

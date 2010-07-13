@@ -28,8 +28,8 @@ class Admin::R2gcUsersController < ApplicationController
       flash[:notice] = 'Utilisateur R2GC créé.'
       redirect_to admin_r2gc_users_path
     else
-      flash[:error] = "Une erreur s'est produite."
-      redirect_to new_admin_r2gc_user_path
+      flash[:error] = "#{@r2gc_user.errors.full_messages.join(",")}"
+      rendre :action => :new
     end
   end
 
