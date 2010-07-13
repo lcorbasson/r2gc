@@ -29,7 +29,7 @@ class Admin::R2gcUsersController < ApplicationController
       redirect_to admin_r2gc_users_path
     else
       flash[:error] = "#{@r2gc_user.errors.full_messages.join(",")}"
-      rendre :action => :new
+      render :action => :new
     end
   end
 

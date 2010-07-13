@@ -10,7 +10,7 @@ class DatabasesController < SiteController
     if request.post?
       login = params[:login]
       password = params[:password]
-      announce_invalid_user unless self.current_user == User.authenticate(login, password)
+      announce_invalid_user unless self.current_user = User.authenticate(login, password)
     end    
     if current_user      
       if params[:remember_me]
