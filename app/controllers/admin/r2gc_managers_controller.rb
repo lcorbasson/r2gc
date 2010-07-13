@@ -17,11 +17,11 @@ class Admin::R2gcManagersController < ApplicationController
   def create
     if User.find_by_email(params[:r2gc_manager][:email]) && User.find_by_email(params[:r2gc_manager][:email]).r2gc_correspondent?
       @r2gc_manager = User.find_by_email(params[:r2gc_manager][:email])
-      @r2gc_manager.roles << Role.find_by_role_name("r2gc_correspondent")
+      @r2gc_manager.roles << Role.find_by_role_name("r2gc_manager")
        if @r2gc_manager.update_attributes(params[:r2gc_manager])
   #      Notifier.deliver_send_connexion_mail_for_correspondent(@correspondent, password )
         flash[:notice] = 'Modérateur créé.'
-        redirect_to admin_correspondents_path
+        redirect_to admin_r2gc_managers_path
       else
         flash[:error] = "#{@r2gc_manager.errors.full_messages.join(",")}"
         render :action => :new

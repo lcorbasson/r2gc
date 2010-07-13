@@ -24,6 +24,14 @@ class DatabasesController < SiteController
     end
   end
 
+  def logout
+    cookies[:session_token] = { :expires => 1.day.ago }
+    self.current_user.forget_me if self.current_user
+    self.current_user = nil
+    flash[:notice] = "Vous êtes désormais déconnecté(e)."
+    redirect_to databases_url
+  end
+
   def edit_account
     @user = User.find(params[:id])
 

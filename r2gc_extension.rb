@@ -79,7 +79,7 @@ class R2gcExtension < Radiant::Extension
     map.resources :measuring_engines, :member => {:to_pdf => :get}
     map.resources :tool_engines, :member => {:to_pdf => :get}
     map.resources :test_engines, :member => {:to_pdf => :get}
-    map.resources :databases, :collection => {:login =>:any}, :member => { :edit_account => :get, :update_account => :any}
+    map.resources :databases, :collection => {:login =>:any, :logout => :any}, :member => { :edit_account => :get, :update_account => :any}
     map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
     map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'
 
