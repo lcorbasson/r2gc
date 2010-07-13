@@ -33,11 +33,12 @@ class Admin::MeasuringEnginesController < ApplicationController
       @measuring_engine.secondary_correspondent_tools.delete_all
       if params[:measuring_engine][:secondary_correspondent_ids] && params[:measuring_engine][:secondary_correspondent_ids].size>0
         params[:measuring_engine][:secondary_correspondent_ids].each do |correspondent_id|
+
           CorrespondentTool.create!(
             :tool => @measuring_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
       if params[:measuring_engine][:linked_tools]
@@ -83,7 +84,7 @@ class Admin::MeasuringEnginesController < ApplicationController
             :tool => @measuring_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
       @measuring_engine.relations_from.delete_all

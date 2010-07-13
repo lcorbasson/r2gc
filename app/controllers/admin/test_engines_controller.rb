@@ -36,7 +36,7 @@ class Admin::TestEnginesController < ApplicationController
             :tool => @test_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
 
@@ -84,7 +84,7 @@ class Admin::TestEnginesController < ApplicationController
             :tool => @test_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
       @test_engine.relations_from.delete_all

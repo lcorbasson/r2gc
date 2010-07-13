@@ -30,7 +30,7 @@ class Admin::SoftwaresController < ApplicationController
             :tool => @software,
             :correspondent_id => params[:software][:main_correspondent_id],
             :main => true
-          )
+          ) unless correspondent_id.nil?
         end
       end
       @software.secondary_correspondent_tools.delete_all
@@ -40,7 +40,7 @@ class Admin::SoftwaresController < ApplicationController
             :tool => @software,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
       if params[:software][:linked_tools]
@@ -87,7 +87,7 @@ class Admin::SoftwaresController < ApplicationController
             :tool => @software,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
 

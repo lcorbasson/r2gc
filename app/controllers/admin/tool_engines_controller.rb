@@ -40,7 +40,7 @@ class Admin::ToolEnginesController < ApplicationController
             :tool => @tool_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
 
@@ -88,7 +88,7 @@ class Admin::ToolEnginesController < ApplicationController
             :tool => @tool_engine,
             :correspondent_id => correspondent_id,
             :main => false
-          )
+          ) unless correspondent_id.blank?
         end
       end
 
