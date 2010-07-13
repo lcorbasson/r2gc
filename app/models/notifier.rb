@@ -47,4 +47,28 @@ class Notifier < ActionMailer::Base
 
  end
 
+ def send_update_mail_for_pgce_user(user)
+  subject    "Base de données équipement: Mise à jour"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user
+
+ end
+
+ def send_update_mail_for_r2gc_manager(user)
+  subject    "Base de données équipement: Mise à jour"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user
+
+ end
+
+ def send_update_mail_for_r2gc_correspondent(user)
+  subject    "Base de données équipement: Mise à jour"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user
+
+ end
+
 end

@@ -1,0 +1,23 @@
+<h1>
+  Modification de votre mot de passe pour accéder à la base de données
+</h1>
+
+<% semantic_remote_form_for @user, :url => update_account_database_path(@user) do |form|   %>
+    <div id="bad_flash_message" class="flashes"></div>
+    <div id="good_flash_message" class="flashes"></div>
+    <table class="account_form" align="left">     
+       <tr>
+        <td><%= label_tag "Nouveau mot de passe *" %></td>
+        <td class="left"><%= form.password_field :password, :value => "" %></td>
+      </tr>
+       <tr>
+        <td><%= label_tag "Confirmation du mot de passe *" %></td>
+        <td class="left"><%= form.password_field :password_confirmation, :value => "" %></td>
+      </tr>     
+       <tr>
+
+        <td style="padding-top:20px;" colspan="2" align="right"><span class="inf_required">* Champs obligatoires</span><br/><%= submit_tag "Valider" %></td>
+      </tr>
+    </table>
+<% end %>
+<br /><br />

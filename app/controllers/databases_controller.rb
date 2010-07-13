@@ -10,7 +10,7 @@ class DatabasesController < SiteController
     if request.post?
       login = params[:login]
       password = params[:password]
-      announce_invalid_user unless self.current_user = User.authenticate(login, password)
+      announce_invalid_user unless self.current_user == User.authenticate(login, password)
     end    
     if current_user      
       if params[:remember_me]
@@ -22,6 +22,38 @@ class DatabasesController < SiteController
     else
       redirect_to databases_url
     end
+  end
+
+  def edit_account
+    @user = User.find(params[:id])
+
+    radiant_render :page => "/tools/account"
+  end
+
+  def update_account
+    @user = User.find(params[:id])
+ 
+      if params[:user][:password] == params[:user][:password_confirmation]
+        if @user.update_attributes(params[:user])
+          render :update do |page|
+            page << "jQuery('#good_flash_message').show();"
+            page.replace_html ".formtastic.user", "Votre mot de passe a bien été modifié."
+          end
+        else
+          render :update do |page|
+            page << "jQuery('#bad_flash_message').show();"
+            page.replace_html :bad_flash_message, "Une erreur s'est produite lors de l'enregistrement."
+          end
+        end
+      else
+        render :update do |page|
+          page << "jQuery('#bad_flash_message').show();"
+          page.replace_html :bad_flash_message, "Le nouveau de passe ne concorde pas avec la confirmation."
+        end
+      end
+    
+
+    
   end
 
   private

@@ -1,5 +1,7 @@
-<h1>Bienvenue sur la base de données équipements des laboratoires de génie civil de la région</h1>
-
+<h1>Bienvenue sur la base de données équipements des laboratoires de génie civil de la région
+<% if current_user %>
+  <em>(Connecté en <%= link_to "#{current_user.first_name} #{current_user.last_name}", edit_account_database_path(current_user) %>)</em>
+<% end %></h1>
 
 
 

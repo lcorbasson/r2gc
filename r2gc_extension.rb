@@ -68,6 +68,7 @@ class R2gcExtension < Radiant::Extension
       admin.role_user '/roles/:role_id/users/:id', :controller => 'roles', :action => 'add_user', :conditions => {:method => :post}
       admin.role_users '/roles/:role_id/users', :controller => 'roles', :action => 'users', :conditions => {:method => :get}
     end
+    map.resources :users
     map.resources :helps, :collection => {:download => :get}
     map.resources :tool_public_photos, :member => {:download => :any}
     map.resources :tool_private_photos, :member => {:download => :any}
@@ -78,7 +79,7 @@ class R2gcExtension < Radiant::Extension
     map.resources :measuring_engines, :member => {:to_pdf => :get}
     map.resources :tool_engines, :member => {:to_pdf => :get}
     map.resources :test_engines, :member => {:to_pdf => :get}
-    map.resources :databases, :collection => {:login =>:any}    
+    map.resources :databases, :collection => {:login =>:any}, :member => { :edit_account => :get, :update_account => :any}
     map.rbac 'admin/rbac', :controller => 'admin/roles', :action => 'index'
     map.role_details 'admin/roles/:id', :controller => 'admin/roles', :action => 'show'
 
