@@ -62,7 +62,7 @@
     </table>
   </div>
   <div class="results_export">
-    <%= link_to "Export Excel",measuring_engines_path(:format => :csv) %>
+    <%= link_to "Export Excel",measuring_engines_path(:format => :csv, :search => session[:search_params]) %>
   </div>
 <% else %>
   <div class="tools_pagination">
