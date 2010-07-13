@@ -94,7 +94,7 @@
           </div>
       <% end %>
         <h3><a href="#">Liens</a></h3>
-        <div>
+        <div style="height:auto;max-height:500px;">
            <% if (@tool_engine.tool_public_photos.size>0 || @tool_engine.tool_brochures.size>0 || (current_user && (@tool_engine.tool_private_photos.size>0 || @tool_engine.tool_brochures.size>0))) %>
           <label>Documents annexes : </label><br /><br />
           <%  if @tool_engine.tool_public_photos.size>0 || (current_user && @tool_engine.tool_private_photos.size>0)%>

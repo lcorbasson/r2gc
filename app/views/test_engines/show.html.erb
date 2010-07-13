@@ -105,7 +105,7 @@
         </div>
        <% end %>
         <h3><a href="#">Liens</a></h3>
-        <div>
+        <div style="height:auto;max-height:500px;">
           <% if (@test_engine.tool_public_photos.size>0 || @test_engine.tool_brochures.size>0 || (current_user && (@test_engine.tool_private_photos.size>0 || @test_engine.tool_brochures.size>0))) %>
             <label>Documents annexes : </label><br/><br/>
             <%  if @test_engine.tool_public_photos.size>0 || (current_user && @test_engine.tool_private_photos.size>0)%>
