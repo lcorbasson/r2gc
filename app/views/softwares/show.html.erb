@@ -61,10 +61,12 @@
             <% if !@software.software_application_domain_comment.blank? %><label>Précisions :</label> <%= @software.software_application_domain_comment %><br/><% end %>
             <% if current_user %>
               <label>Logiciel permettant de développer des programmes internes ?</label> <%= @software.software_can_develop_programs ? "Oui" : "Non" %><br/>
-            <br/> <em>Dernière mise à jour le <%= l(@software.updated_at, :format => :maj_database) %></em>
+            <% end %>
+             <br/> <em>Dernière mise à jour le <%= l(@software.updated_at, :format => :maj_database) %></em>
             <br/><br/>
             <%= link_to "Télécharger la fiche au format PDF", to_pdf_software_path(@software, :format => "pdf"), :class => "download_pdf" %>
-            <% end %>
+
+            
           </div>
 
           <div style="clear:both"></div>

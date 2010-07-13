@@ -36,11 +36,13 @@ pdf.bounding_box [left, 670], :width => 400  do
     unless @software.laboratory.blank?
         pdf.text "Laboratoire :  #{@software.laboratory}"
     end
-    if @software.search_entities.size>0
-        pdf.text "Entité(s) de recherche :  #{@software.search_entities}"
-    end
-    if @software.search_subentities.size>0
-        pdf.text "Sous entité(s) :  #{@software.search_subentities}"
+    if current_user
+        if @software.search_entities.size>0
+            pdf.text "Entité(s) de recherche :  #{@software.search_entities}"
+        end
+        if @software.search_subentities.size>0
+            pdf.text "Sous entité(s) :  #{@software.search_subentities}"
+        end
     end
     if @software.software_statuses.size>0
         pdf.text "Statut du logiciel :  #{@software.software_statuses}"
@@ -51,8 +53,10 @@ pdf.bounding_box [left, 670], :width => 400  do
     unless @software.software_application_domain_comment.blank?
         pdf.text "Précisions :  #{@software.software_application_domain_comment}"
     end
-    unless @software.software_can_develop_programs.blank?
-        pdf.text "Logiciel permettant de développer des programmes internes ? :  #{@software.software_can_develop_programs.eql?(1) ? 'oui' : 'non'}"
+    if current_user
+        unless @software.software_can_develop_programs.blank?
+            pdf.text "Logiciel permettant de développer des programmes internes ? :  #{@software.software_can_develop_programs.eql?(1) ? 'oui' : 'non'}"
+        end
     end
 end
 
@@ -63,29 +67,30 @@ unless @software.software_description.blank?
     pdf.fill_color "333333"
     pdf.text "#{@software.software_description}"
 end
+if current_user
+    unless @software.specifications.blank?
+        pdf.move_down(20)
+        pdf.fill_color "92C5DA"
+        pdf.text "Spécificités techniques du Logiciel"
+        pdf.fill_color "333333"
+        pdf.text "#{@software.specifications}"
+    end
 
-unless @software.specifications.blank?
-    pdf.move_down(20)
-    pdf.fill_color "92C5DA"
-    pdf.text "Spécificités techniques du Logiciel"
-    pdf.fill_color "333333"
-    pdf.text "#{@software.specifications}"
-end
+    unless @software.software_sharing_conditions.blank?
+        pdf.move_down(20)
+        pdf.fill_color "92C5DA"
+        pdf.text "Caractéristiques de partage et de diffusion du logiciel"
+        pdf.fill_color "333333"
+        pdf.text "#{@software.software_sharing_conditions}"
+    end
 
-unless @software.software_sharing_conditions.blank?
-    pdf.move_down(20)
-    pdf.fill_color "92C5DA"
-    pdf.text "Caractéristiques de partage et de diffusion du logiciel"
-    pdf.fill_color "333333"
-    pdf.text "#{@software.software_sharing_conditions}"
-end
-
-unless @software.comment.blank?
-    pdf.move_down(20)
-    pdf.fill_color "92C5DA"
-    pdf.text "Autre(s) commentaire(s)"
-    pdf.fill_color "333333"
-    pdf.text "#{@software.comment}"
+    unless @software.comment.blank?
+        pdf.move_down(20)
+        pdf.fill_color "92C5DA"
+        pdf.text "Autre(s) commentaire(s)"
+        pdf.fill_color "333333"
+        pdf.text "#{@software.comment}"
+    end
 end
 
 if @software.relations_from.size>0 || @software.relations_to.size>0
@@ -107,18 +112,20 @@ unless @software.website.blank?
     pdf.text "#{@software.website}"
 end
 
-if @software.correspondents.size>0
-    pdf.move_down(20)
-    pdf.fill_color "92C5DA"
-    pdf.text "Correspondant(s)"
-    pdf.fill_color "333333"
-    pdf.text "#{@software.correspondents.collect(&:name).join(', ')}"
-end
+if current_user
+    if @software.secondary_correspondents.size>0
+        pdf.move_down(20)
+        pdf.fill_color "92C5DA"
+        pdf.text "Correspondant(s)"
+        pdf.fill_color "333333"
+        pdf.text "#{@software.secondary_correspondents.collect(&:name).join(', ')}"
+    end
 
-if !@software.main_correspondent.blank?
-    pdf.move_down(20)
-    pdf.fill_color "92C5DA"
-    pdf.text "Correspondant principal"
-    pdf.fill_color "333333"
-    pdf.text "#{@software.main_correspondent}"
+    if !@software.main_correspondent.blank?
+        pdf.move_down(20)
+        pdf.fill_color "92C5DA"
+        pdf.text "Correspondant principal"
+        pdf.fill_color "333333"
+        pdf.text "#{@software.main_correspondent}"
+    end
 end
