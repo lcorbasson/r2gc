@@ -100,8 +100,10 @@ class Notifier < ActionMailer::Base
   subject    "Base de données équipement: Mise à jour"
   recipients user.email
   from       "contact@pole-gce.fr"
-  body :user => user
+  body :user => user, :total_tools => Tool.count
   content_type "text/html"
+
+
 
  end
 
