@@ -66,6 +66,9 @@ class Admin::R2gcManagersController < ApplicationController
     roles = @r2gc_manager.roles
     roles.delete(Role.find_by_role_name("r2gc_manager"))
     if @r2gc_manager.update_attribute(:roles, roles)
+      if @r2gc_manager.roles.empty?
+        @r2gc_manager.destroy
+      end
       flash[:notice] = 'Modérateur supprimé.'
       redirect_to admin_r2gc_managers_path()
     else

@@ -68,6 +68,9 @@ class Admin::CorrespondentsController < ApplicationController
     roles.delete(Role.find_by_role_name("r2gc_correspondent"))
     
     if @correspondent.update_attribute(:roles, roles)
+      if @correspondent.roles.empty?
+        @correspondent.destroy
+      end
       flash[:notice] = 'Correspondent supprimé.'
       redirect_to admin_correspondents_path()
     else
