@@ -8,7 +8,7 @@ class Notifier < ActionMailer::Base
     body :content => content, :sender_name => sender_name, :email => sender_email, :tool_name => tool_name
   end
 
-   def password_reset_instructions(user, password)
+  def password_reset_instructions(user, password)
     subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
     recipients user.email
     from       "contact@pole-gce.fr"
@@ -16,34 +16,45 @@ class Notifier < ActionMailer::Base
   end
 
  def send_connexion_mail_for_manager(user, password)
-  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"
   body :user => user, :password => password
+
+  attachment :content_type => "application/octet-stream", :body => File.read("/documents/informations.doc")
+  attachment :content_type => "application/excel", :body => File.read("/documents/statuts.doc")
 
  end
 
  def send_connexion_mail_for_correspondent(user, password)
-  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"
   body :user => user, :password => password
 
+   attachment :content_type => "application/octet-stream", :body => File.read("/documents/informations.doc")
+  attachment :content_type => "application/excel", :body => File.read("/documents/statuts.doc")
  end
 
  def send_connexion_mail_for_user(user, password)
-  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"
   body :user => user, :password => password
+
+  attachment :content_type => "application/octet-stream", :body => File.read("/documents/informations.doc")
+  attachment :content_type => "application/excel", :body => File.read("/documents/statuts.doc")
 
  end
 
  def send_connexion_mail_for_manager_and_correspondent(user, password)
-  subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+  subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"
   body :user => user, :password => password
+
+  attachment :content_type => "application/octet-stream", :body => File.read("/documents/informations.doc")
+  attachment :content_type => "application/excel", :body => File.read("/documents/statuts.doc")
 
  end
 
