@@ -103,6 +103,16 @@ class Notifier < ActionMailer::Base
   body :user => user
   content_type "text/html"
 
+ end
+
+
+ def send_update_mail_for_r2gc_manager_and_correspondent(user)
+  subject    "Base de données équipement: Mise à jour"
+  recipients user.email
+  from       "contact@pole-gce.fr"
+  body :user => user
+  content_type "text/html"
+
 
 
  end
