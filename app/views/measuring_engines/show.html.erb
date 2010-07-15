@@ -105,7 +105,7 @@
           </div>
         <% end %>
         <h3><a href="#">Liens</a></h3>
-        <div style="height:auto;max-height:500px;">
+        <div>
           <% if (@measuring_engine.tool_public_photos.size>0 || @measuring_engine.tool_brochures.size>0 || (current_user && (@measuring_engine.tool_private_photos.size>0 || @measuring_engine.tool_brochures.size>0))) %>
             <label>Documents annexes : </label><br /><br />
             <%  if @measuring_engine.tool_public_photos.size>0 || (current_user && @measuring_engine.tool_private_photos.size>0)%>
@@ -152,11 +152,11 @@
 
 <% if current_user %>
 <%= javascript_tag("$(function() {
-    $('#accordion').accordion({active:1} );
+    $('#accordion').accordion({active:1,  autoHeight: false} );
 })") %>
 <% else %>
 <%= javascript_tag("$(function() {
-    $('#accordion').accordion();
+    $('#accordion').accordion({ autoHeight: false});
 
 })") %>
 <% end %>
