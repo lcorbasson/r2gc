@@ -32,7 +32,7 @@ class Notifier < ActionMailer::Base
   from       "contact@pole-gce.fr"
   body :user => user, :password => password
 
-   attachment :content_type => "application/octet-stream", :body => File.read("#{RAILS_ROOT}/public/documents/informations.doc")
+   attachment :content_type => "application/octet-stream", :body => File.read("#{RAILS_ROOT}/public/documents/informations.doc"), :name => "informations.doc"
   attachment :content_type => "application/excel", :body => File.read("#{RAILS_ROOT}/public/documents/statuts.xls")
  end
 
