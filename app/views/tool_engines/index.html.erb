@@ -23,7 +23,7 @@
 
 
       <%  form_for @search,:html => { :id => "search_form" } do |f| %>
-          <%= f.text_field :name_or_specifications_or_operating_principles_like, :class => "equipment_name" %>
+          <%= f.text_field :name_or_specifications_or_operating_principles_like, :value => params[:search] ? params[:search][:name_or_specifications_or_operating_principles_like] : nil, :class => "equipment_name" %>
           <%= f.hidden_field :type_equals %>
           <%= submit_tag "&nbsp;", :class => "search_btn" %>
           <div id="search-separate"></div>
