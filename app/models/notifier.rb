@@ -37,8 +37,14 @@ class Notifier < ActionMailer::Base
   subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"  
-  body :user => user, :password => password
-  content_type "text/html"
+#  body :user => user, :password => password
+  content_type "multipart/alternative"
+
+   part "text/html" do |p|
+     p.body = render_message("send_connexion_mail_for_correspondent", :user => user, :password => password)
+   end
+
+  
 
   attachment :content_type => "application/octet-stream", :body => File.read("#{RAILS_ROOT}/public/documents/informations.doc"), :filename => 'informations.doc'
   attachment :content_type => "application/excel", :body => File.read("#{RAILS_ROOT}/public/documents/statuts.xls"), :filename => 'liste_utilisateurs.xls'
