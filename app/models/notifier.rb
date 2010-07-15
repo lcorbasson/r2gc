@@ -25,10 +25,8 @@ class Notifier < ActionMailer::Base
   subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"
-  content_type "text/html"
-
-
   body :user => user, :password => password
+  content_type "text/html"
 
   attachment :content_type => "application/octet-stream", :body => File.read("#{RAILS_ROOT}/public/documents/informations.doc"), :filename => 'informations.doc'
   attachment :content_type => "application/excel", :body => File.read("#{RAILS_ROOT}/public/documents/statuts.xls"), :filename => 'liste_utilisateurs.xls'
@@ -38,9 +36,9 @@ class Notifier < ActionMailer::Base
  def send_connexion_mail_for_correspondent(user, password)
   subject    "Mise en ligne de la base de données équipements"
   recipients user.email
-  from       "contact@pole-gce.fr"
-  content_type "text/html"
+  from       "contact@pole-gce.fr"  
   body :user => user, :password => password
+  content_type "text/html"
 
   attachment :content_type => "application/octet-stream", :body => File.read("#{RAILS_ROOT}/public/documents/informations.doc"), :filename => 'informations.doc'
   attachment :content_type => "application/excel", :body => File.read("#{RAILS_ROOT}/public/documents/statuts.xls"), :filename => 'liste_utilisateurs.xls'
