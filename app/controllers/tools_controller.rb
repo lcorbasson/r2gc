@@ -53,6 +53,7 @@ class ToolsController < SiteController
       end
     else
       render :update do |page|
+        page << "jQuery('#bad_flash_message').show();"
         page.replace_html :bad_flash_message, 'Veuillez remplir les champs obligatoires(*).'
       end
     end
