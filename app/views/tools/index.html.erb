@@ -93,7 +93,7 @@
             <%= link_to tool.name, tool %>
           </td>
           <td><%= tool.tool_subtype  || "&nbsp;" %></td>
-          <td><%= tool.brand  || "&nbsp;" %></td>
+          <td><%= tool.brand.blank? ? "&nbsp;" : tool.brand  %></td>
           <td class="last"><%=truncate(tool.version, :length => 30)  || "&nbsp;" %></td>
         </tr>
       <% end %>
