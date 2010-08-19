@@ -51,7 +51,7 @@ class Notifier < ActionMailer::Base
   subject    "Mise en ligne de la base de données équipements"
   recipients user.email
   from       "contact@pole-gce.fr"  
-  ccontent_type "multipart/mixed"
+  content_type "multipart/mixed"
 
   part "text/html" do |p|
      p.body = render_message("send_connexion_mail_for_user", :user => user, :password => password)

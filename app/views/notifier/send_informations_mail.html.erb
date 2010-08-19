@@ -1,8 +1,39 @@
-Bonjour,
+<html>
+<head>
+  <style type="text/css">
+    body {
+      font-family: trebuchet MS;
+      font-size:12px;
+    }
 
-<%= @sender_name %> souhaite obtenir des informations sur l'équipement <%= @tool_name %>,
-voici son message :
+    table {font-size:12px;font-family: trebuchet MS;}
+    a {color:#115673;text-decoration:none}
+  </style>
+</head>
+<body>
+  <table width="500px;" style="margin:auto" cellpadding="0" cellspacing=0"">
+    <tr>
+      <td>
+        <a style="text-decoration:none;" href="http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/"><img style="border:none" src="http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/images/emails/entete_connexion.jpg" /></a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Bonjour,
 
-<%= @content %>
+        <%= @sender_name %> souhaite obtenir des informations sur l'équipement <%= @tool_name %>,
+        voici son message :
+
+        <%= @content %>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+
+
+
+
+
 
 
