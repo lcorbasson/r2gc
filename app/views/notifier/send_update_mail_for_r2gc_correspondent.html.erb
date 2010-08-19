@@ -28,11 +28,12 @@ Votre r&ocirc;le de correspondant pour la base de donn&eacute;es &eacute;quipeme
 Afin de mettre &agrave; jour ces donn&eacute;es, connectez-vous &agrave; l&rsquo;administration du site web via l&rsquo;url <a href="http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/admin">http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/admin</a>.
 <br /><br />Voici le rapport annuel des activit&eacute;s sur la base de donn&eacute;es &eacute;quipements :<br />
 <ul>
+  <%  correspondent =  Correspondent.find(@user.id) %>
   <li>Nombre total d&rsquo;&eacute;quipements enregistr&eacute;s dans la base : <%= Tool.count(:all, :conditions => ["Year(created_at) = ?", Date.today.year]) %> </li>
-  <li>Nombre d&rsquo;&eacute;quipements enregistr&eacute;s au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
-  <li>Nombre de fiches modifi&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.updated_at.year.eql?(Date.today.year)}.size %></li>
-  <li>Nombre de fiches cr&eacute;&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
-  <li>Nombre de fiches supprim&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.deleted_at && t.deleted_at.year.eql?(Date.today.year)}.size %></li>
+  <li>Nombre d&rsquo;&eacute;quipements enregistr&eacute;s au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(correspondent.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
+  <li>Nombre de fiches modifi&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(correspondent.search_entity) && t.updated_at.year.eql?(Date.today.year)}.size %></li>
+  <li>Nombre de fiches cr&eacute;&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(correspondent.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
+  <li>Nombre de fiches supprim&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(correspondent.search_entity) && t.deleted_at && t.deleted_at.year.eql?(Date.today.year)}.size %></li>
 </ul>
 Merci de votre compr&eacute;hension<br /><br />
 
