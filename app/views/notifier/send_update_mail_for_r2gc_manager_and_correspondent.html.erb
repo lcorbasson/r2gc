@@ -41,17 +41,18 @@ d&eacute;parts et des arriv&eacute;es.</li>
 </ul><br />
 En tant que mod&eacute;rateur, vous devez &eacute;galement valider les informations mises &agrave; jour par les correspondants de votre &eacute;quipe sur les fiches suivantes :<br />
 <ul>
-  <li>XXXX</li>
-  <li>YYYYY</li>
+  <%  Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.updated_at.year.eql?(Date.today.year)}.each do |tool| %>
+    <li><%= tool.name %></li>
+  <% end %>
 </ul><br />
 Afin de mettre &agrave; jour ou valider ces donn&eacute;es, connectez-vous &agrave; l&rsquo;administration du site web via l&rsquo;url <a href="http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/admin">http://donnees-equipement.pole-geniecivil-ecoconstruction.fr/admin</a>. <br /><br />
 Voici le rapport annuel des activit&eacute;s sur la base de donn&eacute;es &eacute;quipements :<br />
 <ul>
-  <li>Nombre total d&rsquo;&eacute;quipements enregistr&eacute;s dans la base :</li>
-<li>Nombre d&rsquo;&eacute;quipements enregistr&eacute;s au sein de votre &eacute;quipe :</li>
-<li>Nombre de fiches modifi&eacute;es au sein de votre &eacute;quipe :</li>
-<li>Nombre de fiches cr&eacute;&eacute;es au sein de votre &eacute;quipe :</li>
-<li>Nombre de fiches supprim&eacute;es au sein de votre &eacute;quipe :</li>
+   <li>Nombre total d&rsquo;&eacute;quipements enregistr&eacute;s dans la base : <%= Tool.count(:all, :conditions => ["Year(created_at) = ?", Date.today.year]) %> </li>
+   <li>Nombre d&rsquo;&eacute;quipements enregistr&eacute;s au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
+   <li>Nombre de fiches modifi&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.updated_at.year.eql?(Date.today.year)}.size %></li>
+   <li>Nombre de fiches cr&eacute;&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.created_at.year.eql?(Date.today.year)}.size %></li>
+   <li>Nombre de fiches supprim&eacute;es au sein de votre &eacute;quipe : <%= Tool.all.select{|t| t.correspondents.collect(&:search_entity).include?(@user.search_entity) && t.deleted_at && t.deleted_at.year.eql?(Date.today.year)}.size %></li>
 </ul>
 Merci de votre compr&eacute;hension<br /><br />
 Cordialement<br /><br />
