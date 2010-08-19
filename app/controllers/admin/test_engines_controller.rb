@@ -6,7 +6,7 @@ class Admin::TestEnginesController < ApplicationController
  
 
   def index
-   @search = TestEngine.search(params[:search])
+   @search = TestEngine.without_deleted.search(params[:search])
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 5000, :order => "name ASC")
   end
 

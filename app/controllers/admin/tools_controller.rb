@@ -6,7 +6,7 @@ class Admin::ToolsController < ApplicationController
  
   
   def index
-    @tools = Tool.all
+    @tools = Tool.without_deleted
   end
 
   def new

@@ -1,6 +1,7 @@
 class Tool < ActiveRecord::Base
 
   attr_accessor :main_correspondent_id
+  acts_as_deleted
 
 
   has_and_belongs_to_many :use_conditions
@@ -46,6 +47,7 @@ class Tool < ActiveRecord::Base
   
   attr_accessor :linked_tools
 
+  named_scope :without_deleted, :conditions => ["deleted_at IS NULL"]
   named_scope :limit, lambda {|count| { :limit => count } }
   named_scope :ordered_by_updated_at, :order => "updated_at ASC"
   named_scope :ordered_by_created_at, :order => "created_at ASC"

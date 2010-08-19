@@ -2,7 +2,7 @@ class ToolEnginesController < SiteController
  
 
   def index
-    @search = ToolEngine.search(params[:search])
+    @search = ToolEngine.without_deleted.search(params[:search])
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 30, :order => "name ASC")
     @export_tools = @search.paginate(:all,:page => 1, :per_page => @tools.total_pages*30>0 ? @tools.total_pages*30 : 1, :order => "name ASC")
     @tool_type = "ToolEngine"

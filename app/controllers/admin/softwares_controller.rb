@@ -6,7 +6,7 @@ class Admin::SoftwaresController < ApplicationController
  
 
   def index
-     @search = Software.search(params[:search])
+     @search = Software.without_deleted.search(params[:search])
     @tools = @search.paginate(:all,:page => params[:page], :per_page => 5000, :order => "name ASC")
   end
 
