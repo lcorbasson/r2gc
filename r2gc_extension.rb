@@ -7,8 +7,9 @@ class R2gcExtension < Radiant::Extension
   description "Provides equipment gestion tool and roles managements."
   url "https://github.com/uneek/R2GC"
 
-  define_routes do |map|
-    
+  define_routes do |map|    
+      map.root :controller => "actualities"
+  
     map.namespace(:admin)  do |admin|
       admin.resources :helps, :collection => { :download => :get }
       admin.resources :tools, :collection => { :update_tools => :get } do |tool|
