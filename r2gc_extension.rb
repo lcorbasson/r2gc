@@ -8,11 +8,7 @@ class R2gcExtension < Radiant::Extension
   url "https://github.com/uneek/R2GC"
 
   define_routes do |map|
-    if RAILS_ENV == "production"
-      map.root :controller => "databases"
-    else
-      map.root :controller => "actualities"
-    end
+    
     map.namespace(:admin)  do |admin|
       admin.resources :helps, :collection => { :download => :get }
       admin.resources :tools, :collection => { :update_tools => :get } do |tool|
