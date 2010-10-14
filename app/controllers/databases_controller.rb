@@ -28,7 +28,7 @@ class DatabasesController < SiteController
     cookies[:session_token] = { :expires => 1.day.ago }
     self.current_user.forget_me if self.current_user
     self.current_user = nil
-    flash[:notice] = "Vous êtes désormais déconnecté(e)."
+    flash[:notice] = "<em>Vous êtes désormais déconnecté.</em>"
     redirect_to databases_url
   end
 

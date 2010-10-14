@@ -12,7 +12,7 @@ class Notifier < ActionMailer::Base
   end
 
   def password_reset_instructions(user, password)
-    subject    "Réinitialisation de votre mot de passe pour la base de données équipements"
+    subject    "réinitialisation de votre mot de passe pour accéder à la base de données ELGC"
     recipients user.email
     from       "contact@pole-gce.fr"
     content_type "text/html"
