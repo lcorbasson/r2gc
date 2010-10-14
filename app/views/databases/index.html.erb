@@ -1,6 +1,7 @@
-<%= render :partial => "databases/flash", :locals => { :flash => flash} %>
+
 
 <h1>Bienvenue sur la base ELGC (Equipements des Laboratoires de Génie Civil)</h1>
+
 <% if current_user %>
 <div style="position:absolute;left:0;margin-top:-20px;">
   <em>
@@ -9,6 +10,7 @@
   </em>
 </div>
 <% end %>
+<%= render :partial => "databases/flash", :locals => { :flash => flash} %>
 
 
 
